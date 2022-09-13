@@ -11,6 +11,6 @@ class Image extends Model
 
     public function film()
     {
-        return $this->belongsTo(Film::class,'id');
+        return $this->belongsTo(Film::class,'image_id', 'id');
     }
 }

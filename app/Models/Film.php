@@ -16,6 +16,6 @@ class Film extends Model
 
     public function image()
     {
-        return $this->hasOne(FilmCategory::class);
+        return $this->hasOne(Image::class);
     }
 }
