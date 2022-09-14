@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,10 +11,10 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $user = User::where('email', $request->email)->first();
-        if (!$user || Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'message' => 'user not found or password is wrong'
             ]);
@@ -27,11 +26,22 @@ class AuthController extends Controller
         ]);
     }
 
+    public function logout(Request $request)
+    {
+//        auth()->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
+//        $user->tokens()->where('id', $tokenId)->delete();
+
+        return response()->json([
+            'status' => 'logged out'
+        ]);
+    }
+
     /**
      * @param Request $request
      * @return JsonResponse
      */
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
 
         $validator = $this->checkValidation($request);
