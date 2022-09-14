@@ -7,7 +7,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -26,7 +25,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
 //        auth()->user()->tokens()->delete();
         $request->user()->currentAccessToken()->delete();
@@ -66,15 +65,21 @@ class AuthController extends Controller
         ], 201);
     }
 
-    private function checkValidation($request)
+    private function checkValidation($request): \Illuminate\Contracts\Validation\Validator|\Illuminate\Validation\Validator
     {
         $rules = [
             'email' => 'email|required|unique:users',
             'password' => [
                 'required',
                 'string',
-                'min:10',
-                'regex:((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,50})'
+                'min:6',
+                'regex:((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,50})',
+                'required_with:password_confirmation',
+                'same:password_confirmation'
+            ],
+            'password_confirmation' => [
+                'required',
+                'min:6'
             ],
             'name' => 'required',
             'birthday' => [
