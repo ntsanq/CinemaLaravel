@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
         $this->renderable(function (AuthenticationException $e, $request) {
             if ($request->is('api/*')){
                 return response()->json([
-                    'message'=> 'Login error'
+                    'message'=> 'Api errors'
                 ],401);
             }
         });
