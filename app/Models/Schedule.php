@@ -11,11 +11,16 @@ class Schedule extends Model
 
     public function room()
     {
-        return $this->hasOne(Room::class);
+        return $this->belongsTo(Room::class);
     }
 
     public function film()
     {
-        return $this->hasOne(Film::class);
+        return $this->belongsTo(Film::class);
+    }
+
+    public function ticket()
+    {
+        return $this->hasMany(Ticket::class);
     }
 }

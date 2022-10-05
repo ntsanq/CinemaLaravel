@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name',50);
             $table->float('percent');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

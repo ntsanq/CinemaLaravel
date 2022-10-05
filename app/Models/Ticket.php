@@ -11,21 +11,21 @@ class Ticket extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function shedule()
     {
-        return $this->hasOne(Schedule::class);
+        return $this->belongsTo(Schedule::class);
     }
 
     public function discount()
     {
-        return $this->hasOne(Discount::class);
+        return $this->belongsTo(Discount::class);
     }
 
     public function seat()
     {
-        return $this->hasOne(Seat::class);
+        return $this->belongsTo(Seat::class);
     }
 }

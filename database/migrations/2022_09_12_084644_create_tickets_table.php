@@ -15,18 +15,14 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('schedule_id');
-            $table->unsignedBigInteger('discount_id');
-            $table->unsignedBigInteger('seat_id');
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('schedule_id')->references('id')->on('schedules');
-            $table->foreign('discount_id')->references('id')->on('discounts');
-            $table->foreign('seat_id')->references('id')->on('seats');
-            $table->integer('status');
-            $table->integer('price');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('schedule_id')->constrained('schedules');
+            $table->foreignId('discount_id')->constrained('discounts');
+            $table->foreignId('seat_id')->constrained('seats');
+            $table->boolean('status');
+            $table->unsignedInteger('price');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

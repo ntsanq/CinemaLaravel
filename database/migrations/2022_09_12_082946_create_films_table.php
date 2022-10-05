@@ -15,13 +15,11 @@ return new class extends Migration
     {
         Schema::create('films', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('film_category_id');
-            $table->unsignedBigInteger('image_id');
-
-            $table->foreign('film_category_id')->references('id')->on('film_categories');
-            $table->foreign('image_id')->references('id')->on('images');
-            $table->string('name');
+            $table->foreignId('film_category_id')->constrained('film_categories');
+            $table->foreignId('image_id')->constrained('images');
+            $table->string('name',50);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

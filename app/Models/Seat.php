@@ -9,13 +9,13 @@ class Seat extends Model
 {
     use HasFactory;
 
-    public function ticket()
-    {
-        return $this->belongsTo(Ticket::class, 'seat_id', 'id');
-    }
-
     public function room()
     {
-        return $this->hasOne(Seat::class);
+        return $this->belongsTo(Seat::class);
+    }
+
+    public function ticket()
+    {
+        return $this->hasMany(Ticket::class);
     }
 }

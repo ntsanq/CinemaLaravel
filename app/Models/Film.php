@@ -11,11 +11,16 @@ class Film extends Model
 
     public function filmCategory()
     {
-        return $this->hasOne(FilmCategory::class);
+        return $this->belongsTo(FilmCategory::class);
     }
 
     public function image()
     {
-        return $this->hasOne(Image::class);
+        return $this->belongsTo(Image::class);
+    }
+
+    public function schedule()
+    {
+        return $this->hasMany(Schedule::class);
     }
 }

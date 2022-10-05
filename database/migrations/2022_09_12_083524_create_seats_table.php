@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('room_id');
-
-            $table->foreign('room_id')->references('id')->on('rooms');
-            $table->string('name');
-            $table->integer('status');
+            $table->foreignId('room_id')->constrained('rooms');
+            $table->string('name',50);
+            $table->boolean('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

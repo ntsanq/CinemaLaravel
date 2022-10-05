@@ -15,14 +15,13 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('film_id');
-            $table->unsignedBigInteger('room_id');
-
-            $table->foreign('film_id')->references('id')->on('films');
-            $table->foreign('room_id')->references('id')->on('rooms');
+            $table->foreignId('film_id')->constrained('films');
+            $table->foreignId('room_id')->constrained('rooms');
             $table->dateTime('start');
             $table->dateTime('end');
+            $table->unsignedInteger('price');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
