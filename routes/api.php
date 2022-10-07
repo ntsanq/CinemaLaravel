@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(function (){
-    Route::get('/user', function (){
-        return "USER's page";
+    Route::get('/user', function() {
+        return ['message' => 'Hello Sang!'];
     });
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/logoutAll', [AuthController::class, 'logoutAll']);
@@ -27,5 +27,5 @@ Route::get('/', function (Request $request) {
     return 'Cinema APIs';
 });
 
-Route::get('/login', [AuthController::class, 'login']);
+Route::post('/auth', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);

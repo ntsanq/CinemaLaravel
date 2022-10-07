@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('gender')->nullable();
             $table->date('birthday');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password',50);
+            $table->string('password');
             $table->string('address',100);
             $table->rememberToken();
             $table->timestamps();
