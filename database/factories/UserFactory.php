@@ -27,7 +27,6 @@ class UserFactory extends Factory
             'password' => '$2a$12$ZgHrwmrUnKZLRkzbw4zQBOd96.PI.uTKkIo2P90lEIW1DTEA25YpW', // password
             'address' => fake()->address(),
             'avatar' => fake()->imageUrl('100','100'),
-            'grant_id' => Grant::query()->inRandomOrder()->value('id'),
             'remember_token' => Str::random(10),
         ];
     }

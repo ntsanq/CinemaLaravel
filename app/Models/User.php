@@ -53,8 +53,8 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class);
     }
 
-    public function grant()
+    public function getGenderNameAttribute(): string
     {
-        return $this->belongsTo(Grant::class);
+        return ($this->gender === 0) ? 'Male' : 'Female';
     }
 }
