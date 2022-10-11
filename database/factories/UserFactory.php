@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Grant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -20,17 +21,17 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->safeEmail(),
+            'gender' => fake()->randomElement(['0', '1']),
+            'birthday' => fake()->dateTimeBetween('18 years','100 years'),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => '$2a$12$ZgHrwmrUnKZLRkzbw4zQBOd96.PI.uTKkIo2P90lEIW1DTEA25YpW', // password
+            'address' => fake()->address(),
+            'avatar' => fake()->imageUrl('100','100'),
+            'grant_id' => Grant::query()->inRandomOrder()->value('id'),
             'remember_token' => Str::random(10),
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return static
-     */
     public function unverified()
     {
         return $this->state(function (array $attributes) {

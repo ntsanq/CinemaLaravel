@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +25,8 @@ class User extends Authenticatable
         'password',
         'birthday',
         'address',
+        'avatar',
+        'grant_id',
     ];
 
     /**
@@ -47,5 +51,10 @@ class User extends Authenticatable
     public function ticket()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function grant()
+    {
+        return $this->belongsTo(Grant::class);
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -20,10 +21,13 @@ return new class extends Migration
             $table->boolean('gender')->nullable();
             $table->date('birthday');
             $table->timestamp('email_verified_at')->nullable();
+
             $table->string('password');
-            $table->string('address',100);
+            $table->string('address',100)->nullable();
+            $table->string('avatar',100)->nullable();
+            $table->foreignId('grant_id')->constrained('grants');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->softDeletes();
         });
     }
