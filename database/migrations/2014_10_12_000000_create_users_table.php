@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('address',100)->nullable();
             $table->string('avatar',100)->nullable();
-            $table->foreignId('grant_id')->constrained('grants');
+            $table->boolean('role');
             $table->rememberToken();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->softDeletes();

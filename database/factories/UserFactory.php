@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserRole;
 use App\Models\Grant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -22,12 +23,12 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->safeEmail(),
             'gender' => fake()->randomElement(['0', '1']),
-            'birthday' => fake()->dateTimeBetween('18 years','100 years'),
+            'birthday' => fake()->dateTimeBetween('-50 years','-18 years'),
             'email_verified_at' => now(),
             'password' => '$2a$12$ZgHrwmrUnKZLRkzbw4zQBOd96.PI.uTKkIo2P90lEIW1DTEA25YpW', // password
             'address' => fake()->address(),
             'avatar' => fake()->imageUrl('100','100'),
-            'grant_id' => Grant::query()->inRandomOrder()->value('id'),
+            'role' => fake()->randomElement(UserRole::getValues()),
             'remember_token' => Str::random(10),
         ];
     }

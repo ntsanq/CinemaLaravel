@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -53,8 +54,18 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class);
     }
 
-    public function grant()
+    public function getGenderNameAttribute(): string
     {
-        return $this->belongsTo(Grant::class);
+        return ($this->gender === 0) ? 'Male' : 'Female';
+    }
+
+    public function getRoleAttribute(): string
+    {
+        if ($this->role === 0) {
+            return UserRole::getKey(UserRole::Admin);
+        } elseif ($this->role === 1){
+            return UserRole::getKey(UserRole::Clerk);
+        }
+        return UserRole::getKey(UserRole::Customer);
     }
 }
