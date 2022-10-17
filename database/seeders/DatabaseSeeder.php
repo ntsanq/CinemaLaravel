@@ -11,6 +11,13 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [
                 UsersTableSeeder::class,
+                DiscountTableSeeder::class,
+                RoomTableSeeder::class,
+                ImageTableSeeder::class,
+                FilmCategoryTableSeeder::class,
+                FilmTableSeeder::class,
+                ScheduleTableSeeder::class,
+                SeatTableSeeder::class
             ]
         );
     }
