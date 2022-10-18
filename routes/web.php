@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\Auth\Login\LoginController;
 use App\Http\Controllers\Auth\Register\RegisterController;
+use App\Http\Controllers\Film\FilmController;
 use App\Http\Controllers\Home\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/films/{id}', [FilmController::class, 'index']);
+
 Route::get('/customer', function () {
     return view('customer.index');
 });
