@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
     {{-- Favicon--}}
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('assets/images/s-logo.png') }}">
     <link rel="icon shortcode" href="{{ asset('assets/images/s-logo.png') }}">
 
 
@@ -34,7 +33,7 @@
         <div class="uk-container uk-container-center">
 
             <a class="uk-navbar-brand uk-hidden-small" href="{{ url('/') }}">
-                <img alt="Blockter" src="{{ asset('assets/images/s-logo.png') }}" width="60px">
+                <img alt="s-logo" src="{{ asset('assets/images/s-logo.png') }}" width="60px">
             </a>
 
             <form method="GET" action="#" role="search" name="myForm" onsubmit="return validateForm()"
