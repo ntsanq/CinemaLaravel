@@ -1,5 +1,0 @@
-
-
-<script>
-    fetch('')
-</script>
