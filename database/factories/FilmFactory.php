@@ -23,8 +23,8 @@ class FilmFactory extends Factory
         return [
             'film_category_id' => fake()->randomElement($filmCategoryIds)->id,
             'image_id' => fake()->unique()->randomElement($imageIds)->id,
-            'name' => fake()->name(),
-            'description' => fake()->paragraph(2),
+            'name' => fake()->sentence(2),
+            'description' => fake()->sentences(20, true),
             'language_id' => fake()->randomElement($languageIds)->id,
             'film_rule_id' => fake()->randomElement($filmRuleIds)->id,
         ];
