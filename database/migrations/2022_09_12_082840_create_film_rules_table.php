@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('films', function (Blueprint $table) {
+        Schema::create('film_rules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('film_category_id')->constrained('film_categories');
-            $table->foreignId('image_id')->constrained('images');
             $table->string('name',50);
-            $table->text('description');
-            $table->foreignId('language_id')->constrained('languages');
-            $table->foreignId('rule_id')->constrained('film_rules');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('films');
+        Schema::dropIfExists('film_rules');
     }
 };
