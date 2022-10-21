@@ -15,6 +15,6 @@ class FilmTableSeeder extends Seeder
      */
     public function run()
     {
-        Film::factory(19)->create();
+        Film::factory(3)->create();
     }
 }

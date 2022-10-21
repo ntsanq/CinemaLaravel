@@ -11,19 +11,22 @@ use Illuminate\Support\Facades\DB;
 class FilmFactory extends Factory
 {
     /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
+     * @return array|mixed[]
      */
     public function definition()
     {
         $filmCategoryIds = DB::table('film_categories')->select('id')->get();
         $imageIds = DB::table('images')->select('id')->get();
+        $filmRuleIds = DB::table('film_rules')->select('id')->get();
+        $languageIds = DB::table('languages')->select('id')->get();
 
         return [
             'film_category_id' => fake()->randomElement($filmCategoryIds)->id,
             'image_id' => fake()->unique()->randomElement($imageIds)->id,
-            'name' => fake()->name(),
+            'name' => fake()->sentence(2),
+            'description' => fake()->sentences(20, true),
+            'language_id' => fake()->randomElement($languageIds)->id,
+            'film_rule_id' => fake()->randomElement($filmRuleIds)->id,
         ];
     }
 }

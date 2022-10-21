@@ -19,6 +19,16 @@ class Film extends Model
         return $this->belongsTo(Image::class);
     }
 
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
+    }
+
+    public function filmRule()
+    {
+        return $this->belongsTo(FilmRule::class);
+    }
+
     public function schedule()
     {
         return $this->hasMany(Schedule::class);
