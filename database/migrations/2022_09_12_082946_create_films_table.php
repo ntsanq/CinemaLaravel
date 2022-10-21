@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name',50);
             $table->text('description');
             $table->foreignId('language_id')->constrained('languages');
-            $table->foreignId('rule_id')->constrained('film_rules');
+            $table->foreignId('film_rule_id')->constrained('film_rules');
             $table->timestamps();
             $table->softDeletes();
         });

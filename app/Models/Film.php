@@ -24,7 +24,7 @@ class Film extends Model
         return $this->belongsTo(Language::class);
     }
 
-    public function rule()
+    public function filmRule()
     {
         return $this->belongsTo(FilmRule::class);
     }
