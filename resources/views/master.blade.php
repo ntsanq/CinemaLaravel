@@ -36,10 +36,9 @@
                 <img alt="s-logo" src="{{ asset('assets/images/s-logo.png') }}" width="60px">
             </a>
 
-            <form method="GET" action="#" role="search" name="myForm" onsubmit="return validateForm()"
+            <form method="GET" action="/" role="search" name="myForm" onsubmit="return validateForm()"
                   class="uk-search uk-margin-small-top uk-margin-left uk-hidden-small">
-                <input type="hidden" name="_token" value="ROrcUstuajqKErS3KEwMqmbJmDXKRfW8243SARnz">
-                <input class="uk-search-field" placeholder="Search" name="search">
+                <input class="uk-search-field" placeholder="Search" name="search" type="search">
                 <div class="uk-dropdown uk-dropdown-flip uk-dropdown-search" aria-expanded="false"></div>
             </form>
             <div class="uk-navbar-flip uk-hidden-small">

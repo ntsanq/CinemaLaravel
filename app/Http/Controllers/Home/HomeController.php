@@ -17,6 +17,11 @@ class HomeController extends Controller
             $categoryName = '';
         }
 
+        if (!empty($request->search)) {
+            $search = $request->search;
+        } else {
+            $search = '';
+        }
         $categories = FilmCategory::all()->toArray();
         $filmsWithPagination = Film::query()
             ->join('images', 'images.id', 'films.image_id')
@@ -29,6 +34,7 @@ class HomeController extends Controller
             ])
             ->where('films.deleted_at', null)
             ->where('film_categories.name', 'like', '%'.$categoryName.'%')
+            ->where('films.name', 'like', '%'.$search.'%')
             ->orderBy('name', 'ASC')
             ->paginate(12)
             ->appends($request->query())
