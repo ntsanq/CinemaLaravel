@@ -9,6 +9,15 @@ class Film extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'film_category_id',
+        'image_id',
+        'name',
+        'description',
+        'language_id',
+        'film_rule_id',
+    ];
+
     public function filmCategory()
     {
         return $this->belongsTo(FilmCategory::class);
@@ -32,5 +41,10 @@ class Film extends Model
     public function schedule()
     {
         return $this->hasMany(Schedule::class);
+    }
+
+    public function scopeExclude($query, $value = [])
+    {
+        return $query->select(array_diff($this->fillable, $value));
     }
 }

@@ -1,11 +1,11 @@
 @extends('master')
 
 @section('title')
-    {{  __('Home page') }}
+    {{  __('Film details') }}
 @endsection
 
 @section('head')
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css111') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 @endsection
 
 @section('content')
@@ -17,59 +17,45 @@
                         <ul class="uk-tab uk-tab-grid" data-uk-switcher="{connect:'#media-tabs'}">
                             <li class="uk-width-medium-1-2 uk-active"><a href="#">Description</a></li>
                             <li class="uk-width-medium-1-2"><a href="#">Comments</a></li>
-                            <li class="uk-tab-responsive uk-active uk-hidden" aria-haspopup="true"
-                                aria-expanded="false">
-                                <a>Active</a>
-                                <div class="uk-dropdown uk-dropdown-small uk-dropdown-up">
-                                    <ul class="uk-nav uk-nav-dropdown"></ul>
-                                    <div>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                     <ul id="media-tabs" class="uk-switcher">
                         <!-- ================ start Tab Panel =================================== -->
                         <li>
                             <img
-                                src="http://market.gorilletheme.com/Blockter/images/6315e0378b2c847-sila-spokoju-300x450.jpg"
+                                src="{{ $filmDetails['path'] }}"
                                 class="about_img">
 
-                            <h2 class="uk-text-contrast uk-margin-large-top">Jikirag</h2>
+                            <h2 class="uk-text-contrast uk-margin-large-top">{{ $filmDetails['name'] }}</h2>
                             <ul class="uk-subnav uk-subnav-line">
                                 <li>
-                                    <i class="uk-icon-clock-o uk-margin-small-right"></i>
-                                    05-09-2022
-                                </li>
-                                <li>
-                                    <i class="uk-icon-simplybuilt"></i> 30 MB
+                                    <i class="uk-icon-th-large"></i>
+                                    {{ $filmDetails['category'] }}
                                 </li>
                                 <li>
                                     <i class="uk-icon-language"></i>
-                                    French (2050)
-
-                                </li>
-                                <li>
-                                    <i class="uk-icon-th-large"></i>
-                                    Action
-
-                                </li>
-                                <li>
-                                    <a class="uk-button uk-button-primary" download=""
-                                       href="http://market.gorilletheme.com/Blockter/Audios/6315e039d01eeFile.zip">
-                                        <i class="uk-icon-download uk-margin-small-right"></i>
-                                        Download</a>
+                                    {{ $filmDetails['language'] }}
                                 </li>
                             </ul>
                             <hr>
                             <p class="uk-text-muted uk-h4">
-                            <p>Pete Davidson&nbsp; A pagan village, founded on the bones of both innocent and foul, is
-                                deeply rooted within the heart of an ancient Eden. When a balance of flesh and soil
-                                decays,
-                                the last surviving village elder battles madness and the macabre to save her people from
-                                not
-                                only themselves, but the monstrous judgement that burrows up from below.&nbsp; <br>
-                            </p> </p>
+                                <p>
+                                    {{ $filmDetails['description'] }}
+                                    <br>
+                                </p>
+                            <span>
+                                <b>Rule:</b>
+                                <ul class="uk-subnav uk-subnav-line">
+                                    <li>{{ $filmDetails['rule'] }}</li>
+                                </ul>
+                            </span>
+                            </p>
+                            <p class="uk-text-muted uk-h4">
+                                <a class="uk-button uk-button-primary uk-margin-small-right uk-height-1-1"
+                                   href="#">
+                                    Book
+                                </a>
+                            </p>
                         </li>
                         <!--  ================= ./ Tab Panel 1 =========================== -->
                         <li>

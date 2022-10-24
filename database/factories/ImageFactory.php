@@ -17,7 +17,7 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-            'path' => fake()->imageUrl
+            'path' => fake()->imageUrl('300','450')
         ];
     }
 }
