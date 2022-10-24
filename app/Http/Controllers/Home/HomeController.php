@@ -5,23 +5,33 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Film;
 use App\Models\FilmCategory;
-use Illuminate\Support\Carbon;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if (!empty($request->category)) {
+            $categoryName = $request->category;
+        } else {
+            $categoryName = '';
+        }
+
         $categories = FilmCategory::all()->toArray();
         $filmsWithPagination = Film::query()
             ->join('images', 'images.id', 'films.image_id')
             ->join('languages', 'languages.id', 'films.language_id')
+            ->join('film_categories', 'film_categories.id', 'films.film_category_id')
             ->select([
                 'films.*',
                 'images.path as path',
-                'languages.name as language'
+                'languages.name as language',
             ])
             ->where('films.deleted_at', null)
-            ->paginate(10)
+            ->where('film_categories.name', 'like', '%'.$categoryName.'%')
+            ->orderBy('name', 'ASC')
+            ->paginate(12)
+            ->appends($request->query())
             ->toArray();
 
         $filmData = [];
@@ -35,9 +45,11 @@ class HomeController extends Controller
             );
         }
 
-        return view('home.index', [
-            'categories' => $categories,
-            'films' => $filmData
-        ]);
+        $filmsWithPagination['data'] = $filmData;
+        $filmsWithPagination['categories'] = $categories;
+
+        return view('home.index',[
+            'data'=>$filmsWithPagination
+        ]) ;
     }
 }

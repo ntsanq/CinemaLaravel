@@ -24,9 +24,9 @@
                         <li class="uk-active">
                             <a>All Genres</a>
                         </li>
-                        @foreach($categories as $category)
+                        @foreach($data['categories'] as $category)
                         <li>
-                            <a href="#">
+                            <a href="/?category={{ $category['name' ]}}">
                                 {{ $category['name'] }}
                             </a>
                         </li>
@@ -64,7 +64,7 @@
                 <div class="uk-grid-width-small-1-4 uk-grid-width-medium-1-4 uk-grid-width-large-1-4"
                      data-uk-grid="{gutter:20}" style="position: relative; margin-left: 50px;">
 
-                    @foreach($films as $film)
+                    @foreach($data['data'] as $film)
                     <div>
                         <div class="uk-overlay uk-overlay-hover">
                             <img
@@ -122,12 +122,20 @@
                 <div class="uk-margin-large-top uk-margin-bottom">
                     <div class="uk-Movies">
                         <nav role="navigation" aria-label="Pagination Navigation" class="flex justify-between">
-                            <span
-                                class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md">
+                            <a class="relative inline-flex items-center px-4 py-2 text-sm font-medium
+                             text-gray-500 bg-white border border-gray-300 cursor-default
+                             leading-5 rounded-md"
+                               @if($data['prev_page_url']== null)
+                                    style="pointer-events: none"
+                               @endif
+                               href="{{ $data['prev_page_url'] }}">
                             « Previous
-                            </span>
-                            <a class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                                Next »
+                            </a>
+                            <a class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300
+                             leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100
+                             active:text-gray-700 transition ease-in-out duration-150"
+                            href="{{ $data['next_page_url'] }}">
+                             Next »
                             </a>
                         </nav>
                     </div>
