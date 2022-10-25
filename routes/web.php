@@ -19,7 +19,10 @@ Route::get('/clerk', function () {
 });
 
 Route::get('/sign-in', [LoginController::class, 'index']);
+Route::post('/sign-in', [LoginController::class, 'signIn']);
+
 Route::get('/sign-up', [RegisterController::class, 'index']);
+Route::post('/sign-up', [RegisterController::class, 'signUp']);
 
 
 ######################

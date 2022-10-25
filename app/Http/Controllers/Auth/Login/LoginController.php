@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth\Login;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController
 {
@@ -17,5 +19,19 @@ class LoginController
         return view('auth.login.index', [
             'search' => $search
         ]);
+    }
+
+    public function signIn(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'message' => 'user not found or password is wrong',
+                'request' => $request->email
+            ], 400);
+        }
+        $token = $user->createToken('authToken')->plainTextToken;
+
+        return redirect('/');
     }
 }

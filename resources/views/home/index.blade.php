@@ -9,7 +9,9 @@
 @endsection
 
 @section('content')
-
+    @if(!empty($data['token']))
+        <h2>{{ $data['token'] }}</h2>
+    @endif
 
     {{--container--}}
     <div class="uk-container uk-container-center uk-margin-large-top uk-margin-large-bottom">

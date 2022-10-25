@@ -7,9 +7,10 @@
 @section('content')
     <h2>Sign in</h2>
 
-    <form class="uk-panel uk-panel-box uk-form" action="<%= session_login_url %>" method="POST">
+    <form class="uk-panel uk-panel-box uk-form" action="/sign-in" method="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="uk-form-row">
-            <input class="uk-width-1-1 uk-form-large" placeholder="Username" type="text" name="username" id="username">
+            <input class="uk-width-1-1 uk-form-large" placeholder="Email" type="text" name="email" id="email">
         </div>
         <div class="uk-form-row">
             <input class="uk-width-1-1 uk-form-large" placeholder="Password" type="password" name="password"
