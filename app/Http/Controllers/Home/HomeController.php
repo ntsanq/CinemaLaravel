@@ -36,7 +36,7 @@ class HomeController extends Controller
             ->where('film_categories.name', 'like', '%'.$categoryName.'%')
             ->where('films.name', 'like', '%'.$search.'%')
             ->orderBy('name', 'ASC')
-            ->paginate(12)
+            ->paginate(8)
             ->appends($request->query())
             ->toArray();
 
@@ -55,7 +55,8 @@ class HomeController extends Controller
         $filmsWithPagination['categories'] = $categories;
 
         return view('home.index',[
-            'data'=>$filmsWithPagination
+            'data'=>$filmsWithPagination,
+            'search' => $search
         ]) ;
     }
 }

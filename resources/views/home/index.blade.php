@@ -22,7 +22,7 @@
                     {{--gernes--}}
                     <ul class="uk-nav uk-nav-side uk-nav-parent-icon uk-margin-bottom" data-uk-nav="">
                         <li class="uk-active">
-                            <a>All Genres</a>
+                            <a href="/">All Genres</a>
                         </li>
                         @foreach($data['categories'] as $category)
                         <li>
@@ -133,16 +133,27 @@
                             </a>
                             <a class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300
                              leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100
-                             active:text-gray-700 transition ease-in-out duration-150"
+                             active:text-gray-700 transition ease-in-out duration-150 uk-margin-small-left"
+                               @if($data['next_page_url']== null)
+                                   style="pointer-events: none"
+                               @endif
                             href="{{ $data['next_page_url'] }}">
                              Next »
                             </a>
                         </nav>
                     </div>
                 </div>
-                {{--end Bottom--}}
-
+                <span class="uk-margin-small-left">
+                    Page {{ $data['current_page'] }} of {{ $data['last_page'] }}
+                    @if($data['last_page']>1)
+                        pages
+                    @else
+                        page
+                    @endif
+                </span>
             </div>
+            {{--end Bottom--}}
+
         </div>
     </div>
     {{--end container--}}

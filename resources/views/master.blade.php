@@ -38,14 +38,14 @@
 
             <form method="GET" action="/" role="search" name="myForm" onsubmit="return validateForm()"
                   class="uk-search uk-margin-small-top uk-margin-left uk-hidden-small">
-                <input class="uk-search-field" placeholder="Search" name="search" type="search">
+                <input class="uk-search-field" placeholder="Search" name="search" type="search" value="{{ $search }}">
                 <div class="uk-dropdown uk-dropdown-flip uk-dropdown-search" aria-expanded="false"></div>
             </form>
             <div class="uk-navbar-flip uk-hidden-small">
 
                 <div class="uk-button-group">
-                    <a class="uk-button uk-button-link uk-button-large" href="#">Sign In</a>
-                    <a class="uk-button uk-button-success uk-button-large uk-margin-left" href="#">
+                    <a class="uk-button uk-button-link uk-button-large" href="/sign-in">Sign In</a>
+                    <a class="uk-button uk-button-success uk-button-large uk-margin-left" href="/sign-up">
                         <i class="uk-icon-lock uk-margin-small-right"></i> Sign Up</a>
                 </div>
 

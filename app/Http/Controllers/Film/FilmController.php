@@ -9,6 +9,12 @@ class FilmController extends Controller
 {
     public function index($id)
     {
+        if (!empty($request->search)) {
+            $search = $request->search;
+        } else {
+            $search = '';
+        }
+
         $filmDetails = Film::query()
             ->where('films.id', $id)
             ->where('films.deleted_at', null)
@@ -28,7 +34,8 @@ class FilmController extends Controller
             ->toArray();
 
         return view('film.index',[
-            'filmDetails' => $filmDetails
+            'filmDetails' => $filmDetails,
+            'search' => $search
         ]);
     }
 }
