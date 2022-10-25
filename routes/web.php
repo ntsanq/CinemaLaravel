@@ -18,6 +18,10 @@ Route::get('/clerk', function () {
     return view('clerk.index');
 });
 
+Route::get('/sign-in', [LoginController::class, 'index']);
+Route::get('/sign-up', [RegisterController::class, 'index']);
+
+
 ######################
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/register', [RegisterController::class, 'index']);
