@@ -21,7 +21,7 @@ class LoginController
         ]);
     }
 
-    public function signIn(Request $request)
+    public function check(Request $request)
     {
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {

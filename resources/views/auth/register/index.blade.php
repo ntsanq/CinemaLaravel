@@ -7,7 +7,7 @@
 @section('content')
     <h2>Sign up</h2>
 
-    <form class="uk-panel uk-panel-box uk-form" action="/sign-in" method="POST">
+    <form class="uk-panel uk-panel-box uk-form" action="/signIn" method="POST">
         <div class="uk-form-row">
             <input class="uk-width-1-1 uk-form-large" placeholder="Username" type="text" name="username" id="username">
         </div>
