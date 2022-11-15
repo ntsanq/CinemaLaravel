@@ -18,12 +18,18 @@ Route::get('/clerk', function () {
     return view('clerk.index');
 });
 
-Route::get('/sign-in', [LoginController::class, 'index']);
-Route::post('/sign-in', [LoginController::class, 'signIn']);
+Route::get('/signIn', [LoginController::class, 'index'])->name('signIn.index');
+Route::post('/signIn', [LoginController::class, 'check'])->name('signIn.check');
 
-Route::get('/sign-up', [RegisterController::class, 'index']);
-Route::post('/sign-up', [RegisterController::class, 'signUp']);
+Route::get('/signUp', [RegisterController::class, 'index']);
+Route::post('/signUp', [RegisterController::class, 'store']);
 
+
+Route::group([
+    'middleware' => 'admin'
+], function (){
+    Route::get('/admin', [AdminController::class, 'index']);
+});
 
 ######################
 Route::get('/login', [LoginController::class, 'index']);
