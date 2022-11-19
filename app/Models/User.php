@@ -13,6 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
     public $timestamps = false;
 
     /**
@@ -27,7 +28,6 @@ class User extends Authenticatable
         'birthday',
         'address',
         'avatar',
-        'grant_id',
     ];
 
     /**
@@ -59,7 +59,7 @@ class User extends Authenticatable
         return ($this->gender === 0) ? 'Male' : 'Female';
     }
 
-    public function getRoleAttribute(): string
+    public function getRoleNameAttribute(): string
     {
         if ($this->role === 0) {
             return UserRole::getKey(UserRole::Admin);

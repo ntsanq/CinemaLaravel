@@ -31,6 +31,7 @@ class LoginController
             ], 400);
         }
         $token = $user->createToken('authToken')->plainTextToken;
+        session(['token' => $token]);
 
         return redirect('/');
     }

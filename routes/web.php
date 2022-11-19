@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\Login\LoginController;
+use App\Http\Controllers\Auth\Logout\LogoutController;
 use App\Http\Controllers\Auth\Register\RegisterController;
 use App\Http\Controllers\Film\FilmController;
 use App\Http\Controllers\Home\HomeController;
@@ -23,6 +24,8 @@ Route::post('/signIn', [LoginController::class, 'check'])->name('signIn.check');
 
 Route::get('/signUp', [RegisterController::class, 'index']);
 Route::post('/signUp', [RegisterController::class, 'store']);
+
+Route::post('/signOut', [LogoutController::class, 'logout']);
 
 
 Route::group([

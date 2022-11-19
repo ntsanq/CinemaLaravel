@@ -6,11 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Film;
 use App\Models\FilmCategory;
 use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        $user = null;
+        $token = PersonalAccessToken::findToken(session()->get('token'));
+        if (!empty($token)) {
+            $user = $token->tokenable->toArray();
+        }
+
         if (!empty($request->category)) {
             $categoryName = $request->category;
         } else {
@@ -33,8 +40,8 @@ class HomeController extends Controller
                 'languages.name as language',
             ])
             ->where('films.deleted_at', null)
-            ->where('film_categories.name', 'like', '%'.$categoryName.'%')
-            ->where('films.name', 'like', '%'.$search.'%')
+            ->where('film_categories.name', 'like', '%' . $categoryName . '%')
+            ->where('films.name', 'like', '%' . $search . '%')
             ->orderBy('name', 'ASC')
             ->paginate(8)
             ->appends($request->query())
@@ -54,9 +61,10 @@ class HomeController extends Controller
         $filmsWithPagination['data'] = $filmData;
         $filmsWithPagination['categories'] = $categories;
 
-        return view('home.index',[
-            'data'=>$filmsWithPagination,
+        return view('home.index', [
+            'user' => $user,
+            'data' => $filmsWithPagination,
             'search' => $search
-        ]) ;
+        ]);
     }
 }
