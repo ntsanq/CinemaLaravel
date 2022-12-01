@@ -24,7 +24,11 @@
                             <a href="/">All Genres</a>
                         </li>
                         @foreach($data['categories'] as $category)
-                        <li>
+                        <li
+                            @if(app('request')->input('category') === $category['name'])
+                                class="uk-nav-parent-icon-selected"
+                            @endif
+                        >
                             <a href="/?category={{ $category['name' ]}}">
                                 {{ $category['name'] }}
                             </a>

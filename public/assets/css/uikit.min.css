@@ -1469,6 +1469,10 @@ ul.uk-nav-sub {
     content: "\f107"
 }
 
+.uk-nav-parent-icon-selected {
+    background-color: rgb(244,239,245) ;
+}
+
 .uk-nav-side > li > a {
     color: #bebdbd
 }
