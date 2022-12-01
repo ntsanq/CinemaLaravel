@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Carbon;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class Controller extends BaseController
 {
@@ -31,5 +32,16 @@ class Controller extends BaseController
 
 
         return $finishTime->diffInMinutes($startTime).' minutes';
+    }
+
+    public function getUserInfo()
+    {
+        $user = null;
+        $token = PersonalAccessToken::findToken(session()->get('token'));
+        if (!empty($token)) {
+            $user = $token->tokenable->toArray();
+        }
+
+        return $user;
     }
 }

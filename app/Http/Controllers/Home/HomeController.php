@@ -6,17 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Film;
 use App\Models\FilmCategory;
 use Illuminate\Http\Request;
-use Laravel\Sanctum\PersonalAccessToken;
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $user = null;
-        $token = PersonalAccessToken::findToken(session()->get('token'));
-        if (!empty($token)) {
-            $user = $token->tokenable->toArray();
-        }
+        $user = $this->getUserInfo();
 
         if (!empty($request->category)) {
             $categoryName = $request->category;

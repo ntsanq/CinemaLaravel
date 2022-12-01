@@ -84,7 +84,7 @@
                             <p>
                                 <span class="uk-text-break uk-float-right">
                                      <a class="uk-button uk-button-primary uk-margin-small-right"
-                                        href="#">
+                                        href="/ticket/date">
                                         Book
                                      </a>
                                 </span>
@@ -92,26 +92,6 @@
                         </div>
                     </div>
                     @endforeach
-{{--                    <div>--}}
-{{--                        <div class="uk-overlay uk-overlay-hover">--}}
-{{--                            <img src="https://m.media-amazon.com/images/M/MV5BM2E4YzEzMGUtOTY5MS00ZDM5LWE3ZTYtMDYxNjgyOWI3Y2ZiXkEyXkFqcGdeQXVyNjU0NTI0Nw@@._V1_FMjpg_UX1000_.jpg">--}}
-{{--                            <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background uk-overlay-icon"></div>--}}
-{{--                            <a class="uk-position-cover"--}}
-{{--                               href="http://market.gorilletheme.com/Blockter/Movies/heatwave"></a>--}}
-{{--                        </div>--}}
-{{--                        <div class="uk-panel">--}}
-{{--                            <h5 class="uk-panel-title">Heatwave</h5>--}}
-{{--                            <p>--}}
-{{--                            <span class="rating">--}}
-{{--                              <i class="uk-icon-language"></i>                                Japanese (1791)--}}
-
-{{--                            </span>--}}
-{{--                                <span class="uk-float-right">--}}
-{{--                              <i class="uk-icon-simplybuilt"></i> 30 MB--}}
-{{--                            </span>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
 
                 </div>
                 {{--end cards container--}}

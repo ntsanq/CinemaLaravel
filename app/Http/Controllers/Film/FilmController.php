@@ -9,6 +9,8 @@ class FilmController extends Controller
 {
     public function index($id)
     {
+        $user = $this->getUserInfo();
+
         if (!empty($request->search)) {
             $search = $request->search;
         } else {
@@ -34,6 +36,7 @@ class FilmController extends Controller
             ->toArray();
 
         return view('film.index',[
+            'user' => $user,
             'filmDetails' => $filmDetails,
             'search' => $search
         ]);

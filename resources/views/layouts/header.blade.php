@@ -5,7 +5,7 @@
             <img alt="s-logo" src="{{ asset('assets/images/s-logo.png') }}" width="60px">
         </a>
 
-        <form method="GET" action="/" role="search" name="myForm" onsubmit="return validateForm()"
+        <form method="GET" action="/" role="search" name="myForm"
               class="uk-search uk-margin-small-top uk-margin-left uk-hidden-small">
             <input class="uk-search-field" placeholder="Search" name="search" type="search" value="{{ $search }}">
             <div class="uk-dropdown uk-dropdown-flip uk-dropdown-search" aria-expanded="false"></div>
@@ -13,6 +13,7 @@
         <div class="uk-navbar-flip uk-hidden-small">
 
             @if(!empty( $user ))
+                <i class="uk-icon-user"></i>
                 {{ $user['name'] }}
                 <form action="/signOut" method="post">
                     @csrf
@@ -20,7 +21,7 @@
                 </form>
             @else
                 <div class="uk-button-group">
-                    <a class="uk-button uk-button-link uk-button-large" href="/signIn">Sign In</a>
+                    <a class="uk-button uk-button-link uk-button-large" href="/signIn">Sign In {{ (session()->get('token')) }}</a>
                     <a class="uk-button uk-button-success uk-button-large uk-margin-left" href="/signUp">
                         <i class="uk-icon-lock uk-margin-small-right"></i> Sign Up</a>
                 </div>
