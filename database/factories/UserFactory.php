@@ -24,7 +24,7 @@ class UserFactory extends Factory
             'gender' => fake()->randomElement(['0', '1']),
             'birthday' => fake()->dateTimeBetween('-50 years','-18 years'),
             'email_verified_at' => now(),
-            'password' => '$2a$12$ZgHrwmrUnKZLRkzbw4zQBOd96.PI.uTKkIo2P90lEIW1DTEA25YpW', // password
+            'password' => '$2a$12$ZgHrwmrUnKZLRkzbw4zQBOd96.PI.uTKkIo2P90lEIW1DTEA25YpW', // password 123
             'address' => fake()->address(),
             'avatar' => fake()->imageUrl('100','100'),
             'role' => fake()->randomElement(UserRole::getValues()),
