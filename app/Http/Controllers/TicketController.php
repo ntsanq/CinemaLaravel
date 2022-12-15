@@ -17,14 +17,14 @@ class TicketController extends Controller
             ])
             ->get()->first();
 
-        return view('ticket.datePick', [
+        return view('ticket.master', [
             'film' => $film
         ]);
     }
 
     public function dateList(Request $request)
     {
-        
+
     }
 
     public function seat()
