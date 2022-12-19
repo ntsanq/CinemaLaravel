@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\Models\Room;
+use App\Http\Controllers\Controller;
 use App\Models\Schedule;
 use App\Models\Seat;
 use Illuminate\Http\Request;

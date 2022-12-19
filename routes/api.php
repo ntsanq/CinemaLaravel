@@ -4,8 +4,6 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\FilmController;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\API\UserController;
-use App\Http\Controllers\ScheduleController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
