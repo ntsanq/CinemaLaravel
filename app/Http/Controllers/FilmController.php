@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Film;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Film;
 
 class FilmController extends Controller

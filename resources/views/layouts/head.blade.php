@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <title>@yield('title', "Sang's Website")</title>
-
+    @viteReactRefresh
+    @vite('resources/js/app.jsx')
     @yield('head')
 </head>

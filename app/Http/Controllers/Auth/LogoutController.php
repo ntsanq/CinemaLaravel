@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Logout;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 

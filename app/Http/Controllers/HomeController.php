@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Film;
 use App\Models\FilmCategory;
 use Illuminate\Http\Request;
