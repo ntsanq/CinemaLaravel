@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\FilmController;
+use App\Http\Controllers\API\SeatController;
+use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\ScheduleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,19 +20,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(function (){
-    Route::get('/user', function() {
-        return ['message' => 'Hello Sang!'];
-    });
+    Route::get('/user', [UserController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/logoutAll', [AuthController::class, 'logoutAll']);
 });
 
-Route::get('/', function (Request $request) {
+Route::get('/', function () {
     return 'Cinema APIs';
 });
 
 Route::post('/auth', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::post('/getSeatsAvailable', [ScheduleController::class, 'getSeats']);
+Route::post('/getSeats', [SeatController::class, 'get']);
 Route::get('/films/{id}', [FilmController::class, 'getById']);

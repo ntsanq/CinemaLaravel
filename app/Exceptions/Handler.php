@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Http\Traits\ResponseTrait;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
@@ -49,13 +50,13 @@ class Handler extends ExceptionHandler
 //        });
 //    }
 
+    use ResponseTrait;
+
     public function register()
     {
         $this->renderable(function (AuthenticationException $e, $request) {
             if ($request->is('api/*')){
-                return response()->json([
-                    'message'=> 'Api errors'
-                ],401);
+                return $this->failed('Unauthorized', 401);
             }
         });
     }
