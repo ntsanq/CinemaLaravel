@@ -40,9 +40,10 @@ class SeatTableSeeder extends Seeder
         foreach ($rooms as $room) {
             foreach ($seats as $seat) {
                 Seat::create([
-                    'room_id'=> $room->id,
+                    'room_id' => $room->id,
                     'name' => $seat,
-                    'status'=> fake()->randomElement(SeatStatus::getValues())
+                    'status' => fake()->randomElement(SeatStatus::getValues()),
+                    'price' => fake()->numberBetween('100000', '200000')
                 ]);
             }
         }

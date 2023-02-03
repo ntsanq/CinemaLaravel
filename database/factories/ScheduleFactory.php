@@ -28,8 +28,7 @@ class ScheduleFactory extends Factory
             'film_id' => fake()->randomElement($filmIds)->id,
             'room_id' => fake()->randomElement($roomIds)->id,
             'start' => $startTime->format('Y-m-d H:i:s'),
-            'end' => $endTime->format('Y-m-d H:i:s'),
-            'price' => fake()->numberBetween('100000', '200000')
+            'end' => $endTime->format('Y-m-d H:i:s')
         ];
     }
 }

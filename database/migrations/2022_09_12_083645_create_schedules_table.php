@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('room_id')->constrained('rooms');
             $table->dateTime('start');
             $table->dateTime('end');
-            $table->unsignedInteger('price');
             $table->timestamps();
             $table->softDeletes();
         });
