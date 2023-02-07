@@ -2,50 +2,68 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Traits\ResponseTrait;
 use App\Models\Schedule;
 use App\Models\Seat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BookingController
 {
+    use ResponseTrait;
+
     public function getSeats(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'roomId' => 'required|int',
+        ]);
 
-
-        $schedules = Schedule::query()
-            ->join('rooms', 'rooms.id', 'schedules.room_id')
-            ->select([
-                'schedules.*',
-                'rooms.*'
-            ])
-            ->where('schedules.film_id', $request->filmId)
-            ->where('schedules.deleted_at', null)->get()->toArray();
-
-        $rooms = [];
-        foreach ($schedules as $schedule) {
-            $seats = Seat::query()
-                ->where('room_id', $schedule['room_id'])
-                ->get();
-            $seats = $seats->makeHidden([
-                'id',
-                'room_id',
-                'created_at',
-                'updated_at',
-                'deleted_at',
-            ]);
-            $rooms[$schedule['name']] = $seats->toArray();
+        if ($validator->fails()) {
+            return $this->failed($validator->messages());
         }
 
-        return response()->json([
-            'success' => true,
-            'data' => [
-                $rooms
-            ]
-        ]);
+        $seats = Seat::query()
+            ->join('rooms', 'rooms.id', 'seats.room_id')
+            ->select([
+                'seats.id',
+                'seats.name',
+                'seats.status',
+                'seats.price',
+            ])
+            ->where('seats.room_id', $request->roomId)
+            ->get()->toArray();
+
+        return $this->success($seats);
     }
 
     public function getTimes(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'filmId' => 'required|int',
+            'date' => 'required|date_format:d-m-Y',
+        ]);
 
+        if ($validator->fails()) {
+            return $this->failed($validator->messages());
+        }
+
+        $date = strtotime($request->date);
+
+        $schedules = Schedule::query()
+            ->join('films', 'films.id', 'schedules.film_id')
+            ->select([
+                'schedules.start',
+                'schedules.end',
+                'schedules.room_id',
+            ])
+            ->where('schedules.film_id', $request->filmId)
+            ->whereDate('schedules.start', date('Y/m/d', $date))
+            ->get()->toArray();
+
+        if ($schedules === null) {
+             return $this->successMessage([]);
+        }
+
+        return $this->success($schedules);
     }
 }

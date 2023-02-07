@@ -2,12 +2,16 @@
 
 namespace App\Exceptions;
 
+use App\Http\Traits\ResponseTrait;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+
+    use ResponseTrait;
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -38,25 +42,25 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Register the exception handling callbacks for the application.
-     *
-     * @return void
+     * @param $request
+     * @param Throwable $exception
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
+     * @throws Throwable
      */
-//    public function register()
-//    {
-//        $this->reportable(function (Throwable $e) {
-//            //
-//        });
-//    }
-
-    public function register()
+    public function render($request, Throwable $exception)
     {
-        $this->renderable(function (AuthenticationException $e, $request) {
-            if ($request->is('api/*')){
-                return response()->json([
-                    'message'=> 'Api errors'
-                ],401);
-            }
-        });
+        if ($exception instanceof NotFoundHttpException) {
+            return $this->failed('not found', 404);
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return $this->failed('unauthorized', 401);
+        }
+
+        if ($exception instanceof \Exception) {
+            return $this->failed($exception->getMessage());
+        }
+
+        return parent::render($request, $exception);
     }
 }
