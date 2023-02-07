@@ -88,7 +88,7 @@
                             <p>
                                 <span class="uk-text-break uk-float-right">
                                      <a class="uk-button uk-button-primary uk-margin-small-right"
-                                        href="/ticket/date?filmId={{ $film['id'] }}">
+                                        href="/ticket/select?filmId={{ $film['id'] }}">
                                         Book
                                      </a>
                                 </span>

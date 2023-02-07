@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
-    public function date(Request $request)
+    public function select(Request $request)
     {
         $film = Film::where('films.id', $request->filmId)
             ->join('images','images.id', 'films.image_id')
@@ -21,15 +21,4 @@ class TicketController extends Controller
             'film' => $film
         ]);
     }
-
-    public function dateList(Request $request)
-    {
-        
-    }
-
-    public function seat()
-    {
-        return view('ticket.seatPick');
-    }
-
 }

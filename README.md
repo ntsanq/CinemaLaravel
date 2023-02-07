@@ -10,15 +10,26 @@ This project that writing for a cinema management.
 - Composer : v2.3.7.[Install Composer](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-composer-on-ubuntu-20-04)
 
 #### Set up
-
-Clone this project:
+                     
+- **Step 1**: Clone this project:
 ```sh  
 $ git clone https://github.com/ntsanq/CinemaLaravel.git
 $ cd CinemaLaravel
 $ composer install
-$ php artisan migrate:refresh --seed
-$ php artisan serve
 ``` 
+
+
+- **Step 2**: Create example database: <br>
+Create new database <br>
+Make your new .env with database's name you created <br>
+Run:
+```sh  
+$ php artisan migrate --seed 
+$ php artisan serve                           (one tab)
+$ npm run dev                                 (one tab)
+``` 
+
+
 Run your server: http://localhost:8000
 
 ## Author

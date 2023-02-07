@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -50,7 +51,6 @@ class AuthController extends Controller
      */
     public function register(Request $request): JsonResponse
     {
-
         $validator = $this->checkValidation($request);
         if ($validator->fails()) {
             return response()->json([
@@ -61,17 +61,20 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => UserRole::Customer,
             'birthday' => $request->birthday,
             'address' => $request->address,
-            'avatar' => $request->avatar,
-            'grant' => $request->grant,
+            'avatar' => $request->avatar
         ]);
+
+        $token = $user->createToken('authToken')->plainTextToken;
 
         return response()->json([
             "status" => 'success',
             "data" => [
                 'id' => $user->id,
-                'email' => $user->email
+                'email' => $user->email,
+                'token' => $token
             ]
         ], 201);
     }
@@ -83,18 +86,10 @@ class AuthController extends Controller
             'password' => [
                 'required',
                 'string',
-                'min:6',
-                'regex:((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,50})',
-                'required_with:password_confirmation',
-                'same:password_confirmation'
-            ],
-            'password_confirmation' => [
-                'required',
-                'min:6'
+                'regex:((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,50})'
             ],
             'name' => 'required',
             'birthday' => [
-                'required',
                 'date',
                 'before:01/01/2020 00:00'
             ],
