@@ -12,6 +12,7 @@ class Handler extends ExceptionHandler
 {
 
     use ResponseTrait;
+
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -49,16 +50,18 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof NotFoundHttpException) {
-            return $this->failed('not found', 404);
-        }
+        if ($request->is('api/*')) {
+            if ($exception instanceof NotFoundHttpException) {
+                return $this->failed('not found', 404);
+            }
 
-        if ($exception instanceof AuthenticationException) {
-            return $this->failed('unauthorized', 401);
-        }
+            if ($exception instanceof AuthenticationException) {
+                return $this->failed('unauthorized', 401);
+            }
 
-        if ($exception instanceof \Exception) {
-            return $this->failed($exception->getMessage());
+            if ($exception instanceof \Exception) {
+                return $this->failed($exception->getMessage());
+            }
         }
 
         return parent::render($request, $exception);

@@ -76,9 +76,8 @@ export default function SeatPick() {
                     for (let i = 0; i < noOfRows; i++) {
                         newSeatList[i] = catogory.seats.slice(i * 8, i * 8 + 8);
                     }
-                    console.log(newSeatList);
                     return (
-                        <div className="seats-section">
+                        <div className="seats-section" key={catogory.seats}>
                             <h4>{catogory.name}</h4>
                             {newSeatList.map((seats, i) => (
                                 <div key={i} className="seats">

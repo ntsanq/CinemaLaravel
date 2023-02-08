@@ -1,5 +1,3 @@
-import '../css/app.css'
-
-import "./components/Example";
+import '../css/app.css';
 
 import "./components/TicketBooking";

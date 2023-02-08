@@ -7,7 +7,7 @@ export default function DatePick() {
 
     const [dateState, setDateState] = useState(new Date())
     const changeDate = (e) => {
-        setDateState(e)
+        setDateState(e);
     }
 
     return (
