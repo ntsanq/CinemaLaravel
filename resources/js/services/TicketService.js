@@ -12,8 +12,16 @@ class TicketService {
 
     async getTimes(filmId, date) {
         let response = await axios.post(this.api + `/getTimes`, {
-            filmId,
-            date
+            filmId: filmId,
+            date: date
+        });
+
+        return response.data;
+    }
+
+    async getSeats(roomId) {
+        let response = await axios.post(this.api + `/getSeats`, {
+            roomId: roomId
         });
 
         return response.data;

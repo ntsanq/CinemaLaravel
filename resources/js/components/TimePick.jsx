@@ -3,14 +3,20 @@ import React, {useState} from 'react';
 export default function TimePick(props) {
     const [selectedTime, setSelectedTime] = useState("null");
 
-    const timesData = props.timesData;
-
-    const listItems = timesData.map((time, index) =>
+    const listItems = props.timesData.map((time, index) =>
         <button key={index}
-                onClick={(e) => setSelectedTime(e.target.textContent)}
+                onClick={handleButton}
                 style={{marginLeft: '20px'}}
-        >{time.start}</button>
+        >{time.start} <span hidden>{time.room_id}</span></button>
     );
+
+
+    function handleButton(e) {
+        setSelectedTime(e.target.textContent);
+        const buttonContent = e.target.textContent.split(' ');
+        const roomId = buttonContent[1];
+        props.getSeats(roomId);
+    }
 
     return (
         <>

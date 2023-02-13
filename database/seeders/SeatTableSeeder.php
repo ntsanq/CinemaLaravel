@@ -25,12 +25,13 @@ class SeatTableSeeder extends Seeder
             'E',
             'F',
             'G',
-            'H'
+            'H',
+            'J'
         ];
 
         $seats = [];
         foreach ($chars as $char) {
-            for ($i = 1; $i <= 9; $i++) {
+            for ($i = 1; $i <= 8; $i++) {
                 $seatName = $i . $char;
                 $seats[] = $seatName;
             }

@@ -25,6 +25,8 @@ class BookingController
         $seats = Seat::query()
             ->join('rooms', 'rooms.id', 'seats.room_id')
             ->select([
+                'rooms.id as room_id',
+                'rooms.name as room_name',
                 'seats.id',
                 'seats.name',
                 'seats.status',
@@ -33,7 +35,27 @@ class BookingController
             ->where('seats.room_id', $request->roomId)
             ->get()->toArray();
 
-        return $this->success($seats);
+        $occupiedList = [];
+        $room = [];
+        $allSeats = [];
+
+        $room['id'] = $seats[0]['room_id'];
+        $room['name'] = $seats[0]['room_name'];
+
+        foreach ($seats as $seat) {
+            if ($seat['status'] === 1) {
+                $occupiedList[] = $seat['id'];
+            }
+
+            $allSeats[] = $seat['id'];
+
+        }
+
+        return $this->success([
+            'allSeats' => $allSeats,
+            'occupied' => $occupiedList,
+            'room' => $room,
+        ]);
     }
 
     public function getTimes(Request $request)
@@ -61,7 +83,7 @@ class BookingController
             ->get()->toArray();
 
         if ($schedules === null) {
-             return $this->successMessage([]);
+            return $this->successMessage([]);
         }
 
         foreach ($schedules as &$schedule) {

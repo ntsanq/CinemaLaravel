@@ -1,48 +1,30 @@
 import React from 'react';
 import {useState} from "react";
 
-export default function SeatPick() {
+export default function SeatPick(props) {
 
     const [selectedSeats, setSelectedSeats] = useState([]);
-    const [selectedCatogory, setSelectedCatogory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
-    const seatsCatogory = [
+    const allSeats = props.seatsData.allSeats;
+    const occupied = props.seatsData.occupied;
+
+    const seatsCategory = [
         {
-            name: "Club",
-            price: 236,
-            seats: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            occupied: [2, 3]
+            name: 'Poor',
+            price: 120000,
+            seats: allSeats,
+            occupied: occupied
         },
         {
-            name: "Executive",
-            price: 200,
-            seats: [
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30
-            ],
-            occupied: [26]
+            name: "VIP",
+            price: 200000,
+            seats: [11, 12],
+            occupied: [11]
         }
     ];
 
-    const handleOnClick = (seat, catogory) => {
+    const handleOnClick = (seat, category) => {
         const isSelected = selectedSeats.indexOf(seat) > -1;
         if (isSelected) {
             const newSelectedSeats = selectedSeats.filter(
@@ -52,15 +34,15 @@ export default function SeatPick() {
         } else {
             if (
                 selectedSeats.length !== 0 &&
-                selectedCatogory &&
-                selectedCatogory.name !== catogory.name
+                selectedCategory &&
+                selectedCategory.name !== category.name
             ) {
-                alert("Select seats from same catogory");
+                alert("Select seats from same category");
             } else if (selectedSeats.length > 5) {
                 alert("Maximum 5 seats allowed");
             } else {
                 setSelectedSeats([...selectedSeats, seat]);
-                setSelectedCatogory(catogory);
+                setSelectedCategory(category);
             }
         }
     };
@@ -70,20 +52,20 @@ export default function SeatPick() {
         <>
             <h1 className='hi'>Seat picker</h1>
             <div className="screen">
-                {seatsCatogory.map((catogory) => {
-                    const noOfRows = Math.ceil(catogory.seats.length / 8);
+                {seatsCategory.map((category) => {
+                    const noOfRows = Math.ceil(category.seats.length / 8);
                     const newSeatList = [];
                     for (let i = 0; i < noOfRows; i++) {
-                        newSeatList[i] = catogory.seats.slice(i * 8, i * 8 + 8);
+                        newSeatList[i] = category.seats.slice(i * 8, i * 8 + 8);
                     }
                     return (
-                        <div className="seats-section" key={catogory.seats}>
-                            <h4>{catogory.name}</h4>
+                        <div className="seats-section" key={category.seats}>
+                            <h4>{category.name}</h4>
                             {newSeatList.map((seats, i) => (
                                 <div key={i} className="seats">
                                     {seats.map((seat, j) => {
                                         const isSelected = selectedSeats.indexOf(seat) > -1;
-                                        const isOccupied = catogory.occupied.indexOf(seat) > -1;
+                                        const isOccupied = category.occupied.indexOf(seat) > -1;
                                         return (
                                             <div
                                                 key={`seat-${seat + j}`}
@@ -92,7 +74,7 @@ export default function SeatPick() {
                                                 }`}
                                                 onClick={() => {
                                                     if (!isOccupied) {
-                                                        handleOnClick(seat, catogory);
+                                                        handleOnClick(seat, category);
                                                     } else {
                                                         null;
                                                     }
@@ -109,7 +91,7 @@ export default function SeatPick() {
                     <span> Seats Count: {selectedSeats.length}</span>{" "}
                     <span>
           Price: $
-                        {selectedCatogory ? selectedSeats.length * selectedCatogory.price : 0}
+                        {selectedCategory ? selectedSeats.length * selectedCategory.price : 0}
         </span>
                 </div>
             </div>
