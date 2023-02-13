@@ -64,6 +64,11 @@ class BookingController
              return $this->successMessage([]);
         }
 
+        foreach ($schedules as &$schedule) {
+            $schedule['start'] = date('H:i', strtotime($schedule['start']));
+            $schedule['end'] = date('H:i', strtotime($schedule['end']));
+        }
+
         return $this->success($schedules);
     }
 }

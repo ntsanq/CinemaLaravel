@@ -1,24 +1,36 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import DatePick from './DatePick';
 import SeatPick from "./SeatPick";
 import TimePick from "./TimePick";
+import TicketService from "../services/TicketService";
 
 export default function TicketBooking(props) {
     useEffect(() => {
-        console.log(props.data)
     }, []);
+
+    const film = JSON.parse(props.data);
+    const [timesData, setTimesData] = useState([]);
+    const getTimes = (filmId, date) => {
+        TicketService.getTimes(filmId, date).then(r => {
+            if (r.success) {
+                console.log(r.data);
+                setTimesData(r.data);
+            } else {
+                console.log('failed');
+            }
+        }).catch(e => console.log(e));
+    };
+
+
+
     return (
         <>
-            <pre>
-                {props.data}
-            </pre>
-
             <h1>TicketBooking</h1>
 
             <h2>Which day you want to watch?</h2>
-            <DatePick/>
-            <TimePick/>
+            <DatePick getTimes={getTimes} filmId={film.id}/>
+            <TimePick timesData={timesData}/>
             <SeatPick/>
         </>
 

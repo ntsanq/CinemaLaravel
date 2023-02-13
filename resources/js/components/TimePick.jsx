@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 
-export default function TimePick() {
-    const [time, setTime] = useState("null");
+export default function TimePick(props) {
+    const [selectedTime, setSelectedTime] = useState("null");
 
-    const timeData = ['08:20', '01:20', '13:20', '15:20'];
-    const listItems = timeData.map((point) =>
-        <button onClick={(e) => setTime(e.target.textContent)} style={{marginLeft: '20px'}}
-                key={point.toString()}>{point}</button>
+    const timesData = props.timesData;
+
+    const listItems = timesData.map((time, index) =>
+        <button key={index}
+                onClick={(e) => setSelectedTime(e.target.textContent)}
+                style={{marginLeft: '20px'}}
+        >{time.start}</button>
     );
 
     return (
@@ -22,7 +25,7 @@ export default function TimePick() {
             </div>
 
 
-            <p>Current selected date is <b>{time}</b></p>
+            <p>Current selected date is <b>{selectedTime}</b></p>
 
         </>
     );
