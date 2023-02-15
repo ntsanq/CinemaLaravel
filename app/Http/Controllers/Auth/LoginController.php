@@ -25,10 +25,7 @@ class LoginController
     {
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'message' => 'user not found or password is wrong',
-                'request' => $request->email
-            ], 400);
+            return view('auth.login.index')->withErrors(['message' => 'Login failed'])->with($request->input());
         }
         $token = $user->createToken('authToken')->plainTextToken;
         session(['token' => $token]);

@@ -16,8 +16,15 @@
             <input class="uk-width-1-1 uk-form-large" placeholder="Password" type="password" name="password"
                    id="password">
         </div>
+
         <div class="uk-form-row">
             <input class="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="submit" value="Login">
         </div>
     </form>
+    <span>
+        @if($errors->any())
+            <h4>{{$errors->first()}}</h4>
+        @endif
+    </span>
+
 @endsection
