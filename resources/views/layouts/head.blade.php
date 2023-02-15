@@ -8,14 +8,14 @@
 
 
     {{-- Font--}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="//fonts.googleapis.com">
+    <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ asset('assets/Fontawesome/css/all.css') }}">
 
     {{-- Google--}}
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lalezar&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,500,600&amp;display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Lalezar&amp;display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Righteous&amp;display=swap" rel="stylesheet">
 
     {{-- Css--}}
     <link rel="stylesheet" href="{{ asset('assets/css/uikit.min.css') }}">
