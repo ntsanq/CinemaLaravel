@@ -4,8 +4,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
     server: {
-        host: 'cinema.sangnguyen.me',
-        https: true
+        host: 'cinema.sangnguyen.me'
     },
 
     plugins: [
