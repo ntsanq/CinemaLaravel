@@ -6,7 +6,8 @@ export default function SeatPick(props) {
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
 
-    const allSeats = props.seatsData.allSeats;
+    const allSeats = props.seatsData.allSeats === undefined ? [] : props.seatsData.allSeats;
+
     const occupied = props.seatsData.occupied;
 
     const seatsCategory = [
