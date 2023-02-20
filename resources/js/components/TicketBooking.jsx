@@ -12,6 +12,7 @@ export default function TicketBooking(props) {
     const film = JSON.parse(props.data);
     const [timesData, setTimesData] = useState([]);
     const [seatsData, setSeatsData] = useState([]);
+    const [selectedSeats, setSelectedSeats] = useState([]);
 
     const getTimes = (filmId, date) => {
         TicketService.getTimes(filmId, date).then(r => {
@@ -32,14 +33,25 @@ export default function TicketBooking(props) {
         }).catch(e => console.log(e));
     };
 
+    const getSeatInfo = (seatId) => {
+        TicketService.getSeatInfo(seatId).then(r => {
+            if (r.success) {
+                console.log('Seat ID parameter put into GetSeatInfo API: ' + seatId)
+                setSelectedSeats([...selectedSeats, r.data]);
+            } else {
+                console.log(r.message);
+            }
+        }).catch(e => console.log(e));
+    }
+
     return (
         <>
-            <h1>TicketBooking</h1>
+                <h1>TicketBooking</h1>
 
-            <h2>Which day you want to watch?</h2>
-            <DatePick getTimes={getTimes} filmId={film.id}/>
-            <TimePick timesData={timesData} getSeats={getSeats}/>
-            <SeatPick seatsData={seatsData}/>
+                <h2>Which day you want to watch?</h2>
+                <DatePick getTimes={getTimes} filmId={film.id}/>
+                <TimePick timesData={timesData} getSeats={getSeats}/>
+                <SeatPick seatsData={seatsData} pickedSeatsInfo={selectedSeats} getSeatInfo={getSeatInfo}/>
         </>
 
     );

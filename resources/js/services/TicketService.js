@@ -27,6 +27,12 @@ class TicketService {
         return response.data;
     }
 
+    async getSeatInfo(seatId) {
+        let response = await axios.get(this.api + `/seats/${seatId}`);
+
+        return response.data;
+    }
+
 }
 
 export default new TicketService();

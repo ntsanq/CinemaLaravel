@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\BookingController;
+use App\Http\Controllers\API\SeatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,4 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/getSeats', [BookingController::class, 'getSeats']);
 Route::post('/getTimes', [BookingController::class, 'getTimes']);
+Route::get('/seats/{id}', [SeatController::class, 'info']);

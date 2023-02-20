@@ -1,27 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useState} from "react";
 
 export default function SeatPick(props) {
 
+    const alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+
+    const allSeats = props.seatsData.allSeats === undefined ? [] : props.seatsData.allSeats;
+    const occupied = props.seatsData.occupied;
+
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
 
-    const allSeats = props.seatsData.allSeats === undefined ? [] : props.seatsData.allSeats;
-
-    const occupied = props.seatsData.occupied;
+    useEffect(() => {
+        if (selectedSeats.slice(-1)[0] !== undefined) {
+            props.getSeatInfo(selectedSeats.slice(-1)[0]);
+        }
+    }, [selectedSeats])
 
     const seatsCategory = [
         {
-            name: 'Poor',
             price: 120000,
             seats: allSeats,
             occupied: occupied
-        },
-        {
-            name: "VIP",
-            price: 200000,
-            seats: [11, 12],
-            occupied: [11]
         }
     ];
 
@@ -38,7 +38,7 @@ export default function SeatPick(props) {
                 selectedCategory &&
                 selectedCategory.name !== category.name
             ) {
-                alert("Select seats from same category");
+                alert("Must be the same category");
             } else if (selectedSeats.length > 5) {
                 alert("Maximum 5 seats allowed");
             } else {
@@ -48,39 +48,44 @@ export default function SeatPick(props) {
         }
     };
 
+    const handleSelectedOnChange = (selectedSeats) => {
+    }
 
     return (
         <>
             <h1 className='hi'>Seat picker</h1>
-            <div className="screen">
-                {seatsCategory.map((category) => {
+            <div className="all-seats">
+                {seatsCategory.map((category, k) => {
                     const noOfRows = Math.ceil(category.seats.length / 8);
                     const newSeatList = [];
                     for (let i = 0; i < noOfRows; i++) {
                         newSeatList[i] = category.seats.slice(i * 8, i * 8 + 8);
                     }
                     return (
-                        <div className="seats-section" key={category.seats}>
+                        <div className="seats-section" key={k}>
                             <h4>{category.name}</h4>
                             {newSeatList.map((seats, i) => (
-                                <div key={i} className="seats">
+                                <div key={`${k}-${i}`} className="seats">
                                     {seats.map((seat, j) => {
                                         const isSelected = selectedSeats.indexOf(seat) > -1;
                                         const isOccupied = category.occupied.indexOf(seat) > -1;
                                         return (
-                                            <div
-                                                key={`seat-${seat + j}`}
-                                                className={`seat ${isSelected ? "selected" : ""} ${
-                                                    isOccupied ? "occupied" : ""
-                                                }`}
-                                                onClick={() => {
-                                                    if (!isOccupied) {
-                                                        handleOnClick(seat, category);
-                                                    } else {
-                                                        null;
-                                                    }
-                                                }}
-                                            />
+                                            <React.Fragment key={`seat-${seat + j}`}>
+                                                <span> {j + 1}{alpha[i]}</span>
+                                                <div
+                                                    key={`seat-${seat + j}`}
+                                                    className={`seat ${isSelected ? "selected" : ""} ${
+                                                        isOccupied ? "occupied" : ""
+                                                    }`}
+                                                    onClick={() => {
+                                                        if (!isOccupied) {
+                                                            handleOnClick(seat, category);
+                                                        } else {
+                                                            null;
+                                                        }
+                                                    }}
+                                                />
+                                            </React.Fragment>
                                         );
                                     })}
                                 </div>
@@ -89,11 +94,9 @@ export default function SeatPick(props) {
                     );
                 })}
                 <div className="total">
-                    <span> Seats Count: {selectedSeats.length}</span>{" "}
-                    <span>
-          Price: $
-                        {selectedCategory ? selectedSeats.length * selectedCategory.price : 0}
-        </span>
+                    <span>Seats Count: {selectedSeats.length}</span>{" "}
+                    <span>Price: ${selectedCategory ? selectedSeats.length * selectedCategory.price : 0}</span>
+                    <span onChange={handleSelectedOnChange(selectedSeats)}>You selected: {selectedSeats.map(seat => <span key={seat}>{seat}</span>)}</span>
                 </div>
             </div>
         </>
