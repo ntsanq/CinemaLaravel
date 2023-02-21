@@ -15,6 +15,7 @@ export default function DatePick(props) {
 
     const changeDate = (e) => {
         setDateState(e);
+        props.onData(e);
     }
 
     return (

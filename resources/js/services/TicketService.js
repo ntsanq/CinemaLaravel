@@ -33,6 +33,18 @@ class TicketService {
         return response.data;
     }
 
+
+    async book(scheduleTime, seats, discountId, userId) {
+        let response = await axios.post(this.api + `/confirmBooking`, {
+            scheduleTime: scheduleTime,
+            seats: seats,
+            discountId: discountId,
+            userId: userId,
+        });
+
+        return response.data;
+    }
+
 }
 
 export default new TicketService();

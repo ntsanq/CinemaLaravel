@@ -4,12 +4,16 @@ import DatePick from './DatePick';
 import SeatPick from "./SeatPick";
 import TimePick from "./TimePick";
 import TicketService from "../services/TicketService";
+import moment from "moment/moment";
 
 export default function TicketBooking(props) {
     useEffect(() => {
     }, []);
 
-    const film = JSON.parse(props.data);
+    const film = JSON.parse(props.film)
+    const user = JSON.parse(props.user)
+
+    const [dateState, setDateState] = useState('');
     const [timesData, setTimesData] = useState([]);
     const [seatsData, setSeatsData] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
@@ -37,27 +41,65 @@ export default function TicketBooking(props) {
         TicketService.getSeatInfo(seatId).then(r => {
             if (r.success) {
                 console.log('Seat ID parameter put into GetSeatInfo API: ' + seatId)
-                setSelectedSeats([...selectedSeats, r.data]);
+                setSelectedSeats([...selectedSeats, r.data.id]);
             } else {
                 console.log(r.message);
             }
         }).catch(e => console.log(e));
     }
 
+
+    const confirmBooking = (scheduleTime, seats, discountId, userId) => {
+        TicketService.book(scheduleTime, seats, discountId, userId).then(r => {
+            if (r.success) {
+                console.log('Book api: ')
+                console.log(r.data)
+            } else {
+                console.log(r.message);
+            }
+        }).catch(e => console.log(e));
+    }
+
+    const handleDateState = (date) => {
+        setDateState(date);
+    }
+
+
+    const handleSubmitConfirm = () => {
+        console.log('Submit: ');
+
+        console.log('Selected time: ');
+        let time = timesData[0] === undefined ? [] : timesData[0].start;
+        let scheduleTime = moment(dateState).format('DD-MM-YYYY') + ' ' + time;
+        console.log(scheduleTime);
+
+        console.log('Selected seats: ');
+        console.log(selectedSeats);
+
+        console.log('User id: ');
+        console.log(user.id);
+
+        // confirmBooking(scheduleTime, selectedSeats, 1, user.id);
+
+    }
+
     return (
         <>
-                <h1>TicketBooking</h1>
-
-                <h2>Which day you want to watch?</h2>
-                <DatePick getTimes={getTimes} filmId={film.id}/>
-                <TimePick timesData={timesData} getSeats={getSeats}/>
-                <SeatPick seatsData={seatsData} pickedSeatsInfo={selectedSeats} getSeatInfo={getSeatInfo}/>
+            <h1>TicketBooking</h1>
+            <DatePick getTimes={getTimes} filmId={film.id} onData={handleDateState}/>
+            <TimePick timesData={timesData} getSeats={getSeats}/>
+            <SeatPick seatsData={seatsData} pickedSeatsInfo={selectedSeats} getSeatInfo={getSeatInfo}/>
+            <form className="uk-panel uk-panel-box uk-form">
+                <input className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="button"
+                       value="Confirm" onClick={handleSubmitConfirm}/>
+            </form>
         </>
 
     );
 }
 
 if (document.getElementById('ticket_booking')) {
-    let data = document.getElementById('ticket_booking').getAttribute('data');
-    createRoot(document.getElementById('ticket_booking')).render(<TicketBooking data={data}/>);
+    let film = document.getElementById('ticket_booking').getAttribute('film');
+    let user = document.getElementById('ticket_booking').getAttribute('user');
+    createRoot(document.getElementById('ticket_booking')).render(<TicketBooking film={film} user={user}/>);
 }

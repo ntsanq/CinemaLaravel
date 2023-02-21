@@ -17,8 +17,11 @@ class TicketController extends Controller
             ])
             ->get()->first();
 
+        $user = $this->getUserInfo();
+
         return view('ticket.booking', [
-            'film' => $film
+            'film' => $film,
+            'user' => $user
         ]);
     }
 }
