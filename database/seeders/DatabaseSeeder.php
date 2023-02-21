@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
                 RoomTableSeeder::class,
                 ImageTableSeeder::class,
                 FilmCategoryTableSeeder::class,
+                SeatCategoryTableSeeder::class,
                 LanguagesTableSeeder::class,
                 FilmRulesTableSeeder::class,
                 FilmTableSeeder::class,

@@ -4,12 +4,16 @@ namespace Database\Seeders;
 
 use App\Enums\SeatStatus;
 use App\Models\Seat;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class SeatTableSeeder extends Seeder
 {
+
+    const VILLAGER = 1;
+    const DREAMER = 2;
+
+
     /**
      * Run the database seeds.
      *
@@ -38,14 +42,30 @@ class SeatTableSeeder extends Seeder
         }
 
         $rooms = DB::table('rooms')->select('id')->get();
+
+        $vipSeatsList = [
+            '1J',
+            '2J',
+            '3J',
+            '4J',
+            '5J',
+            '6J',
+            '7J',
+            '8J',
+        ];
+
         foreach ($rooms as $room) {
             foreach ($seats as $seat) {
-                Seat::create([
-                    'room_id' => $room->id,
-                    'name' => $seat,
-                    'status' => fake()->randomElement(SeatStatus::getValues()),
-                    'price' => fake()->numberBetween('100000', '200000')
-                ]);
+                $seatIns = new Seat();
+                $seatIns->room_id = $room->id;
+                $seatIns->name = $seat;
+                if (in_array($seatIns->name, $vipSeatsList)) {
+                    $seatIns->seat_category_id = self::VILLAGER;
+                } else {
+                    $seatIns->seat_category_id = self::DREAMER;
+                }
+                $seatIns->status = fake()->randomElement(SeatStatus::getValues());
+                $seatIns->save();
             }
         }
     }
