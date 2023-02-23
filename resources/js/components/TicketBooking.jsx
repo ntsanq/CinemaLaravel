@@ -11,7 +11,7 @@ export default function TicketBooking(props) {
     }, []);
 
     const film = JSON.parse(props.film)
-    const user = JSON.parse(props.user)
+    const userId = JSON.parse(props.user) === null ? null : JSON.parse(props.user).id;
 
     const [dateState, setDateState] = useState('');
     const [timesData, setTimesData] = useState([]);
@@ -49,21 +49,28 @@ export default function TicketBooking(props) {
     }
 
 
-    const confirmBooking = (scheduleTime, seats, discountId, userId) => {
-        TicketService.book(scheduleTime, seats, discountId, userId).then(r => {
+    const confirmBooking = (filmId, scheduleTime, seats, discountId, userId) => {
+        TicketService.book(filmId, scheduleTime, seats, discountId, userId).then(r => {
+            console.log(r)
             if (r.success) {
                 console.log('Book api: ')
                 console.log(r.data)
-            } else {
-                console.log(r.message);
             }
-        }).catch(e => console.log(e));
+        }) .catch(function (error) {
+            if (error.response) {
+                const messages = error.response.data.message;
+                Object.keys(messages).forEach(key => {
+                    messages[key].forEach(msg => {
+                        alert(msg)
+                    });
+                });
+            }
+        });
     }
 
     const handleDateState = (date) => {
         setDateState(date);
     }
-
 
     const handleSubmitConfirm = () => {
         console.log('Submit: ');
@@ -77,10 +84,9 @@ export default function TicketBooking(props) {
         console.log(selectedSeats);
 
         console.log('User id: ');
-        console.log(user.id);
+        console.log(userId);
 
-        // confirmBooking(scheduleTime, selectedSeats, 1, user.id);
-
+        confirmBooking(film.id, scheduleTime, selectedSeats, 1, userId);
     }
 
     return (

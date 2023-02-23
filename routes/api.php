@@ -35,4 +35,4 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/getSeats', [BookingController::class, 'getSeats']);
 Route::post('/getTimes', [BookingController::class, 'getTimes']);
 Route::get('/seats/{id}', [SeatController::class, 'info']);
-Route::get('/confirmBooking', [BookingController::class, 'confirmBooking']);
+Route::post('/confirmBooking', [BookingController::class, 'confirmBooking']);

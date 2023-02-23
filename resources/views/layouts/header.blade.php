@@ -21,7 +21,7 @@
                 </form>
             @else
                 <div class="uk-button-group">
-                    <a class="uk-button uk-button-link uk-button-large" href="/signIn">Sign In {{ (session()->get('token')) }}</a>
+                    <a class="uk-button uk-button-link uk-button-large" href="/signIn">Sign In</a>
                     <a class="uk-button uk-button-success uk-button-large uk-margin-left" href="/signUp">
                         <i class="uk-icon-lock uk-margin-small-right"></i> Sign Up</a>
                 </div>

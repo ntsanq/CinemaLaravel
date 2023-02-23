@@ -16,14 +16,14 @@ class SeatCategoryTableSeeder extends Seeder
     public function run()
     {
         $categories = [
-            'Villager',
-            'Dreamer',
+            'Standard',
+            'Premium Couple',
         ];
 
         foreach ($categories as $category) {
             $seatCategoryIns = new SeatCategory();
             $seatCategoryIns->name = $category;
-            if ($seatCategoryIns->name === 'Dreamer') {
+            if ($seatCategoryIns->name === 'Standard') {
                 $seatCategoryIns->price = 120000;
             } else {
                 $seatCategoryIns->price = 150000;

@@ -60,9 +60,9 @@ class SeatTableSeeder extends Seeder
                 $seatIns->room_id = $room->id;
                 $seatIns->name = $seat;
                 if (in_array($seatIns->name, $vipSeatsList)) {
-                    $seatIns->seat_category_id = self::VILLAGER;
-                } else {
                     $seatIns->seat_category_id = self::DREAMER;
+                } else {
+                    $seatIns->seat_category_id = self::VILLAGER;
                 }
                 $seatIns->status = fake()->randomElement(SeatStatus::getValues());
                 $seatIns->save();
