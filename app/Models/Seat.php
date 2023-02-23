@@ -9,6 +9,10 @@ class Seat extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'status'
+    ];
+
     public function room()
     {
         return $this->belongsTo(Seat::class);
