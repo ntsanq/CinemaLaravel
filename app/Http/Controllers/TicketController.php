@@ -24,4 +24,10 @@ class TicketController extends Controller
             'user' => $user
         ]);
     }
+
+    public function showReceipt(Request $request)
+    {
+        $jsonString = json_decode($request->input('tickets'));
+        dd($jsonString);
+    }
 }
