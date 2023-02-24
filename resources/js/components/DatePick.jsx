@@ -11,6 +11,7 @@ export default function DatePick(props) {
 
     useEffect(() => {
         getTimes(filmId, moment(dateState).format('DD-MM-YYYY'));
+        props.onData(dateState);
     },[dateState])
 
     const changeDate = (e) => {
