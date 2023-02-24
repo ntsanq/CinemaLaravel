@@ -123,47 +123,50 @@ class BookingController
         $filmSchedule = Schedule::query()
             ->where('start', 'like', '%' . date('Y-m-d H:i', $schedule) . '%')
             ->where('film_id', $filmId)
-            ->first()->toArray();
+            ->first();
+
+        if ($filmSchedule === null) {
+            return $this->failed('no film schedule');
+        }
 
         $bookedTickets = [];
-        if ($filmSchedule !== []) {
+        $filmSchedule = $filmSchedule->toArray();
 
-            //each ticket for each value of seats array input
-            foreach ($seats as $seat) {
-                //check seat exist
-                $seatIns = Seat::findOrFail($seat);
-                if ($seatIns === null) {
-                    return $this->failed('no seat with this id');
-                } else {
-                    //seat already booked
-                    if ($seatIns->status === SeatStatus::Booked) {
-                        return $this->failed('this seat has been already booked');
-                    }
-                    $ticket = new Ticket();
-                    $ticket->user_id = $userId;
-                    $ticket->schedule_id = $filmSchedule['id'];
-
-                    $seatCategoryIns = SeatCategory::findOrFail($seatIns->seat_category_id);
-                    $ticket->price = $seatCategoryIns->price;
-
-                    $ticket->seat_id = $seat;
-                    if ($discountId !== null) {
-                        $ticket->discount_id = $discountId;
-                    }
-
-                    $ticket->status = TicketStatus::HasNotBeenUsed;
-                    $ticket->save();
-
-                    //set seat was taken
-                    $seatIns->update([
-                        'status' => SeatStatus::Booked
-                    ]);
-
-                    $ticketData = $ticket;
-                    $ticketData['seatType'] = $seatCategoryIns->name;
-                    $ticketData['seatName'] = $seatIns->name;
-                    $bookedTickets[] = $ticketData;
+        //each ticket for each value of seats array input
+        foreach ($seats as $seat) {
+            //check seat exist
+            $seatIns = Seat::findOrFail($seat);
+            if ($seatIns === null) {
+                return $this->failed('no seat with this id');
+            } else {
+                //seat already booked
+                if ($seatIns->status === SeatStatus::Booked) {
+                    return $this->failed('this seat has been already booked');
                 }
+                $ticket = new Ticket();
+                $ticket->user_id = $userId;
+                $ticket->schedule_id = $filmSchedule['id'];
+
+                $seatCategoryIns = SeatCategory::findOrFail($seatIns->seat_category_id);
+                $ticket->price = $seatCategoryIns->price;
+
+                $ticket->seat_id = $seat;
+                if ($discountId !== null) {
+                    $ticket->discount_id = $discountId;
+                }
+
+                $ticket->status = TicketStatus::HasNotBeenUsed;
+                $ticket->save();
+
+                //set seat was taken
+                $seatIns->update([
+                    'status' => SeatStatus::Booked
+                ]);
+
+                $ticketData = $ticket;
+                $ticketData['seatType'] = $seatCategoryIns->name;
+                $ticketData['seatName'] = $seatIns->name;
+                $bookedTickets[] = $ticketData;
             }
         }
 
