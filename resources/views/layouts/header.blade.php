@@ -7,7 +7,7 @@
 
         <form method="GET" action="/" role="search" name="myForm"
               class="uk-search uk-margin-small-top uk-margin-left uk-hidden-small">
-            <input class="uk-search-field" placeholder="Search" name="search" type="search" value="{{ $search }}">
+            <input class="uk-search-field" placeholder="Search" name="search" type="search" value="{{ $search ?? '' }}">
             <div class="uk-dropdown uk-dropdown-flip uk-dropdown-search" aria-expanded="false"></div>
         </form>
         <div class="uk-navbar-flip uk-hidden-small">

@@ -1,7 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 export default function TimePick(props) {
     const [selectedTime, setSelectedTime] = useState("null");
+
+    useEffect(() => {
+        props.onData(selectedTime);
+    }, [selectedTime])
 
     const listItems = props.timesData.map((time, index) =>
         <button key={index}

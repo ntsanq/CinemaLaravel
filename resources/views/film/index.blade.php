@@ -52,7 +52,7 @@
                             </p>
                             <p class="uk-text-muted uk-h4">
                                 <a class="uk-button uk-button-primary uk-margin-small-right uk-height-1-1"
-                                   href="#">
+                                   href="/ticket/select?filmId={{ $filmDetails['id'] }}">
                                     Book
                                 </a>
                             </p>
