@@ -5,6 +5,7 @@ import SeatPick from "./SeatPick";
 import TimePick from "./TimePick";
 import TicketService from "../services/TicketService";
 import moment from "moment/moment";
+import Loading from "./Loading";
 
 export default function TicketBooking(props) {
 
@@ -20,13 +21,24 @@ export default function TicketBooking(props) {
 
     const [timesData, setTimesData] = useState([]);
     const [seatsData, setSeatsData] = useState([]);
-
     const [seatInfos, setSeatInfos] = useState([]);
 
-    const getTimes = (filmId, date) => {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(()=>{
+            setLoading(false)
+        },0)
+    }, [])
+
+    const getTimes = (filmId, date) =>
+    {
         TicketService.getTimes(filmId, date).then(r => {
             setTimesData(r.data);
-        }).catch(e => console.log(e));
+            setLoading(false);
+        }).catch(e => {
+            console.log(e);
+        });
     };
     const getSeats = (roomId) => {
         TicketService.getSeats(roomId).then(r => {
@@ -101,22 +113,29 @@ export default function TicketBooking(props) {
 
     return (
         <>
-            <h1>Choose your date</h1>
-            <DatePick getTimes={getTimes} filmId={film.id} onData={handleDateState}/>
-            <h1>Choose your time</h1>
-            <TimePick timesData={timesData} getSeats={getSeats} onData={handleTimeState}/>
-            <h1>Choose your seat</h1>
-            <SeatPick seatsData={seatsData} onData={handleNewSelectedSeat}/>
-            <form className="uk-panel uk-panel-box uk-form">
-                <input className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="button"
-                       value="Confirm" onClick={handleSubmitConfirm}/>
-            </form>
+            {loading ? <Loading /> :
+                <>
+                    <h1>Choose your date</h1>
+                    <DatePick getTimes={getTimes} filmId={film.id} onData={handleDateState}/>
+                    <h1>Choose your time</h1>
+                    <TimePick timesData={timesData} getSeats={getSeats} onData={handleTimeState}/>
+                    <h1>Choose your seat</h1>
+                    <SeatPick seatsData={seatsData} onData={handleNewSelectedSeat}/>
+                    <form className="uk-panel uk-panel-box uk-form">
+                        <input className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="button"
+                               value="Confirm" onClick={handleSubmitConfirm}/>
+                    </form>
 
-            <div className="total">
-                <span>Seats Count: {seatInfos.length}</span>{" "}
-                <span> Total: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
-                <span>You selected: {seatInfos.map(seat => <span key={`${seat.id}-${seat.name}`}>{seat.name}</span>)}</span>
-            </div>
+                    <div className="total">
+                        <span>Seats Count: {seatInfos.length}</span>{" "}
+                        <span> Total: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
+                        <span>You selected: {seatInfos.map(seat => <span
+                            key={`${seat.id}-${seat.name}`}>{seat.name}</span>)}</span>
+                    </div>
+                </>
+
+            }
+
         </>
 
     );

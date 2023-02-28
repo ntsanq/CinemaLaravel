@@ -1,7 +1,15 @@
 import React, {useEffect, useState} from 'react';
+import Loading from "./Loading";
 
 export default function TimePick(props) {
     const [selectedTime, setSelectedTime] = useState("null");
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000)
+    }, [])
 
     useEffect(() => {
         props.onData(selectedTime);
@@ -24,9 +32,12 @@ export default function TimePick(props) {
 
     return (
         <>
-            <div className="grid-button">
-                <div style={{display: "flex"}}>{listItems}</div>
-            </div>
+            {
+                loading ? <Loading/> :
+                <div className="grid-button">
+                    <div style={{display: "flex"}}>{listItems}</div>
+                </div>
+            }
         </>
     );
 }
