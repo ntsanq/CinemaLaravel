@@ -24,19 +24,9 @@ export default function TimePick(props) {
 
     return (
         <>
-            <h1 className='hi'>Time picker</h1>
-
-            <h2>Please Select your preferred slot</h2>
-            <div className="btns">
-
-                <div className="grid-button">
-                    <div style={{display: "flex"}}>{listItems}</div>
-                </div>
+            <div className="grid-button">
+                <div style={{display: "flex"}}>{listItems}</div>
             </div>
-
-
-            <p>Current selected date is <b>{selectedTime}</b></p>
-
         </>
     );
 }

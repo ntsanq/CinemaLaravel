@@ -15,14 +15,13 @@ export default function TicketBooking(props) {
     const [timeState, setTimeState] = useState('');
     useEffect(() => {
         setSeatsData([]);
-        setSelectedSeats([]);
+        setSeatInfos([]);
     }, [dateState, timeState]);
 
     const [timesData, setTimesData] = useState([]);
     const [seatsData, setSeatsData] = useState([]);
 
-    const [selectedSeats, setSelectedSeats] = useState([]);
-
+    const [seatInfos, setSeatInfos] = useState([]);
 
     const getTimes = (filmId, date) => {
         TicketService.getTimes(filmId, date).then(r => {
@@ -37,7 +36,16 @@ export default function TicketBooking(props) {
 
     const getSeatInfo = (seatId) => {
         TicketService.getSeatInfo(seatId).then(r => {
-            setSelectedSeats([...selectedSeats, r.data.id]);
+            const newSeatNameIndex = seatInfos.indexOf(r.data.name);
+            if (newSeatNameIndex === -1) {
+                const object = {
+                    id: r.data.id,
+                    name: r.data.name,
+                    price: r.data.price
+                }
+                setSeatInfos([...seatInfos, object]);
+            }
+
         }).catch(e => console.log(e));
     }
 
@@ -74,23 +82,41 @@ export default function TicketBooking(props) {
     const handleTimeState = (time) => {
         setTimeState(time);
     }
+    const handleNewSelectedSeat = (seatId) => {
+        const seatWithId = seatInfos.find(seat => seat.id === seatId);
+        if (seatWithId) {
+            const newArray = seatInfos.filter(seat => seat.id !== seatId);
+            setSeatInfos(newArray);
+        } else {
+            getSeatInfo(seatId);
+        }
+    }
 
     const handleSubmitConfirm = () => {
         const timeButtonContent = timeState.split(' ');
         let scheduleTime = moment(dateState).format('DD-MM-YYYY') + ' ' + timeButtonContent[0];
-        confirmBooking(film.id, scheduleTime, selectedSeats, 1, userId);
+        const seatsArray = seatInfos.map(seat => seat.id);
+        confirmBooking(film.id, scheduleTime, seatsArray, 1, userId);
     }
 
     return (
         <>
-            <h1>TicketBooking</h1>
+            <h1>Choose your date</h1>
             <DatePick getTimes={getTimes} filmId={film.id} onData={handleDateState}/>
+            <h1>Choose your time</h1>
             <TimePick timesData={timesData} getSeats={getSeats} onData={handleTimeState}/>
-            <SeatPick seatsData={seatsData} pickedSeatsInfo={selectedSeats} getSeatInfo={getSeatInfo}/>
+            <h1>Choose your seat</h1>
+            <SeatPick seatsData={seatsData} onData={handleNewSelectedSeat}/>
             <form className="uk-panel uk-panel-box uk-form">
                 <input className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="button"
                        value="Confirm" onClick={handleSubmitConfirm}/>
             </form>
+
+            <div className="total">
+                <span>Seats Count: {seatInfos.length}</span>{" "}
+                <span> Total: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
+                <span>You selected: {seatInfos.map(seat => <span key={`${seat.id}-${seat.name}`}>{seat.name}</span>)}</span>
+            </div>
         </>
 
     );

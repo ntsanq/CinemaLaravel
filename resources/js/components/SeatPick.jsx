@@ -9,23 +9,16 @@ export default function SeatPick(props) {
     const occupied = props.seatsData.occupied;
 
     const [selectedSeats, setSelectedSeats] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState(null);
-
-    useEffect(() => {
-        if (selectedSeats.slice(-1)[0] !== undefined) {
-            props.getSeatInfo(selectedSeats.slice(-1)[0]);
-        }
-    }, [selectedSeats])
 
     const seatsCategory = [
         {
-            price: 120000,
             seats: allSeats,
             occupied: occupied
         }
     ];
 
-    const handleOnClick = (seat, category) => {
+    const handleOnClick = (seat) => {
+        props.onData(seat);
         const isSelected = selectedSeats.indexOf(seat) > -1;
         if (isSelected) {
             const newSelectedSeats = selectedSeats.filter(
@@ -33,27 +26,12 @@ export default function SeatPick(props) {
             );
             setSelectedSeats(newSelectedSeats);
         } else {
-            if (
-                selectedSeats.length !== 0 &&
-                selectedCategory &&
-                selectedCategory.name !== category.name
-            ) {
-                alert("Must be the same category");
-            } else if (selectedSeats.length > 5) {
-                alert("Maximum 5 seats allowed");
-            } else {
-                setSelectedSeats([...selectedSeats, seat]);
-                setSelectedCategory(category);
-            }
+            setSelectedSeats([...selectedSeats, seat]);
         }
     };
 
-    const handleSelectedOnChange = (selectedSeats) => {
-    }
-
     return (
         <>
-            <h1 className='hi'>Seat picker</h1>
             <div className="all-seats">
                 {seatsCategory.map((category, k) => {
                     const noOfRows = Math.ceil(category.seats.length / 8);
@@ -93,11 +71,6 @@ export default function SeatPick(props) {
                         </div>
                     );
                 })}
-                <div className="total">
-                    <span>Seats Count: {selectedSeats.length}</span>{" "}
-                    <span>Price: ${selectedCategory ? selectedSeats.length * selectedCategory.price : 0}</span>
-                    <span onChange={handleSelectedOnChange(selectedSeats)}>You selected: {selectedSeats.map(seat => <span key={seat}>{seat}</span>)}</span>
-                </div>
             </div>
         </>
     );
