@@ -36,9 +36,13 @@ export default function TimePick(props) {
                 loading ? <Loading/> :
                     <>
                         <h1>Choose your time</h1>
-                        <div className="grid-button">
-                            <div style={{display: "flex"}}>{listItems}</div>
-                        </div>
+                        {
+                            listItems[0] ?
+                                <div className="grid-button">
+                                    <div style={{display: "flex"}}>{listItems}</div>
+                                </div> :
+                                <div>There's no schedule for this date</div>
+                        }
                     </>
             }
         </>

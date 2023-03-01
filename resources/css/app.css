@@ -1,23 +1,27 @@
 .screen {
-    width: 500px;
-    height: 30px;
-    background: #00a8e6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 28%;
+    height: 90px;
+    background-color: #fff;
+    transform: rotateX(-45deg);
+    -webkit-box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0px 0px 7px 0px rgb(232, 232, 232);
+    box-shadow: 2px 2px 40px 10px rgb(192, 192, 192);
+    margin: 10px 20px;
 }
 
 .screen::before {
     content: "Screen";
     font-size: 24px;
-    color: white;
+    color: black;
 }
+
 .seats {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     max-width: 500px;
 }
+
 .seat {
     width: 30px;
     height: 20px;
@@ -27,21 +31,26 @@
     border-radius: 4px;
     background-color: #d2d2d2;
 }
+
 .seat.occupied {
-    background-color: #762828 !important;
+    background-color: #b74f4f !important;
 }
+
 .seat.selected {
     background-color: blue !important;
 }
+
 .seat:not(.occupied):hover {
     background-color: lightblue;
     cursor: pointer;
     transform: scale(1.2);
 }
+
 .seat:not(.occupied):focus {
     opacity: 0.7;
     background-color: lightblue;
 }
+
 .seat:nth-of-type(8n + 3) {
     margin-left: 30px;
 }
@@ -84,3 +93,28 @@
     height: 350px;
 }
 
+.booking-sections {
+
+}
+
+.left-booking {
+    padding: 100px 100px;
+    width: 40%;
+    text-align: center;
+    float: left;
+}
+
+.right-booking {
+    padding: 0px 100px;
+    width: 30%;
+    max-height: 90%;
+    text-align: center;
+    float: right;
+    display: grid;
+
+}
+
+.right-booking img {
+    height: 111px;
+    float: right;
+}

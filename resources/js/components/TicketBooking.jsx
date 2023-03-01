@@ -23,7 +23,6 @@ export default function TicketBooking(props) {
         });
     }, [])
 
-    console.log(film);
     const userId = JSON.parse(props.user) === null ? null : JSON.parse(props.user).id;
 
     const [dateState, setDateState] = useState('');
@@ -126,42 +125,43 @@ export default function TicketBooking(props) {
     }
 
     return (
-        <>
+        <div className="booking-sections">
             <div className="left-booking">
                 {loadingSection.first ?
                     <DatePick getTimes={getTimes} filmId={filmId} onData={handleDateState}/> : null}
 
-                {loadingSection.second ?
-                    <TimePick timesData={timesData} getSeats={getSeats} onData={handleTimeState}/> : null}
+                {
+                    loadingSection.second ?
+                        <TimePick timesData={timesData} getSeats={getSeats} onData={handleTimeState}/> :
+                        <div>There's no schedule for this date</div>
+                }
 
                 {loadingSection.third ?
                     <>
                         <SeatPick seatsData={seatsData} onData={handleNewSelectedSeat}/>
-
-                        <form className="uk-panel uk-panel-box uk-form">
-                            <input className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="button"
-                                   value="Confirm" onClick={handleSubmitConfirm}/>
-                        </form>
                     </>
                     : null}
 
                 <div className="total">
-                    <span>Seats Count: {seatInfos.length}</span>{" "}
-                    <span> Total: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
-                    <span>You selected: {seatInfos.map(seat => <span
-                        key={`${seat.id}-${seat.name}`}>{seat.name}</span>)}</span>
                 </div>
+                <hr/>
+                <input className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="button"
+                       value="Confirm" onClick={handleSubmitConfirm}/>
             </div>
-            <div className="right-info">
-                <div>Name: {film.description}</div>
-                <div>Description: {film.description}</div>
+            <div className="right-booking">
+                <img src={film.path} className="" alt="film image"></img>
+                <h2 className="uk-text-contrast">{film.name}</h2>
+                <div>time: {timeState.split(' ')[0]}</div>
+                <div>seats: {seatInfos.map(seat => <span
+                    key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</div>
+                <span>number of tickets: {seatInfos.length}</span>{" "}
+                <span> prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
             </div>
-        </>
+        </div>
     );
 }
 
 if (document.getElementById('ticket_booking')) {
-    let film = document.getElementById('ticket_booking').getAttribute('film');
     let user = document.getElementById('ticket_booking').getAttribute('user');
-    createRoot(document.getElementById('ticket_booking')).render(<TicketBooking film={film} user={user}/>);
+    createRoot(document.getElementById('ticket_booking')).render(<TicketBooking user={user}/>);
 }

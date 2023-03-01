@@ -8,5 +8,5 @@
 
 
 @section('content')
-    <div id="ticket_booking" film='{{ $film }}' user='{{ json_encode($user) }}'></div>
+    <div id="ticket_booking" user='{{ json_encode($user) }}'></div>
 @endsection
