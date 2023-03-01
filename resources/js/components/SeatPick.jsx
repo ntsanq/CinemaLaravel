@@ -16,7 +16,7 @@ export default function SeatPick(props) {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 1000)
+        }, 700)
     }, [])
 
 
@@ -44,49 +44,50 @@ export default function SeatPick(props) {
         <>
             {
                 loading ? <Loading/> :
-                <>
-                    <div className="screen"></div>
-                    <div className="all-seats">
-                        {seatsCategory.map((category, k) => {
-                            const noOfRows = Math.ceil(category.seats.length / 8);
-                            const newSeatList = [];
-                            for (let i = 0; i < noOfRows; i++) {
-                                newSeatList[i] = category.seats.slice(i * 8, i * 8 + 8);
-                            }
-                            return (
-                                <div className="seats-section" key={k}>
-                                    <h4>{category.name}</h4>
-                                    {newSeatList.map((seats, i) => (
-                                        <div key={`${k}-${i}`} className="seats">
-                                            {seats.map((seat, j) => {
-                                                const isSelected = selectedSeats.indexOf(seat) > -1;
-                                                const isOccupied = category.occupied.indexOf(seat) > -1;
-                                                return (
-                                                    <React.Fragment key={`seat-${seat + j}`}>
-                                                        <span> {j + 1}{alpha[i]}</span>
-                                                        <div
-                                                            key={`seat-${seat + j}`}
-                                                            className={`seat ${isSelected ? "selected" : ""} ${
-                                                                isOccupied ? "occupied" : ""
-                                                            }`}
-                                                            onClick={() => {
-                                                                if (!isOccupied) {
-                                                                    handleOnClick(seat, category);
-                                                                } else {
-                                                                    null;
-                                                                }
-                                                            }}
-                                                        />
-                                                    </React.Fragment>
-                                                );
-                                            })}
-                                        </div>
-                                    ))}
-                                </div>
-                            );
-                        })}
-                    </div>
-                </>
+                    <>
+                        <h1>Choose your seat</h1>
+                        <div className="screen"></div>
+                        <div className="all-seats">
+                            {seatsCategory.map((category, k) => {
+                                const noOfRows = Math.ceil(category.seats.length / 8);
+                                const newSeatList = [];
+                                for (let i = 0; i < noOfRows; i++) {
+                                    newSeatList[i] = category.seats.slice(i * 8, i * 8 + 8);
+                                }
+                                return (
+                                    <div className="seats-section" key={k}>
+                                        <h4>{category.name}</h4>
+                                        {newSeatList.map((seats, i) => (
+                                            <div key={`${k}-${i}`} className="seats">
+                                                {seats.map((seat, j) => {
+                                                    const isSelected = selectedSeats.indexOf(seat) > -1;
+                                                    const isOccupied = category.occupied.indexOf(seat) > -1;
+                                                    return (
+                                                        <React.Fragment key={`seat-${seat + j}`}>
+                                                            <span> {j + 1}{alpha[i]}</span>
+                                                            <div
+                                                                key={`seat-${seat + j}`}
+                                                                className={`seat ${isSelected ? "selected" : ""} ${
+                                                                    isOccupied ? "occupied" : ""
+                                                                }`}
+                                                                onClick={() => {
+                                                                    if (!isOccupied) {
+                                                                        handleOnClick(seat, category);
+                                                                    } else {
+                                                                        null;
+                                                                    }
+                                                                }}
+                                                            />
+                                                        </React.Fragment>
+                                                    );
+                                                })}
+                                            </div>
+                                        ))}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </>
             }
         </>
     );

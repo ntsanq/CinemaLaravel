@@ -8,7 +8,7 @@ export default function TimePick(props) {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 1000)
+        }, 700)
     }, [])
 
     useEffect(() => {
@@ -34,9 +34,12 @@ export default function TimePick(props) {
         <>
             {
                 loading ? <Loading/> :
-                <div className="grid-button">
-                    <div style={{display: "flex"}}>{listItems}</div>
-                </div>
+                    <>
+                        <h1>Choose your time</h1>
+                        <div className="grid-button">
+                            <div style={{display: "flex"}}>{listItems}</div>
+                        </div>
+                    </>
             }
         </>
     );
