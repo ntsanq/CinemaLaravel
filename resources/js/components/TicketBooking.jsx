@@ -5,10 +5,25 @@ import SeatPick from "./SeatPick";
 import TimePick from "./TimePick";
 import TicketService from "../services/TicketService";
 import moment from "moment/moment";
+import FilmService from "../services/FilmService";
+
 
 export default function TicketBooking(props) {
 
-    const film = JSON.parse(props.film)
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const queryParams = Object.fromEntries(urlSearchParams.entries());
+    const filmId = queryParams.filmId;
+
+    const [film, setFilm] = useState({});
+    useEffect(() => {
+        FilmService.getFilmInfo(queryParams.filmId).then(r => {
+            setFilm(r.data);
+        }).catch(e => {
+            console.log(e);
+        });
+    }, [])
+
+    console.log(film);
     const userId = JSON.parse(props.user) === null ? null : JSON.parse(props.user).id;
 
     const [dateState, setDateState] = useState('');
@@ -107,35 +122,41 @@ export default function TicketBooking(props) {
         const timeButtonContent = timeState.split(' ');
         let scheduleTime = moment(dateState).format('DD-MM-YYYY') + ' ' + timeButtonContent[0];
         const seatsArray = seatInfos.map(seat => seat.id);
-        confirmBooking(film.id, scheduleTime, seatsArray, 1, userId);
+        confirmBooking(filmId, scheduleTime, seatsArray, 1, userId);
     }
 
     return (
-        <div className="fa-align-right">
-            {loadingSection.first ?
-                <DatePick getTimes={getTimes} filmId={film.id} onData={handleDateState}/> : null}
+        <>
+            <div className="left-booking">
+                {loadingSection.first ?
+                    <DatePick getTimes={getTimes} filmId={filmId} onData={handleDateState}/> : null}
 
-            {loadingSection.second ?
-                <TimePick timesData={timesData} getSeats={getSeats} onData={handleTimeState}/> : null}
+                {loadingSection.second ?
+                    <TimePick timesData={timesData} getSeats={getSeats} onData={handleTimeState}/> : null}
 
-            {loadingSection.third ?
-                <>
-                    <SeatPick seatsData={seatsData} onData={handleNewSelectedSeat}/>
+                {loadingSection.third ?
+                    <>
+                        <SeatPick seatsData={seatsData} onData={handleNewSelectedSeat}/>
 
-                    <form className="uk-panel uk-panel-box uk-form">
-                        <input className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="button"
-                               value="Confirm" onClick={handleSubmitConfirm}/>
-                    </form>
-                </>
-                : null}
+                        <form className="uk-panel uk-panel-box uk-form">
+                            <input className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="button"
+                                   value="Confirm" onClick={handleSubmitConfirm}/>
+                        </form>
+                    </>
+                    : null}
 
-            <div className="total">
-                <span>Seats Count: {seatInfos.length}</span>{" "}
-                <span> Total: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
-                <span>You selected: {seatInfos.map(seat => <span
-                    key={`${seat.id}-${seat.name}`}>{seat.name}</span>)}</span>
+                <div className="total">
+                    <span>Seats Count: {seatInfos.length}</span>{" "}
+                    <span> Total: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
+                    <span>You selected: {seatInfos.map(seat => <span
+                        key={`${seat.id}-${seat.name}`}>{seat.name}</span>)}</span>
+                </div>
             </div>
-        </div>
+            <div className="right-info">
+                <div>Name: {film.description}</div>
+                <div>Description: {film.description}</div>
+            </div>
+        </>
     );
 }
 
