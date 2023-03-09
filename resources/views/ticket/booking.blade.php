@@ -1,6 +1,12 @@
+@extends('master')
+
+@section('title')
+    {{  __('Booking') }}
+@endsection
+
 @include('layouts/head')
 
-<div class="film-info">
-</div>
 
-<div id="ticket_booking" data='{{ $film }}'></div>
+@section('content')
+    <div id="ticket_booking" user='{{ json_encode($user) }}'></div>
+@endsection

@@ -1,7 +1,20 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import Loading from "./Loading";
 
 export default function TimePick(props) {
     const [selectedTime, setSelectedTime] = useState("null");
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 500)
+    }, [props.timesData[0]])
+
+    useEffect(() => {
+        props.onData(selectedTime);
+    }, [selectedTime])
 
     const listItems = props.timesData.map((time, index) =>
         <button key={index}
@@ -20,19 +33,19 @@ export default function TimePick(props) {
 
     return (
         <>
-            <h1 className='hi'>Time picker</h1>
-
-            <h2>Please Select your preferred slot</h2>
-            <div className="btns">
-
-                <div className="grid-button">
-                    <div style={{display: "flex"}}>{listItems}</div>
-                </div>
-            </div>
-
-
-            <p>Current selected date is <b>{selectedTime}</b></p>
-
+            <h1>Choose time</h1>
+            {
+                loading ? <Loading/> :
+                    <>
+                        {
+                            listItems[0] ?
+                                <div className="grid-button">
+                                    <div style={{display: "flex"}}>{listItems}</div>
+                                </div> :
+                                <div>Pick another date</div>
+                        }
+                    </>
+            }
         </>
     );
 }

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
     use HasFactory;
 
     public function room()

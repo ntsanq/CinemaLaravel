@@ -9,6 +9,10 @@ class Seat extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'status'
+    ];
+
     public function room()
     {
         return $this->belongsTo(Seat::class);
@@ -17,5 +21,10 @@ class Seat extends Model
     public function ticket()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function seatCategory()
+    {
+        return $this->belongsTo(SeatCategory::class);
     }
 }

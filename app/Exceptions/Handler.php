@@ -62,6 +62,10 @@ class Handler extends ExceptionHandler
             if ($exception instanceof \Exception) {
                 return $this->failed($exception->getMessage());
             }
+
+            if ($exception instanceof \ParseError) {
+                return $this->failed($exception->getMessage());
+            }
         }
 
         return parent::render($request, $exception);

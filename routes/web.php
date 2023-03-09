@@ -22,4 +22,5 @@ Route::post('/signOut', [LogoutController::class, 'logout']);
 
 Route::prefix('/ticket')->group(function () {
     Route::get('/select', [TicketController::class, 'select']);
+    Route::get('/receipt', [TicketController::class, 'showReceipt']);
 });

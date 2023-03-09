@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enums\SeatStatus;
+use App\Enums\TicketStatus;
 use App\Http\Traits\ResponseTrait;
 use App\Models\Schedule;
 use App\Models\Seat;
+use App\Models\SeatCategory;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,8 +33,7 @@ class BookingController
                 'rooms.name as room_name',
                 'seats.id',
                 'seats.name',
-                'seats.status',
-                'seats.price',
+                'seats.status'
             ])
             ->where('seats.room_id', $request->roomId)
             ->get()->toArray();
@@ -92,5 +95,81 @@ class BookingController
         }
 
         return $this->success($schedules);
+    }
+
+    public function confirmBooking(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'filmId' => 'required|int',
+            'scheduleTime' => 'required|date',
+            'seats' => 'required|array',
+            'userId' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->failed($validator->messages());
+        }
+
+        $schedule = strtotime($request->scheduleTime);
+
+        $userId = $request->userId;
+
+        $filmId = $request->filmId;
+
+        $discountId = $request->discountId;
+
+        $seats = $request->seats;
+
+        $filmSchedule = Schedule::query()
+            ->where('start', 'like', '%' . date('Y-m-d H:i', $schedule) . '%')
+            ->where('film_id', $filmId)
+            ->first();
+
+        if ($filmSchedule === null) {
+            return $this->failed('no film schedule');
+        }
+
+        $bookedTickets = [];
+        $filmSchedule = $filmSchedule->toArray();
+
+        //each ticket for each value of seats array input
+        foreach ($seats as $seat) {
+            //check seat exist
+            $seatIns = Seat::findOrFail($seat);
+            if ($seatIns === null) {
+                return $this->failed('no seat with this id');
+            } else {
+                //seat already booked
+                if ($seatIns->status === SeatStatus::Booked) {
+                    return $this->failed('this seat has been already booked');
+                }
+                $ticket = new Ticket();
+                $ticket->user_id = $userId;
+                $ticket->schedule_id = $filmSchedule['id'];
+
+                $seatCategoryIns = SeatCategory::findOrFail($seatIns->seat_category_id);
+                $ticket->price = $seatCategoryIns->price;
+
+                $ticket->seat_id = $seat;
+                if ($discountId !== null) {
+                    $ticket->discount_id = $discountId;
+                }
+
+                $ticket->status = TicketStatus::HasNotBeenUsed;
+                $ticket->save();
+
+                //set seat was taken
+                $seatIns->update([
+                    'status' => SeatStatus::Booked
+                ]);
+
+                $ticketData = $ticket;
+                $ticketData['seatType'] = $seatCategoryIns->name;
+                $ticketData['seatName'] = $seatIns->name;
+                $bookedTickets[] = $ticketData;
+            }
+        }
+
+        return $this->success($bookedTickets);
     }
 }

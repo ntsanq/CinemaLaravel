@@ -17,8 +17,17 @@ class TicketController extends Controller
             ])
             ->get()->first();
 
+        $user = $this->getUserInfo();
+
         return view('ticket.booking', [
-            'film' => $film
+            'film' => $film,
+            'user' => $user
         ]);
+    }
+
+    public function showReceipt(Request $request)
+    {
+        $jsonString = json_decode($request->input('tickets'));
+        dd($jsonString);
     }
 }

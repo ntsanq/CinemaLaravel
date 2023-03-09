@@ -9,6 +9,7 @@ class Film extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
     protected $fillable = [
         'film_category_id',
         'image_id',
