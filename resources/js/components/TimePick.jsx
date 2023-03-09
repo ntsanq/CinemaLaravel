@@ -3,13 +3,14 @@ import Loading from "./Loading";
 
 export default function TimePick(props) {
     const [selectedTime, setSelectedTime] = useState("null");
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
         setTimeout(() => {
             setLoading(false)
-        }, 700)
-    }, [])
+        }, 500)
+    }, [props.timesData[0]])
 
     useEffect(() => {
         props.onData(selectedTime);
@@ -32,16 +33,16 @@ export default function TimePick(props) {
 
     return (
         <>
+            <h1>Choose time</h1>
             {
                 loading ? <Loading/> :
                     <>
-                        <h1>Choose your time</h1>
                         {
                             listItems[0] ?
                                 <div className="grid-button">
                                     <div style={{display: "flex"}}>{listItems}</div>
                                 </div> :
-                                <div>There's no schedule for this date</div>
+                                <div>Pick another date</div>
                         }
                     </>
             }

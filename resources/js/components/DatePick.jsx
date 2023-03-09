@@ -111,7 +111,7 @@ export default function DatePick(props) {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 700)
+        }, 500)
     }, [])
 
     useEffect(() => {
@@ -126,10 +126,10 @@ export default function DatePick(props) {
 
     return (
         <>
+            <h1>Choose your date</h1>
             {
                 loading ? <Loading/> :
                     <>
-                        <h1>Choose your date</h1>
                         <CalendarContainer>
                             <Calendar
                                 value={dateState}

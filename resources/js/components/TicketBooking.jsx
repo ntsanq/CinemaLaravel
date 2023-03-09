@@ -84,19 +84,20 @@ export default function TicketBooking(props) {
         }).catch(function (error) {
             if (error.response) {
                 const messages = error.response.data.message;
-                Object.keys(messages).forEach(key => {
-                    if (key === 'userId') {
-                        if (confirm('Please Login first!') === true) {
-                            window.location.href = '/signIn';
-                        }
+                if (Object.keys(messages) && Object.keys(messages)[0] === 'userId') {
+                    if (confirm('Please Login first!') === true) {
+                        window.location.href = '/signIn';
                     }
-                    if (key === 'seats' || key === 'scheduleTime') {
-                        alert('Please pick a time and seats first!')
-                    }
-                    if (key === 'filmId') {
-                        alert('This film may not available!')
-                    }
-                });
+                }
+                if (Object.keys(messages) && Object.keys(messages)[0] === 'filmId') {
+                    alert('This film may not available!')
+                }
+                if (Object.keys(messages) && Object.keys(messages)[0] === 'scheduleTime') {
+                    alert('Please pick a time and seats first!')
+                }
+                if (Object.keys(messages) && Object.keys(messages)[0] === 'seats') {
+                    alert('Please pick a time and seats first!')
+                }
             }
         });
     }
@@ -124,38 +125,55 @@ export default function TicketBooking(props) {
         confirmBooking(filmId, scheduleTime, seatsArray, 1, userId);
     }
 
+    const handlePopup = () => {
+        if (timeState === 'null' || seatInfos[0] === undefined) {
+            alert('Please pick a time and seats first!');
+        } else if (timeState === 'null' || seatInfos[0] === undefined) {
+            alert('Please pick a time and seats first!');
+        } else if (userId === null) {
+            if (confirm('Please Login first!') === true) {
+                window.location.href = '/signIn';
+            }
+        } else {
+            let popup = document.getElementById('confirmPopup');
+            popup.classList.toggle('active');
+        }
+    };
+
     return (
         <div className="booking-sections">
             <div className="left-booking">
-                {loadingSection.first ?
-                    <DatePick getTimes={getTimes} filmId={filmId} onData={handleDateState}/> : null}
-
-                {
-                    loadingSection.second ?
-                        <TimePick timesData={timesData} getSeats={getSeats} onData={handleTimeState}/> :
-                        <div>There's no schedule for this date</div>
-                }
-
-                {loadingSection.third ?
-                    <>
-                        <SeatPick seatsData={seatsData} onData={handleNewSelectedSeat}/>
-                    </>
-                    : null}
-
+                <DatePick getTimes={getTimes} filmId={filmId} onData={handleDateState}/>
+                <TimePick timesData={timesData} getSeats={getSeats} onData={handleTimeState}/>
+                <SeatPick seatsData={seatsData} onData={handleNewSelectedSeat}/>
                 <div className="total">
                 </div>
-                <hr/>
-                <input className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="button"
-                       value="Confirm" onClick={handleSubmitConfirm}/>
             </div>
+
             <div className="right-booking">
                 <img src={film.path} className="" alt="film image"></img>
                 <h2 className="uk-text-contrast">{film.name}</h2>
-                <div>time: {timeState.split(' ')[0]}</div>
+                <div>showtime: {timeState.split(' ')[0]}</div>
+                <div>seats: {seatInfos.map(seat => <span
+                    key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</div>
+                <span>number of tickets: {seatInfos.length}</span>{" "}
+                <span>prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
+
+                <hr/>
+                <button className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="button"
+                        onClick={handlePopup}>Confirm
+                </button>
+            </div>
+            <div id="confirmPopup">
+                <h2>Confirm you booking information</h2>
+                <div>showtime: {timeState.split(' ')[0]}</div>
                 <div>seats: {seatInfos.map(seat => <span
                     key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</div>
                 <span>number of tickets: {seatInfos.length}</span>{" "}
                 <span> prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
+
+                <button onClick={() => handlePopup()}>cancel</button>
+                <button onClick={() => handleSubmitConfirm()}>pay</button>
             </div>
         </div>
     );

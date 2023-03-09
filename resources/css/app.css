@@ -100,7 +100,7 @@
 .left-booking {
     padding: 100px 100px;
     width: 40%;
-    text-align: center;
+    text-align: left;
     float: left;
 }
 
@@ -117,4 +117,29 @@
 .right-booking img {
     height: 111px;
     float: right;
+}
+
+
+#confirmPopup {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    border: 2px white;
+    box-shadow: 0 5px 30px rgba(0,0,0,.30);
+    background: #fff;
+    transition: 0.5s;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    opacity: 0;
+}
+#confirmPopup.active {
+    visibility: visible;
+    background: #fff;
+    color: black;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+#confirmPopup.active h2 {
+    color: brown;
 }
