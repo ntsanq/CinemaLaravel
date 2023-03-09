@@ -132,7 +132,7 @@ export default function TicketBooking(props) {
             alert('Please pick a time and seats first!');
         } else if (userId === null) {
             if (confirm('Please Login first!') === true) {
-                window.location.href = '/signIn';
+                window.location.href = `/signIn?filmId=${filmId}`;
             }
         } else {
             let popup = document.getElementById('confirmPopup');

@@ -9,6 +9,7 @@
 
     <form class="uk-panel uk-panel-box uk-form" action="/signIn" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="failedFilm" value="{{ request('filmId')  }}">
         <div class="uk-form-row">
             <input class="uk-width-1-1 uk-form-large" placeholder="Email" type="text" name="email" id="email">
         </div>
