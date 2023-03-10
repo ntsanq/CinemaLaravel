@@ -6,15 +6,25 @@ import TimePick from "./TimePick";
 import TicketService from "../services/TicketService";
 import moment from "moment/moment";
 import FilmService from "../services/FilmService";
-
+import BookingDetails from "./BookingDetails";
+import ConfirmPopup from "./ConfirmPopup";
 
 export default function TicketBooking(props) {
 
     const urlSearchParams = new URLSearchParams(window.location.search);
     const queryParams = Object.fromEntries(urlSearchParams.entries());
     const filmId = queryParams.filmId;
-
     const [film, setFilm] = useState({});
+    const userId = JSON.parse(props.user) === null ? null : JSON.parse(props.user).id;
+
+    const [dateState, setDateState] = useState('');
+    const [timeState, setTimeState] = useState('');
+
+    const [timesData, setTimesData] = useState([]);
+    const [seatsData, setSeatsData] = useState([]);
+    const [seatInfos, setSeatInfos] = useState([]);
+    const [payment, setPayment] = useState('');
+
     useEffect(() => {
         FilmService.getFilmInfo(queryParams.filmId).then(r => {
             setFilm(r.data);
@@ -23,20 +33,10 @@ export default function TicketBooking(props) {
         });
     }, [])
 
-    const userId = JSON.parse(props.user) === null ? null : JSON.parse(props.user).id;
-
-    const [dateState, setDateState] = useState('');
-    const [timeState, setTimeState] = useState('');
     useEffect(() => {
         setSeatsData([]);
         setSeatInfos([]);
     }, [dateState, timeState]);
-
-    const [timesData, setTimesData] = useState([]);
-    const [seatsData, setSeatsData] = useState([]);
-    const [seatInfos, setSeatInfos] = useState([]);
-
-    const [payment, setPayment] = useState('');
 
     const getTimes = (filmId, date) => {
         TicketService.getTimes(filmId, date).then(r => {
@@ -116,7 +116,6 @@ export default function TicketBooking(props) {
         }
     };
 
-
     const handlePayment = (value) => {
         setPayment(value);
     }
@@ -127,47 +126,14 @@ export default function TicketBooking(props) {
                 <DatePick getTimes={getTimes} filmId={filmId} onData={handleDateState}/>
                 <TimePick timesData={timesData} getSeats={getSeats} onData={handleTimeState}/>
                 <SeatPick seatsData={seatsData} onData={handleNewSelectedSeat}/>
-                <div className="total">
-                </div>
             </div>
 
             <div className="right-booking">
-                <img src={film.path} className="" alt="film image"></img>
-                <h2 className="uk-text-contrast">{film.name}</h2>
-                <div>showtime: {timeState.split(' ')[0]}</div>
-                <div>seats: {seatInfos.map(seat => <span
-                    key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</div>
-                <span>number of tickets: {seatInfos.length}</span>{" "}
-                <span>prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
-
-                <hr/>
-                <button className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="button"
-                        onClick={handlePopup}>Confirm
-                </button>
+                <BookingDetails film={film} timeState={timeState} seatInfos={seatInfos} handlePopup={handlePopup}/>
             </div>
             <div id="confirmPopup">
-                <h2>Confirm you booking information</h2>
-                <div>showtime: {timeState.split(' ')[0]}</div>
-                <div>seats: {seatInfos.map(seat => <span
-                    key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</div>
-                <span>number of tickets: {seatInfos.length}</span>{" "}
-                <span> prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
-
-                <h3>Payment method:</h3>
-                <div>
-                    <input type="radio" id="stripe" name="payment_method" value="stripe"
-                           onChange={(e) => handlePayment(e.currentTarget.value)}></input>
-                    <label htmlFor="stripe">Stripe</label>
-                </div>
-
-                <div>
-                    <input type="radio" id="momo" name="payment_method" value="momo"
-                           onChange={(e) => handlePayment(e.currentTarget.value)}></input>
-                    <label htmlFor="momo">Momo</label>
-                </div>
-                <br/>
-                <button onClick={() => handlePopup()}>cancel</button>
-                <button onClick={() => handleSubmitConfirm()}>pay</button>
+                <ConfirmPopup timeState={timeState} seatInfos={seatInfos} handlePayment={handlePayment}
+                              handlePopup={handlePopup} handleSubmitConfirm={handleSubmitConfirm}/>
             </div>
         </div>
     );
