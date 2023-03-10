@@ -28,14 +28,6 @@ class TicketController extends Controller
         ]);
     }
 
-    public function showReceipt(Request $request)
-    {
-        $jsonString = json_decode($request->input('tickets'));
-
-        dd($jsonString);
-    }
-
-
     public function success(Request $request)
     {
         $sessionId = $request->input('sessionId');

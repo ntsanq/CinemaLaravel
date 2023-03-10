@@ -18,13 +18,14 @@ Route::post('/signIn', [LoginController::class, 'check'])->name('signIn.check');
 Route::get('/signUp', [RegisterController::class, 'index']);
 Route::post('/signUp', [RegisterController::class, 'store']);
 
-Route::post('/signOut', [LogoutController::class, 'logout']);
-
 Route::prefix('/ticket')->group(function () {
     Route::get('/select', [TicketController::class, 'select']);
-    Route::get('/receipt', [TicketController::class, 'showReceipt']);
 });
 
-Route::get('/stripe/success', [TicketController::class, 'success'])->name('stripe.success');
-Route::get('/stripe/cancel', [TicketController::class, 'cancel'])->name('stripe.cancel');
+Route::middleware('auth.web')->group(function (){
+    Route::post('/signOut', [LogoutController::class, 'logout']);
+    Route::get('/stripe/success', [TicketController::class, 'success'])->name('stripe.success');
+    Route::get('/stripe/cancel', [TicketController::class, 'cancel'])->name('stripe.cancel');
+});
+
 

@@ -25,7 +25,7 @@ class LoginController
         if ($request->failedFilm) {
             return redirect("ticket/select?filmId=$request->failedFilm");
         }  else {
-            return redirect('/filmId=');
+            return redirect('/');
         }
     }
 }
