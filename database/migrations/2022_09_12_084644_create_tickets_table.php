@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('seat_id')->constrained('seats');
             $table->boolean('status');
             $table->unsignedInteger('price');
+            $table->string('session_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

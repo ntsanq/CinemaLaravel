@@ -24,3 +24,7 @@ Route::prefix('/ticket')->group(function () {
     Route::get('/select', [TicketController::class, 'select']);
     Route::get('/receipt', [TicketController::class, 'showReceipt']);
 });
+
+Route::get('/stripe/success', [TicketController::class, 'success'])->name('stripe.success');
+Route::get('/stripe/cancel', [TicketController::class, 'cancel'])->name('stripe.cancel');
+
