@@ -11,6 +11,7 @@ use App\Models\SeatCategory;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Stripe\StripeClient;
 
 class BookingController
 {
@@ -97,13 +98,14 @@ class BookingController
         return $this->success($schedules);
     }
 
-    public function confirmBooking(Request $request)
+    public function checkout(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'filmId' => 'required|int',
             'scheduleTime' => 'required|date',
             'seats' => 'required|array',
             'userId' => 'required',
+            'payment' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -111,13 +113,9 @@ class BookingController
         }
 
         $schedule = strtotime($request->scheduleTime);
-
         $userId = $request->userId;
-
         $filmId = $request->filmId;
-
         $discountId = $request->discountId;
-
         $seats = $request->seats;
 
         $filmSchedule = Schedule::query()
@@ -128,48 +126,75 @@ class BookingController
         if ($filmSchedule === null) {
             return $this->failed('no film schedule');
         }
-
-        $bookedTickets = [];
         $filmSchedule = $filmSchedule->toArray();
 
-        //each ticket for each value of seats array input
+        $link = '';
+        if ($request->payment === 'stripe') {
+            $link = $this->stripeCheckout($seats, $userId, $filmSchedule, $discountId);
+        }
+
+        return $this->success($link);
+    }
+
+    private function stripeCheckout($seats, $userId, $filmSchedule, $discountId)
+    {
+        $stripe = new StripeClient(env('STRIPE_SECRET_KEY'));
+        $lineItems = [];
+        $tickets = [];
+
         foreach ($seats as $seat) {
-            //check seat exist
             $seatIns = Seat::findOrFail($seat);
             if ($seatIns === null) {
-                return $this->failed('no seat with this id');
+                throw new \Exception('no seat with this id');
             } else {
-                //seat already booked
                 if ($seatIns->status === SeatStatus::Booked) {
-                    return $this->failed('this seat has been already booked');
+                    throw new \Exception('this seat has been already booked');
                 }
+
                 $ticket = new Ticket();
                 $ticket->user_id = $userId;
                 $ticket->schedule_id = $filmSchedule['id'];
 
                 $seatCategoryIns = SeatCategory::findOrFail($seatIns->seat_category_id);
                 $ticket->price = $seatCategoryIns->price;
-
                 $ticket->seat_id = $seat;
                 if ($discountId !== null) {
                     $ticket->discount_id = $discountId;
                 }
-
-                $ticket->status = TicketStatus::HasNotBeenUsed;
+                $ticket->status = TicketStatus::NonPaid;
                 $ticket->save();
+                $tickets[] = $ticket;
 
-                //set seat was taken
                 $seatIns->update([
                     'status' => SeatStatus::Booked
                 ]);
 
-                $ticketData = $ticket;
-                $ticketData['seatType'] = $seatCategoryIns->name;
-                $ticketData['seatName'] = $seatIns->name;
-                $bookedTickets[] = $ticketData;
+                $lineItems[] = [
+                    'price_data' => [
+                        'currency' => 'vnd',
+                        'product_data' => [
+                            'name' => 'Seat ' . $seatIns->name . '(' . $seatCategoryIns->name . ')',
+                        ],
+                        'unit_amount' => $seatCategoryIns->price,
+                    ],
+                    'quantity' => 1,
+                ];
             }
         }
 
-        return $this->success($bookedTickets);
+        $checkout_session = $stripe->checkout->sessions->create([
+            'line_items' => $lineItems,
+            'mode' => 'payment',
+            'success_url' => route('stripe.success', [], true) . "?sessionId={CHECKOUT_SESSION_ID}",
+            'cancel_url' => route('stripe.cancel', [], true),
+        ]);
+
+        foreach ($tickets as $ticket) {
+            $ticket->update([
+                'session_id' => $checkout_session->id
+            ]);
+        }
+
+        return $checkout_session->url;
     }
 }

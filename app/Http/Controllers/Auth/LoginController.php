@@ -10,15 +10,7 @@ class LoginController
 {
     public function index(Request $request)
     {
-        if (!empty($request->search)) {
-            $search = $request->search;
-        } else {
-            $search = '';
-        }
-
-        return view('auth.login.index', [
-            'search' => $search
-        ]);
+        return view('auth.login.index');
     }
 
     public function check(Request $request)
@@ -30,6 +22,10 @@ class LoginController
         $token = $user->createToken('authToken')->plainTextToken;
         session(['token' => $token]);
 
-        return redirect('/');
+        if ($request->failedFilm) {
+            return redirect("ticket/select?filmId=$request->failedFilm");
+        }  else {
+            return redirect('/');
+        }
     }
 }

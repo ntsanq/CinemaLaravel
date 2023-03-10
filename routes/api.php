@@ -36,5 +36,6 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/getSeats', [BookingController::class, 'getSeats']);
 Route::post('/getTimes', [BookingController::class, 'getTimes']);
 Route::get('/seats/{id}', [SeatController::class, 'info']);
-Route::post('/confirmBooking', [BookingController::class, 'confirmBooking']);
 Route::get('/films/{id}', [FilmController::class, 'info']);
+
+Route::post('/confirmBooking', [BookingController::class, 'checkout']);

@@ -36,15 +36,11 @@ export default function TicketBooking(props) {
     const [seatsData, setSeatsData] = useState([]);
     const [seatInfos, setSeatInfos] = useState([]);
 
-    const [loadingSection, setLoadingSection] = useState({first: true, second: false, third: false});
+    const [payment, setPayment] = useState('');
 
     const getTimes = (filmId, date) => {
         TicketService.getTimes(filmId, date).then(r => {
             setTimesData(r.data);
-            if (r.data[0]) {
-                const newLoadingSection = {...loadingSection, ...{second: true}};
-                setLoadingSection(newLoadingSection);
-            }
         }).catch(e => {
             console.log(e);
         });
@@ -52,10 +48,6 @@ export default function TicketBooking(props) {
     const getSeats = (roomId) => {
         TicketService.getSeats(roomId).then(r => {
             setSeatsData(r.data);
-            if (r.data) {
-                const newLoadingSection = {...loadingSection, ...{third: true}};
-                setLoadingSection(newLoadingSection);
-            }
         }).catch(e => console.log(e));
     };
 
@@ -74,31 +66,12 @@ export default function TicketBooking(props) {
         }).catch(e => console.log(e));
     }
 
-    const confirmBooking = (filmId, scheduleTime, seats, discountId, userId) => {
-        TicketService.book(filmId, scheduleTime, seats, discountId, userId).then(r => {
-            let ids = [];
-            Object.keys(r.data).forEach(key => {
-                ids = [...ids, r.data[key].id]
-            })
-            window.location.href = `/ticket/receipt?tickets=[${ids}]`;
+    const confirmBooking = (filmId, scheduleTime, seats, discountId, userId, payment) => {
+        TicketService.book(filmId, scheduleTime, seats, discountId, userId, payment).then(r => {
+            console.log(r.data)
+            window.location.href = r.data;
         }).catch(function (error) {
-            if (error.response) {
-                const messages = error.response.data.message;
-                if (Object.keys(messages) && Object.keys(messages)[0] === 'userId') {
-                    if (confirm('Please Login first!') === true) {
-                        window.location.href = '/signIn';
-                    }
-                }
-                if (Object.keys(messages) && Object.keys(messages)[0] === 'filmId') {
-                    alert('This film may not available!')
-                }
-                if (Object.keys(messages) && Object.keys(messages)[0] === 'scheduleTime') {
-                    alert('Please pick a time and seats first!')
-                }
-                if (Object.keys(messages) && Object.keys(messages)[0] === 'seats') {
-                    alert('Please pick a time and seats first!')
-                }
-            }
+
         });
     }
 
@@ -119,10 +92,13 @@ export default function TicketBooking(props) {
     }
 
     const handleSubmitConfirm = () => {
+        if (payment === '') {
+            alert('Please choose your payment!');
+        }
         const timeButtonContent = timeState.split(' ');
         let scheduleTime = moment(dateState).format('DD-MM-YYYY') + ' ' + timeButtonContent[0];
         const seatsArray = seatInfos.map(seat => seat.id);
-        confirmBooking(filmId, scheduleTime, seatsArray, 1, userId);
+        confirmBooking(filmId, scheduleTime, seatsArray, 1, userId, payment);
     }
 
     const handlePopup = () => {
@@ -132,13 +108,18 @@ export default function TicketBooking(props) {
             alert('Please pick a time and seats first!');
         } else if (userId === null) {
             if (confirm('Please Login first!') === true) {
-                window.location.href = '/signIn';
+                window.location.href = `/signIn?filmId=${filmId}`;
             }
         } else {
             let popup = document.getElementById('confirmPopup');
             popup.classList.toggle('active');
         }
     };
+
+
+    const handlePayment = (value) => {
+        setPayment(value);
+    }
 
     return (
         <div className="booking-sections">
@@ -172,6 +153,19 @@ export default function TicketBooking(props) {
                 <span>number of tickets: {seatInfos.length}</span>{" "}
                 <span> prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
 
+                <h3>Payment method:</h3>
+                <div>
+                    <input type="radio" id="stripe" name="payment_method" value="stripe"
+                           onChange={(e) => handlePayment(e.currentTarget.value)}></input>
+                    <label htmlFor="stripe">Stripe</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="momo" name="payment_method" value="momo"
+                           onChange={(e) => handlePayment(e.currentTarget.value)}></input>
+                    <label htmlFor="momo">Momo</label>
+                </div>
+                <br/>
                 <button onClick={() => handlePopup()}>cancel</button>
                 <button onClick={() => handleSubmitConfirm()}>pay</button>
             </div>
