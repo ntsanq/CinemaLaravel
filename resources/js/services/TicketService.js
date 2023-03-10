@@ -33,13 +33,14 @@ class TicketService {
         return response.data;
     }
 
-    async book(filmId, scheduleTime, seats, discountId, userId) {
+    async book(filmId, scheduleTime, seats, discountId, userId, payment) {
         let response = await axios.post(this.api + `/confirmBooking`, {
             filmId: filmId,
             scheduleTime: scheduleTime,
             seats: seats,
             discountId: discountId,
             userId: userId,
+            payment: payment
         });
 
         return response.data;
