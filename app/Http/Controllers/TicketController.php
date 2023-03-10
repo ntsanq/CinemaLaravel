@@ -56,7 +56,8 @@ class TicketController extends Controller
 
     public function cancel()
     {
-
+        return view('checkout.failed', [
+        ]);
     }
 
     private function ticketsPaid($sessionId)
