@@ -24,6 +24,7 @@ export default function TicketBooking(props) {
     const [seatsData, setSeatsData] = useState([]);
     const [seatInfos, setSeatInfos] = useState([]);
     const [payment, setPayment] = useState('');
+    const [popUpOpen, setPopUpOpen] = useState(false);
 
     useEffect(() => {
         FilmService.getFilmInfo(queryParams.filmId).then(r => {
@@ -101,7 +102,7 @@ export default function TicketBooking(props) {
         confirmBooking(filmId, scheduleTime, seatsArray, 1, userId, payment);
     }
 
-    const handlePopup = () => {
+    const handleEnoughInfo = () => {
         if (timeState === 'null' || seatInfos[0] === undefined) {
             alert('Please pick a time and seats first!');
         } else if (timeState === 'null' || seatInfos[0] === undefined) {
@@ -111,10 +112,13 @@ export default function TicketBooking(props) {
                 window.location.href = `/signIn?filmId=${filmId}`;
             }
         } else {
-            let popup = document.getElementById('confirmPopup');
-            popup.classList.toggle('active');
+            setPopUpOpen(true);
         }
     };
+
+    const handlePopUp = (bool) => {
+        setPopUpOpen(bool);
+    }
 
     const handlePayment = (value) => {
         setPayment(value);
@@ -129,11 +133,11 @@ export default function TicketBooking(props) {
             </div>
 
             <div className="right-booking">
-                <BookingDetails film={film} timeState={timeState} seatInfos={seatInfos} handlePopup={handlePopup}/>
-            </div>
-            <div id="confirmPopup">
-                <ConfirmPopup timeState={timeState} seatInfos={seatInfos} handlePayment={handlePayment}
-                              handlePopup={handlePopup} handleSubmitConfirm={handleSubmitConfirm}/>
+                <BookingDetails film={film} timeState={timeState} seatInfos={seatInfos}
+                                handleEnoughInfo={handleEnoughInfo}
+                                handleSubmitConfirm={handleSubmitConfirm} popUpOpen={popUpOpen}
+                                onPopUpData={handlePopUp}
+                                handelPayment={handlePayment}/>
             </div>
         </div>
     );
