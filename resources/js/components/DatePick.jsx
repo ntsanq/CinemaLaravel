@@ -7,14 +7,12 @@ import Loading from "./Loading";
 import styled from 'styled-components';
 
 const CalendarContainer = styled.div`
-    /* ~~~ container styles ~~~ */
     margin: 20px auto auto;
     background-color: #252527;
     padding: 20px 20px;
     max-height: 300px;
-    width: 80%;
-
-    border-radius: 3px;
+    width: 100%;
+    border-radius: 6px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
 
     abbr[title] {
@@ -22,29 +20,20 @@ const CalendarContainer = styled.div`
         border-bottom: none;
     }
 
-    /* ~~~ navigation styles ~~~ */
-
     .react-calendar__navigation {
         display: flex;
         margin-bottom: 5px;
 
         .react-calendar__navigation__label {
-            color: black;
+            color: white;
             font-weight: bold;
-            font-size: 18px;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            margin-left: 50px;
-            margin-right: 50px;
+            font-size: 14px;
         }
 
         .react-calendar__navigation__arrow {
             flex-grow: 0.333;
         }
     }
-
-
-    /* ~~~ label styles ~~~ */
 
     .react-calendar__month-view__weekdays {
         text-align: center;
@@ -53,11 +42,12 @@ const CalendarContainer = styled.div`
 
     button {
         margin: 3px;
-        background-color: #e1dddd;
+        background-color: #252527;
         border: 0;
         border-radius: 3px;
-        color: black;
+        color: white;
         padding: 5px 0;
+        cursor: pointer;
 
         &:hover {
             font-weight: bold;
@@ -70,8 +60,6 @@ const CalendarContainer = styled.div`
         }
     }
 
-    /* ~~~ day grid styles ~~~ */
-
     .react-calendar__month-view__days {
         display: grid !important;
         grid-template-columns: 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% 14.2%;
@@ -81,20 +69,16 @@ const CalendarContainer = styled.div`
         }
     }
 
-    /* ~~~ neighboring month & weekend styles ~~~ */
-
     .react-calendar__month-view__days__day--neighboringMonth {
-        opacity: 0.6;
+        opacity: 0.3;
     }
 
     .react-calendar__month-view__days__day--weekend {
         color: #9d2626;
+        box-shadow: none;
     }
 
-    /* ~~~ active day styles ~~~ */
-
     .react-calendar__tile--range {
-        box-shadow: 0 0 6px 2px black;
         color: #ffffff;
         background-color: #d5302e;
     }
@@ -125,28 +109,24 @@ export default function DatePick(props) {
     }
 
     return (
-        <>
-            <h1>Choose your date</h1>
+        <div className="date-pick uk-margin-large-bottom">
+            <h2 className="uk-text-contrast">Choose date:</h2>
             {
                 loading ? <Loading/> :
-                    <>
-                        <CalendarContainer>
-                            <Calendar
-                                value={dateState}
-                                onChange={changeDate}
-
-                                nextLabel='>>'
-                                nextAriaLabel={null}
-                                next2Label={null}
-                                prevLabel='<<'
-                                prevAriaLabel={null}
-                                prev2Label={null}
-                                prev2AriaLabel={null}
-                            />
-                        </CalendarContainer>
-                    </>
-
+                    <CalendarContainer>
+                        <Calendar
+                            value={dateState}
+                            onChange={changeDate}
+                            nextLabel='>'
+                            nextAriaLabel={null}
+                            next2Label={null}
+                            prevLabel='<'
+                            prevAriaLabel={null}
+                            prev2Label={null}
+                            prev2AriaLabel={null}
+                        />
+                    </CalendarContainer>
             }
-        </>
+        </div>
     );
 }

@@ -1,12 +1,13 @@
 .screen {
-    width: 28%;
-    height: 90px;
+    width: 103%;
+    height: 40px;
     background-color: #fff;
     transform: rotateX(-45deg);
     -webkit-box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 1);
     -moz-box-shadow: 0px 0px 7px 0px rgb(232, 232, 232);
-    box-shadow: 2px 2px 40px 10px rgb(192, 192, 192);
+    box-shadow: 2px 2px 30px 2px rgb(192, 192, 192);
     margin: 10px 20px;
+    text-align: center;
 }
 
 .screen::before {
@@ -52,11 +53,11 @@
 }
 
 .seat:nth-of-type(8n + 3) {
-    margin-left: 30px;
+    margin-left: 60px;
 }
 
 .seat:nth-of-type(8n + 7) {
-    margin-left: 30px;
+    margin-left: 60px;
 }
 
 .total {
@@ -78,8 +79,8 @@
 }
 
 .loading-spinner {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     border: 10px solid #f3f3f3; /* Light grey */
     border-top: 10px solid #383636; /* Black */
     border-radius: 50%;
@@ -88,9 +89,6 @@
 
 .spinner-container {
     display: grid;
-    justify-content: center;
-    align-items: center;
-    height: 350px;
 }
 
 .booking-sections {
@@ -98,20 +96,26 @@
 }
 
 .left-booking {
-    padding: 100px 100px;
+    padding: 50px 100px;
     width: 40%;
     text-align: left;
     float: left;
 }
 
 .right-booking {
-    padding: 0px 100px;
+    position: fixed;
+    top: -3%;
+    left: 61%;
+    margin-top: 200px;
+    margin-right: 30px;
+    padding: 40px 40px;
     width: 30%;
     max-height: 90%;
     text-align: center;
     float: right;
     display: grid;
-
+    background: #252527;
+    border-radius: 10px;
 }
 
 .right-booking img {
@@ -119,27 +123,43 @@
     float: right;
 }
 
-
-#confirmPopup {
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    border: 2px white;
-    box-shadow: 0 5px 30px rgba(0,0,0,.30);
-    background: #fff;
-    transition: 0.5s;
-    transform: translate(-50%, -50%);
-    visibility: hidden;
-    opacity: 0;
+.time-button:active {
+    background: rebeccapurple;
+    cursor: pointer;
 }
-#confirmPopup.active {
-    visibility: visible;
-    background: #fff;
+
+.time-button {
+    background: white;
+    border-radius: 6px;
     color: black;
-    opacity: 1;
-    transition: 0.5s;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+    padding: 4px 12px;
 }
 
-#confirmPopup.active h2 {
-    color: brown;
+.time-button:hover,
+.time-button:active {
+    background-color: #e8b6b6;
+    color: #232323;
+}
+
+.time-button.active {
+    background-color: #d5302e;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.date-pick {
+
+}
+
+.time-pick {
+
+}
+
+.seat-pick {
+
 }

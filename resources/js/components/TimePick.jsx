@@ -3,7 +3,8 @@ import Loading from "./Loading";
 
 export default function TimePick(props) {
     const [selectedTime, setSelectedTime] = useState("null");
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(null);
 
     useEffect(() => {
         setLoading(true)
@@ -16,24 +17,29 @@ export default function TimePick(props) {
         props.onData(selectedTime);
     }, [selectedTime])
 
-    const listItems = props.timesData.map((time, index) =>
-        <button key={index}
-                onClick={handleButton}
-                style={{marginLeft: '20px'}}
-        >{time.start} <span hidden>{time.room_id}</span></button>
-    );
+    const listItems = props.timesData.map((time, index) => (
+        <button
+            key={index}
+            onClick={(e) => handleButton(e, index)}
+            className={`time-button ${activeIndex === index ? 'active' : ''}`}
+            style={{marginLeft: '20px'}}
+        >
+            {time.start} <span hidden>{time.room_id}</span>
+        </button>
+    ));
 
 
-    function handleButton(e) {
+    function handleButton(e, index) {
         setSelectedTime(e.target.textContent);
         const buttonContent = e.target.textContent.split(' ');
         const roomId = buttonContent[1];
         props.getSeats(roomId);
+        setActiveIndex(index);
     }
 
     return (
-        <>
-            <h1>Choose time</h1>
+        <div className="time-pick uk-margin-large-bottom">
+            <h2 className="uk-text-contrast">Choose time:</h2>
             {
                 loading ? <Loading/> :
                     <>
@@ -46,6 +52,6 @@ export default function TimePick(props) {
                         }
                     </>
             }
-        </>
+        </div>
     );
 }

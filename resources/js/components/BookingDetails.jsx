@@ -37,9 +37,10 @@ export default function BookingDetails(props) {
             <hr/>
 
             <div>
-                <Button  className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="primary" onClick={() => {
-                    handleEnoughInfo();
-                }}>
+                <Button className="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="primary"
+                        onClick={() => {
+                            handleEnoughInfo();
+                        }}>
                     Confirm
                 </Button>
                 <Modal

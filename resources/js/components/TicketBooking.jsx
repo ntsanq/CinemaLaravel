@@ -7,7 +7,6 @@ import TicketService from "../services/TicketService";
 import moment from "moment/moment";
 import FilmService from "../services/FilmService";
 import BookingDetails from "./BookingDetails";
-import ConfirmPopup from "./ConfirmPopup";
 
 export default function TicketBooking(props) {
 
