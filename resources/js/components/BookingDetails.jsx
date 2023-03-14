@@ -104,13 +104,15 @@ export default function BookingDetails(props) {
                         </Button>,
                     ]}
                 >
-                    <p>showtime: {timeState.split(' ')[0]}</p>
-                    <p>seats: {seatInfos.map(seat => <span
+                    <p>
+                        <img className="booking-details--checkout-img" src={film.path} alt=""/>
+                    </p>
+                    <p>Showtime: {timeState.split(' ')[0]}</p>
+                    <p>Seats: {seatInfos.map(seat => <span
                         key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</p>
-                    <p>number of tickets: {seatInfos.length}</p>
-                    <p>prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</p>
+                    <p>Total prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)} VND</p>
 
-                    <h3>Payment method:</h3>
+                    <h3 className="payment-label">Payment method:</h3>
                     <div>
                         <input type="radio" id="stripe" name="payment_method" value="stripe"
                                onChange={(e) => handlePayment(e.currentTarget.value)}></input>

@@ -14,7 +14,7 @@
 
 .right-booking {
     position: fixed;
-    top: -5%;
+    top: -3%;
     left: 61%;
     margin-top: 200px;
     margin-right: 30px;
@@ -136,4 +136,16 @@
 .booking-details--film-name {
     font-size: 24px;
     margin-bottom: 0.5rem;
+}
+
+
+.booking-details--checkout-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.payment-label {
+    color: #104adc;
+    font-weight: initial;
 }
