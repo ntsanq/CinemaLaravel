@@ -7472,10 +7472,16 @@ a.uk-thumbnail:hover, a.uk-thumbnail:focus {
     justify-content: center
 }
 
+.uk-flex-left {
+    -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
 .uk-flex-right {
     -ms-flex-pack: end;
     -webkit-justify-content: flex-end;
-    justify-content: flex-end
+    justify-content: flex-end;
 }
 
 .uk-flex-space-between {
