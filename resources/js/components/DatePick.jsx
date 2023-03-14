@@ -51,7 +51,7 @@ const CalendarContainer = styled.div`
 
         &:hover {
             font-weight: bold;
-            background-color: #e8b6b6;
+            background-color: lightblue;
             color: #232323;
         }
 

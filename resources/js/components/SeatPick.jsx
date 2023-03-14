@@ -67,20 +67,19 @@ export default function SeatPick(props) {
                                                                 const isOccupied = category.occupied.indexOf(seat) > -1;
                                                                 return (
                                                                     <React.Fragment key={`seat-${seat + j}`}>
-                                                                        <span> {j + 1}{alpha[i]}</span>
-                                                                        <div
-                                                                            key={`seat-${seat + j}`}
-                                                                            className={`seat ${isSelected ? "selected" : ""} ${
-                                                                                isOccupied ? "occupied" : ""
-                                                                            }`}
-                                                                            onClick={() => {
-                                                                                if (!isOccupied) {
-                                                                                    handleOnClick(seat, category);
-                                                                                } else {
-                                                                                    null;
-                                                                                }
-                                                                            }}
-                                                                        />
+                                                                        <div key={`seat-${seat + j}`}
+                                                                             className={`uk-text-center seat ${isSelected ? "selected" : ""} ${
+                                                                                 isOccupied ? "occupied" : ""
+                                                                             }`}
+                                                                             onClick={() => {
+                                                                                 if (!isOccupied) {
+                                                                                     handleOnClick(seat, category);
+                                                                                 } else {
+                                                                                     null;
+                                                                                 }
+                                                                             }}>
+                                                                            {j + 1}{alpha[i]}
+                                                                        </div>
                                                                     </React.Fragment>
                                                                 );
                                                             })}

@@ -31,41 +31,54 @@ export default function BookingDetails(props) {
                 <div className="uk-width-1-2 uk-overlay-background-blue uk-margin-bottom-remove booking-details--img">
                     <img src={film.path} alt="film image"></img>
                 </div>
-                <div className="uk-flex-bottom uk-margin-left booking-details--film-name">
-                    <h2 className="uk-text-contrast">{film.name}</h2>
-
-                    <div className="uk-text-left booking-details--film-rules">
-                        <span className="" style={{color: "red"}}>(*)</span>
+                <div className="uk-flex-bottom uk-margin-left">
+                    <div className="uk-text-left uk-text-contrast booking-details--film-name">{film.name}</div>
+                    <div className="uk-text-left booking-details--film-rules uk-margin-bottom ">
+                        <span className="booking-details--film-rules">(*)</span>
                         {film.rules ? film.rules.map((item, i) => {
                             return (<span className="uk-text-left uk-margin-small-left" key={i}>{item}
                                 {i !== film.rules.length - 1 && ','}
                         </span>)
-                        }) : '(*)'}
+                        }) : ''}
                     </div>
 
-                    <div className="uk-text-left uk-margin-small booking-details--film-categories">
+                    <div
+                        className="uk-text-left uk-margin-small booking-details--film-categories uk-margin-small-bottom">
                         <span>Genre: </span>
                         {film.categories ? film.categories.map((item, i) => {
-                            return (<span className="uk-text-left" key={i}>{item}
+                            return (<span className="uk-text-left uk-text-contrast" key={i}>{item}
                                 {i !== film.rules.length - 1 && ', '}
                             </span>)
                         }) : ''}
                     </div>
 
-                    <div className="uk-text-left booking-details--film-production">
+                    <div className="uk-text-left booking-details--film-production uk-margin-small-bottom">
                         <span>Production: {film.production}</span>
                     </div>
+
+                    <div className="uk-text-left booking-details--film-description uk-margin-small-bottom">
+                        <span>Description: {film.description}</span>
+                    </div>
+
+
                 </div>
             </div>
 
-            <h3 className="uk-text-left uk-text-contrast">Ticket:</h3>
-            <div
-                className="uk-text-left uk-margin-small">Showtime: {timeState.split(' ')[0] === 'null' ? '' : timeState.split(' ')[0]}
-            </div>
-            <div className="uk-text-left uk-margin-small">Seat numbers: {seatInfos.map(seat => <span
-                key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</div>
-            <div className="uk-text-left uk-margin-small">Total
-                prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)} VND
+            <h3 className="uk-text-left uk-text-contrast uk-margin-small-bottom uk-text-bold">Ticket:</h3>
+            <div className="booking-details--ticket-details">
+                <div className="uk-text-left uk-margin-small">
+                    <span style={{opacity: 0.7}}>Showtime: </span>
+                    <span> {timeState.split(' ')[0] === 'null' ? '' : timeState.split(' ')[0]}</span>
+                </div>
+                <div className="uk-text-left uk-margin-small light">
+                    <span style={{opacity: 0.7}}>Seat numbers: </span>
+                    {seatInfos.map(seat => <span
+                        key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</div>
+                <div className="uk-text-left uk-margin-small wei">
+                    <span style={{opacity: 0.7}}>Total prices:</span>
+                    <span
+                        className="uk-text-bold"> {seatInfos.reduce((total, seat) => total + seat.price, 0)} VND</span>
+                </div>
             </div>
 
             <hr/>
