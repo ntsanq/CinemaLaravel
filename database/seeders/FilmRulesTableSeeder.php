@@ -16,8 +16,11 @@ class FilmRulesTableSeeder extends Seeder
     public function run()
     {
         $filmRules = [
-            'No Under 18',
-            'No Under 13'
+            'Over 18 only',
+            'Over 16 only',
+            'No cat',
+            'No dog',
+            'Only elderly',
         ];
 
         foreach ($filmRules as $filmRule) {
