@@ -24,15 +24,49 @@ export default function BookingDetails(props) {
         setPopUp(false);
     };
 
+
     return (
-        <>
-            <img src={film.path} className="" alt="film image"></img>
-            <h2 className="uk-text-contrast">{film.name}</h2>
-            <div>showtime: {timeState.split(' ')[0]}</div>
-            <div>seats: {seatInfos.map(seat => <span
+        <div className="uk-flex uk-flex-column">
+            <div className="uk-flex uk-margin-bottom">
+                <div className="uk-width-1-2 uk-overlay-background-blue uk-margin-bottom-remove booking-details--img">
+                    <img src={film.path} alt="film image"></img>
+                </div>
+                <div className="uk-flex-bottom uk-margin-left booking-details--film-name">
+                    <h2 className="uk-text-contrast">{film.name}</h2>
+
+                    <div className="uk-text-left booking-details--film-rules">
+                        <span className="" style={{color: "red"}}>(*)</span>
+                        {film.rules ? film.rules.map((item, i) => {
+                            return (<span className="uk-text-left uk-margin-small-left" key={i}>{item}
+                                {i !== film.rules.length - 1 && ','}
+                        </span>)
+                        }) : '(*)'}
+                    </div>
+
+                    <div className="uk-text-left uk-margin-small booking-details--film-categories">
+                        <span>Genre: </span>
+                        {film.categories ? film.categories.map((item, i) => {
+                            return (<span className="uk-text-left" key={i}>{item}
+                                {i !== film.rules.length - 1 && ', '}
+                            </span>)
+                        }) : ''}
+                    </div>
+
+                    <div className="uk-text-left booking-details--film-production">
+                        <span>Production: {film.production}</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 className="uk-text-left uk-text-contrast">Ticket:</h3>
+            <div
+                className="uk-text-left uk-margin-small">Showtime: {timeState.split(' ')[0] === 'null' ? '' : timeState.split(' ')[0]}
+            </div>
+            <div className="uk-text-left uk-margin-small">Seat numbers: {seatInfos.map(seat => <span
                 key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</div>
-            <span>number of tickets: {seatInfos.length}</span>{" "}
-            <span>prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)}</span>
+            <div className="uk-text-left uk-margin-small">Total
+                prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)} VND
+            </div>
 
             <hr/>
 
@@ -77,7 +111,6 @@ export default function BookingDetails(props) {
                     </div>
                 </Modal>
             </div>
-        </>
+        </div>
     );
 }
-
