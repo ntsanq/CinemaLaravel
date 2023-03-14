@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Film;
+use App\Models\FilmCategory;
+use App\Models\FilmRule;
 
 class FilmController extends Controller
 {
@@ -19,22 +21,35 @@ class FilmController extends Controller
         $filmDetails = Film::query()
             ->where('films.id', $id)
             ->where('films.deleted_at', null)
-            ->join('images','images.id', 'films.image_id')
-            ->join('languages','languages.id', 'films.language_id')
-            ->join('film_categories','film_categories.id', 'films.film_category_id')
-            ->join('film_rules','film_rules.id', 'films.film_rule_id')
+            ->join('images', 'images.id', 'films.image_id')
+            ->join('languages', 'languages.id', 'films.language_id')
             ->select([
-               'films.*',
+                'films.*',
                 'images.path',
-                'languages.name as language',
-                'film_categories.name as category',
-                'film_rules.name as rule'
+                'languages.name as language'
             ])
-            ->get()
             ->first()
             ->toArray();
 
-        return view('film.index',[
+
+        $categories = json_decode($filmDetails['film_category_id']);
+        $categoriesData = [];
+        foreach ($categories as $category) {
+            $categoryName = FilmCategory::findOrFail($category)->name;
+            $categoriesData[] = $categoryName;
+        }
+
+        $rulesData = [];
+        $rules = json_decode($filmDetails['film_rule_id']);
+        foreach ($rules as $rule) {
+            $ruleName = FilmRule::findOrFail($rule)->name;
+            $rulesData[] = $ruleName;
+        }
+
+        $filmDetails['categories'] = $categoriesData;
+        $filmDetails['rules'] = $rulesData;
+
+        return view('film.index', [
             'user' => $user,
             'filmDetails' => $filmDetails,
             'search' => $search
