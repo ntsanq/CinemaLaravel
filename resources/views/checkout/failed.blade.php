@@ -8,10 +8,15 @@
 
 
 @section('content')
-    <img src="{{ asset('assets/images/failed.png') }}" alt="">
-    <h1>Your payment was unsuccessful</h1>
-    <div>
-        <p>Please check again.</p>
-        <a href="/">Go back</a>
+    <div class="uk-flex uk-flex-center checkout-success">
+        <div class="uk-flex uk-flex-column">
+            <div class="uk-flex uk-flex-center">
+                <img class="checkout-success-img" src="{{ asset('assets/images/failed.png') }}" alt="">
+            </div>
+            <h1 class="uk-text-center">Your payment was unsuccessful</h1>
+            <div class="uk-text-center">
+                <span>Please check again. </span><a href="#">Go back</a>
+            </div>
+        </div>
     </div>
 @endsection

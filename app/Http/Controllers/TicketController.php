@@ -34,21 +34,26 @@ class TicketController extends Controller
 
         $tickets = Ticket::query()->where('session_id', $sessionId)->get()->toArray();
 
-        if (empty($tickets)){
+        if (empty($tickets)) {
             throw new NotFoundHttpException;
         }
 
         $this->ticketsPaid($sessionId);
 
+        $user = $this->getUserInfo();
+
 
         return view('checkout.success', [
+            'user' => $user,
             'tickets' => $tickets
         ]);
     }
 
     public function cancel()
     {
+        $user = $this->getUserInfo();
         return view('checkout.failed', [
+            'user' => $user
         ]);
     }
 
