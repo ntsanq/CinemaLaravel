@@ -149,3 +149,11 @@
     color: #104adc;
     font-weight: initial;
 }
+
+.checkout-success {
+    margin: 7%;
+}
+
+.checkout-success-img {
+    width: 200px;
+}
