@@ -2,10 +2,9 @@
 
 @section('content')
     <div class="uk-flex uk-flex-center">
-        <div class="uk-cover-background">
+        <div class="auth-form uk-margin-large-top uk-block uk-flex uk-flex-column uk-text-center">
             <h2>Sign in</h2>
-
-            <form class="uk-panel uk-panel-box uk-form" action="/signIn" method="POST">
+            <form class="uk-panel uk-panel-box uk-form uk-flex uk-flex-column" action="/signIn" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="failedFilm" value="{{ request('filmId') }}">
                 <div class="uk-form-row">
@@ -16,15 +15,16 @@
                            id="password">
                 </div>
 
-                <div class="uk-form-row">
-                    <input class="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="submit" value="Login">
+                <div class="uk-form-row uk-margin-top">
+                    <input class="uk-width-1-1 uk-button uk-button-primary uk-button-large uk-margin-top" type="submit"
+                           value="Login">
                 </div>
             </form>
-            <span>
+            <strong>
                 @if($errors->any())
-                    <h4>{{$errors->first()}}</h4>
+                    {{$errors->first()}}
                 @endif
-            </span>
+            </strong>
         </div>
     </div>
 
