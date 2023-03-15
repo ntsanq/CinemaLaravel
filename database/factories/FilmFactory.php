@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Faker\Provider\Youtube;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 
@@ -29,6 +30,9 @@ class FilmFactory extends Factory
         $productionIds = DB::table('productions')->select('id')->get();
         $languageIds = DB::table('languages')->select('id')->get();
 
+        $faker = \Faker\Factory::create();
+        $faker->addProvider(new Youtube($faker));
+
         return [
             'film_category_id' => json_encode($uniqueFilmCategoryIds),
             'image_id' => fake()->unique()->randomElement($imageIds)->id,
@@ -37,6 +41,7 @@ class FilmFactory extends Factory
             'language_id' => fake()->randomElement($languageIds)->id,
             'film_rule_id' => json_encode($uniqueFilmRuleIds),
             'production_id' => fake()->randomElement($productionIds)->id,
+            'trailer_link' => $faker->youtubeEmbedUri(),
         ];
     }
 }
