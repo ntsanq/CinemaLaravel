@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\BookingController;
 use App\Http\Controllers\API\FilmController;
 use App\Http\Controllers\API\SeatController;
+use App\Http\Controllers\API\TicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,3 +40,4 @@ Route::get('/seats/{id}', [SeatController::class, 'info']);
 Route::get('/films/{id}', [FilmController::class, 'info']);
 
 Route::post('/confirmBooking', [BookingController::class, 'checkout']);
+Route::post('/getTickets', [TicketController::class, 'getTickets']);
