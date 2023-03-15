@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {createRoot} from "react-dom/client";
+import { Spin } from 'antd';
 export default function Loading() {
 
     return (
-        <div className="spinner-container">
-            <div className="loading-spinner">
-            </div>
-        </div>
+        <Spin />
     );
 }
 

@@ -1,5 +1,4 @@
 @import url('seatpick.css');
-@import url('spinner.css');
 @import url('ticketinfo.css');
 
 .booking-sections {
@@ -167,4 +166,7 @@
 }
 #sign-out-button:hover {
     font-weight: bold;
+}
+.ant-spin .ant-spin-dot-item {
+    background: white;
 }
