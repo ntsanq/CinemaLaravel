@@ -27,10 +27,15 @@
                                 class="about_img">
 
                             <h2 class="uk-text-contrast uk-margin-large-top">{{ $filmDetails['name'] }}</h2>
+
                             <ul class="uk-subnav uk-subnav-line">
                                 <li>
-                                    <i class="uk-icon-th-large"></i>
-                                    {{ $filmDetails['category'] }}
+                                    <i class="uk-icon-bolt"></i>
+                                    @if(count($filmDetails['categories']) > 1)
+                                        {{ implode(', ', $filmDetails['categories']) }}
+                                    @else
+                                        {{ $filmDetails['categories'][0] }}
+                                    @endif
                                 </li>
                                 <li>
                                     <i class="uk-icon-language"></i>
@@ -39,18 +44,20 @@
                             </ul>
                             <hr>
                             <p class="uk-text-muted uk-h4">
-                                <p>
-                                    {{ $filmDetails['description'] }}
-                                    <br>
-                                </p>
-                            <span>
-                                <b>Rule:</b>
-                                <ul class="uk-subnav uk-subnav-line">
-                                    <li>{{ $filmDetails['rule'] }}</li>
-                                </ul>
-                            </span>
+                            <p>
+                                {{ $filmDetails['description'] }}
+                                <br>
                             </p>
-                            <p class="uk-text-muted uk-h4">
+
+                            <div style="color: #f10b0b" class="">
+                                (*)
+                                @if(count($filmDetails['rules']) > 1)
+                                    {{ implode(', ', $filmDetails['rules']) }}
+                                @else
+                                    {{ $filmDetails['rules'][0] }}
+                                @endif
+                            </div>
+                            <p class="uk-text-muted uk-h4 uk-margin-large-top">
                                 <a class="uk-button uk-button-primary uk-margin-small-right uk-height-1-1"
                                    href="/ticket/select?filmId={{ $filmDetails['id'] }}">
                                     Book

@@ -1,117 +1,31 @@
-.screen {
-    width: 28%;
-    height: 90px;
-    background-color: #fff;
-    transform: rotateX(-45deg);
-    -webkit-box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 1);
-    -moz-box-shadow: 0px 0px 7px 0px rgb(232, 232, 232);
-    box-shadow: 2px 2px 40px 10px rgb(192, 192, 192);
-    margin: 10px 20px;
-}
-
-.screen::before {
-    content: "Screen";
-    font-size: 24px;
-    color: black;
-}
-
-.seats {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    max-width: 500px;
-}
-
-.seat {
-    width: 30px;
-    height: 20px;
-    /* flex: 0 0 8%; */
-    margin: 4px 6px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #d2d2d2;
-}
-
-.seat.occupied {
-    background-color: #b74f4f !important;
-}
-
-.seat.selected {
-    background-color: blue !important;
-}
-
-.seat:not(.occupied):hover {
-    background-color: lightblue;
-    cursor: pointer;
-    transform: scale(1.2);
-}
-
-.seat:not(.occupied):focus {
-    opacity: 0.7;
-    background-color: lightblue;
-}
-
-.seat:nth-of-type(8n + 3) {
-    margin-left: 30px;
-}
-
-.seat:nth-of-type(8n + 7) {
-    margin-left: 30px;
-}
-
-.total {
-    display: flex;
-    margin-top: 40px;
-}
-
-.total span {
-    margin-right: 30px;
-}
-
-@keyframes spinner {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 10px solid #f3f3f3; /* Light grey */
-    border-top: 10px solid #383636; /* Black */
-    border-radius: 50%;
-    animation: spinner 1.5s linear infinite;
-}
-
-.spinner-container {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    height: 350px;
-}
+@import url('seatpick.css');
+@import url('spinner.css');
 
 .booking-sections {
 
 }
 
 .left-booking {
-    padding: 100px 100px;
+    padding: 30px 100px;
     width: 40%;
     text-align: left;
     float: left;
 }
 
 .right-booking {
-    padding: 0px 100px;
+    position: fixed;
+    top: -5%;
+    left: 61%;
+    margin-top: 200px;
+    margin-right: 30px;
+    padding: 40px 40px;
     width: 30%;
     max-height: 90%;
     text-align: center;
     float: right;
     display: grid;
-
+    background: #252527;
+    border-radius: 10px;
 }
 
 .right-booking img {
@@ -119,27 +33,137 @@
     float: right;
 }
 
-
-#confirmPopup {
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    border: 2px white;
-    box-shadow: 0 5px 30px rgba(0,0,0,.30);
-    background: #fff;
-    transition: 0.5s;
-    transform: translate(-50%, -50%);
-    visibility: hidden;
-    opacity: 0;
+.time-button:active {
+    background: rebeccapurple;
+    cursor: pointer;
 }
-#confirmPopup.active {
-    visibility: visible;
-    background: #fff;
+
+.time-button {
+    background: #ede8e8;
+    border-radius: 3px;
     color: black;
-    opacity: 1;
-    transition: 0.5s;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+    padding: 4px 16px;
 }
 
-#confirmPopup.active h2 {
-    color: brown;
+.time-button:hover,
+.time-button:active {
+    background-color: lightblue;
+    color: #232323;
+}
+
+.time-button.active {
+    background-color: #d5302e;
+    color: #ffffff;
+}
+
+.date-pick {
+
+}
+
+.time-pick {
+
+}
+
+.seat-pick {
+
+}
+
+.booking-details--img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+
+.booking-details--img img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.booking-details--film-rules {
+    color: #f10b0b;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.booking-details--film-categories {
+    color: white;
+}
+
+.booking-details--film-categories {
+    color: white;
+}
+
+.booking-details--film-categories {
+    color: white;
+    opacity: 0.7;
+}
+
+.booking-details--film-production {
+    color: white;
+    opacity: 0.7;
+}
+
+.booking-details--ticket-details {
+    color: white;
+}
+
+.booking-details--ticket-details div span {
+
+}
+
+.booking-details--film-description {
+    color: white;
+    opacity: 0.7;
+    width: 200px;
+    height: 3.9rem; /* 3 lines of text, assuming a line height of 1.2em */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.booking-details--film-name {
+    font-size: 24px;
+    margin-bottom: 0.5rem;
+}
+
+
+.booking-details--checkout-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.payment-label {
+    color: #104adc;
+    font-weight: initial;
+}
+
+.checkout-success {
+    margin: 7%;
+}
+
+.checkout-success-img {
+    width: 200px;
+}
+
+#sign-out-button {
+    text-align: center;
+    color: white;
+    border: none;
+    background: unset;
+}
+#sign-out-button:hover {
+    font-weight: bold;
 }

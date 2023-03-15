@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Traits\ResponseTrait;
 use App\Models\Film;
+use App\Models\FilmCategory;
+use App\Models\FilmRule;
 
 class FilmController
 {
@@ -15,18 +17,37 @@ class FilmController
             ->where('films.id', $id)
             ->join('images', 'images.id', 'films.image_id')
             ->join('languages', 'languages.id', 'films.language_id')
-            ->join('film_categories', 'film_categories.id', 'films.film_category_id')
-            ->join('film_rules', 'film_rules.id', 'films.film_rule_id')
+            ->join('productions', 'productions.id', 'films.production_id')
             ->select([
                 'films.*',
                 'images.path',
                 'languages.name as language',
-                'film_categories.name as category',
-                'film_rules.name as rule'
+                'productions.name as production',
             ])
             ->get()
             ->first()
             ->toArray();
+
+        $rules = json_decode($filmDetails['film_rule_id']);
+
+        $categories = json_decode($filmDetails['film_category_id']);
+
+        $ruleData = [];
+        foreach ($rules as $rule) {
+            $ruleName = FilmRule::findOrFail($rule);
+            $ruleData[] = $ruleName->name;
+        }
+        $filmDetails['rules'] = $ruleData;
+
+        $filmCategories = [];
+        foreach ($categories as $category) {
+            $categoryName = FilmCategory::findOrFail($category);
+            $filmCategories[] = $categoryName->name;
+        }
+        $filmDetails['categories'] = $filmCategories;
+
+        unset($filmDetails['film_rule_id'], $filmDetails['language_id'], $filmDetails['language_id'],
+            $filmDetails['image_id'], $filmDetails['film_category_id'], $filmDetails['production_id']);
 
         return $this->success($filmDetails);
 

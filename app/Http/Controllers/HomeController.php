@@ -12,31 +12,29 @@ class HomeController extends Controller
     {
         $user = $this->getUserInfo();
 
-        if (!empty($request->category)) {
-            $categoryName = $request->category;
-        } else {
-            $categoryName = '';
-        }
-
         if (!empty($request->search)) {
             $search = $request->search;
         } else {
             $search = '';
         }
         $categories = FilmCategory::all()->toArray();
+
         $filmsWithPagination = Film::query()
             ->join('images', 'images.id', 'films.image_id')
             ->join('languages', 'languages.id', 'films.language_id')
-            ->join('film_categories', 'film_categories.id', 'films.film_category_id')
             ->select([
                 'films.*',
                 'images.path as path',
                 'languages.name as language',
             ])
             ->where('films.deleted_at', null)
-            ->where('film_categories.name', 'like', '%' . $categoryName . '%')
-            ->where('films.name', 'like', '%' . $search . '%')
-            ->orderBy('name', 'ASC')
+            ->where('films.name', 'like', '%' . $search . '%');
+
+        if (!empty($request->category)) {
+            $categoryId = FilmCategory::query()->where('name', $request->category)->first()->id;
+            $filmsWithPagination->whereRaw("JSON_CONTAINS(film_category_id, CAST('$categoryId' AS JSON))");
+        }
+        $filmsWithPagination = $filmsWithPagination->orderBy('name', 'ASC')
             ->paginate(8)
             ->appends($request->query())
             ->toArray();

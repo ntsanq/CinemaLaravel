@@ -20,7 +20,6 @@ export default function SeatPick(props) {
         }, 500)
     }, [props.seatsData.allSeats])
 
-
     const seatsCategory = [
         {
             seats: allSeats,
@@ -42,9 +41,8 @@ export default function SeatPick(props) {
     };
 
     return (
-        <>
-
-            <h1>Choose your seat</h1>
+        <div className="seat-pick uk-margin-large-bottom">
+            <h2 className="uk-text-contrast">Choose seats:</h2>
             {
                 loading ? <Loading/> :
                     <>
@@ -69,20 +67,19 @@ export default function SeatPick(props) {
                                                                 const isOccupied = category.occupied.indexOf(seat) > -1;
                                                                 return (
                                                                     <React.Fragment key={`seat-${seat + j}`}>
-                                                                        <span> {j + 1}{alpha[i]}</span>
-                                                                        <div
-                                                                            key={`seat-${seat + j}`}
-                                                                            className={`seat ${isSelected ? "selected" : ""} ${
-                                                                                isOccupied ? "occupied" : ""
-                                                                            }`}
-                                                                            onClick={() => {
-                                                                                if (!isOccupied) {
-                                                                                    handleOnClick(seat, category);
-                                                                                } else {
-                                                                                    null;
-                                                                                }
-                                                                            }}
-                                                                        />
+                                                                        <div key={`seat-${seat + j}`}
+                                                                             className={`uk-text-center seat ${isSelected ? "selected" : ""} ${
+                                                                                 isOccupied ? "occupied" : ""
+                                                                             }`}
+                                                                             onClick={() => {
+                                                                                 if (!isOccupied) {
+                                                                                     handleOnClick(seat, category);
+                                                                                 } else {
+                                                                                     null;
+                                                                                 }
+                                                                             }}>
+                                                                            {j + 1}{alpha[i]}
+                                                                        </div>
                                                                     </React.Fragment>
                                                                 );
                                                             })}
@@ -94,9 +91,8 @@ export default function SeatPick(props) {
                                     </div>
                                 </> : <div>Pick a date and a time first</div>
                         }
-
                     </>
             }
-        </>
+        </div>
     );
 }
