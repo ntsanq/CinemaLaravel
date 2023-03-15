@@ -12,7 +12,11 @@
             </div>
             <h1 class="uk-text-center">Your payment was successful</h1>
             <div class="uk-text-center">
-                <span>Thank you for your payment. We will email you for the invoice, otherwise you can view it </span><a href="#">here</a>.
+                <span>Thank you for your payment. We will email you for the invoice, otherwise you can view it </span>
+                <span
+                    id="ticket-details-popup"
+                    tickets={{ json_encode($tickets) }}>
+                </span>.
             </div>
         </div>
     </div>

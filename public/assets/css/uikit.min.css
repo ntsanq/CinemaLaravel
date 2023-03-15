@@ -7496,6 +7496,12 @@ a.uk-thumbnail:hover, a.uk-thumbnail:focus {
     justify-content: space-around
 }
 
+.uk-flex-row {
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
 .uk-flex-row-reverse {
     -ms-flex-direction: row-reverse;
     -webkit-flex-direction: row-reverse;
