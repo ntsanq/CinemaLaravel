@@ -16,14 +16,14 @@
         <div class="uk-flex uk-flex-space-between">
             @if(!empty( $user ))
                 <div class="uk-button-group">
-                    <form action="/signOut" method="post">
-                        @csrf
-                        <button id="sign-out-button" type="submit"><i class="uk-icon-ban"></i></button>
-                    </form>
                     <a class="uk-button uk-button-success uk-button-large uk-margin-left">
                         {{ $user['name'] }}
                         <i class="uk-icon-user"></i>
                     </a>
+                    <form action="/signOut" method="post">
+                        @csrf
+                        <button id="sign-out-button" type="submit" class="uk-button-large uk-button-link uk-active uk-button-dropdown"><i class="uk-icon-sign-out"></i></button>
+                    </form>
                 </div>
             @else
                 <div class="uk-button-group">
