@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enums\TicketStatus;
 use App\Http\Traits\ResponseTrait;
 use App\Models\Film;
 use App\Models\FilmCategory;
 use App\Models\FilmRule;
+use App\Models\Ticket;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class FilmController
 {
@@ -13,20 +17,7 @@ class FilmController
 
     public function info($id)
     {
-        $filmDetails = Film::query()
-            ->where('films.id', $id)
-            ->join('images', 'images.id', 'films.image_id')
-            ->join('languages', 'languages.id', 'films.language_id')
-            ->join('productions', 'productions.id', 'films.production_id')
-            ->select([
-                'films.*',
-                'images.path',
-                'languages.name as language',
-                'productions.name as production',
-            ])
-            ->get()
-            ->first()
-            ->toArray();
+        $filmDetails = $this->queryFilmInfo($id);
 
         $rules = json_decode($filmDetails['film_rule_id']);
 
@@ -50,7 +41,40 @@ class FilmController
             $filmDetails['image_id'], $filmDetails['film_category_id'], $filmDetails['production_id']);
 
         return $this->success($filmDetails);
-
     }
 
+    public function getWeekly()
+    {
+        $mostFilmBought = Ticket::query()
+            ->join('schedules', 'schedules.id', '=', 'tickets.schedule_id')
+            ->select('schedules.film_id', DB::raw('count(*) as total'))
+            ->where('tickets.status', TicketStatus::Paid)
+            ->whereBetween('tickets.updated_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+            ->groupBy('schedules.film_id')
+            ->orderBy('total', 'desc')
+            ->first();
+
+        $film = $this->queryFilmInfo($mostFilmBought->film_id);
+        $film['total'] = $mostFilmBought->total;
+
+        return $this->success($film);
+    }
+
+    private function queryFilmInfo($id)
+    {
+        return Film::query()
+            ->where('films.id', $id)
+            ->join('images', 'images.id', 'films.image_id')
+            ->join('languages', 'languages.id', 'films.language_id')
+            ->join('productions', 'productions.id', 'films.production_id')
+            ->select([
+                'films.*',
+                'images.path',
+                'languages.name as language',
+                'productions.name as production',
+            ])
+            ->get()
+            ->first()
+            ->toArray();
+    }
 }
