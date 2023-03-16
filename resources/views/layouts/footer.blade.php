@@ -4,9 +4,9 @@
         <div class="uk-container-center uk-container">
             <div class="uk-grid">
                 <div class="uk-width-medium-5-10">
-                    <div class="copyright-text">&copy; 2022
-                        <span class="uk-text-bold">Sang's Website</span>
-                        <span>- Copyright © 2022 . All rights reserved.</span>
+                    <div class="copyright-text">&copy; 2023
+                        <span class="uk-text-bold">Sang Flixer</span>
+                        <span>- Copyright © 2023 . All rights reserved.</span>
                     </div>
                 </div>
                 <div class="uk-width-medium-5-10">

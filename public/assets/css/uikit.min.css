@@ -5662,7 +5662,7 @@ a.uk-thumbnail:hover, a.uk-thumbnail:focus {
     left: auto
 }
 
-.uk-overlay-icon:before {
+. uk-overlay-icon:before {
     content: "\f002";
     position: absolute;
     top: 50%;

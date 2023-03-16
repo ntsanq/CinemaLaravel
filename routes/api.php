@@ -41,3 +41,5 @@ Route::get('/films/{id}', [FilmController::class, 'info']);
 
 Route::post('/confirmBooking', [BookingController::class, 'checkout']);
 Route::post('/getTickets', [TicketController::class, 'getTickets']);
+
+Route::get('/getWeeklyFilm', [FilmController::class, 'getWeekly']);

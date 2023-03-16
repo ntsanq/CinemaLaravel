@@ -144,8 +144,10 @@
 }
 
 .payment-label {
-    color: #104adc;
-    font-weight: initial;
+    color: #040d23;
+    font-style: italic;
+    text-decoration: underline;
+    font-size: 16px;
 }
 
 .checkout-success {
@@ -174,4 +176,8 @@
 .auth-form {
     width: 30rem;
     padding: 30px 10px;
+}
+
+.logout-btn {
+    padding: 0 0;
 }

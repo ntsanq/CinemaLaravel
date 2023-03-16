@@ -112,17 +112,25 @@ export default function BookingDetails(props) {
                         key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</p>
                     <p>Total prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)} VND</p>
 
-                    <h3 className="payment-label">Payment method:</h3>
+                    <h3 className="payment-label">Payment method</h3>
                     <div>
                         <input type="radio" id="stripe" name="payment_method" value="stripe"
                                onChange={(e) => handlePayment(e.currentTarget.value)}></input>
-                        <label htmlFor="stripe">Stripe</label>
+                        <label htmlFor="stripe" style={{marginLeft: "7px"}}>
+                            <img
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/1280px-Stripe_Logo%2C_revised_2016.svg.png"
+                                alt="" width="60px"/>
+                        </label>
                     </div>
 
-                    <div>
+                    <div className="uk-margin-top">
                         <input type="radio" id="momo" name="payment_method" value="momo"
                                onChange={(e) => handlePayment(e.currentTarget.value)}></input>
-                        <label htmlFor="momo">Momo</label>
+                        <label htmlFor="momo" style={{marginLeft: "10px"}}>
+                            <img
+                                src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-MoMo-Transparent.png"
+                                alt="" width="30px"/>
+                        </label>
                     </div>
                 </Modal>
             </div>

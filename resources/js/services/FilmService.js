@@ -16,6 +16,12 @@ class FilmService {
         return response.data;
     }
 
+    async getWeeklyFilm() {
+        let response = await axios.get(this.api + `/getWeeklyFilm/`);
+
+        return response.data;
+    }
+
 
 }
 
