@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {createRoot} from "react-dom/client";
-import UserService from "../services/UserService";
 
 export default function ProfileButton(props) {
     const user = JSON.parse(props.user);

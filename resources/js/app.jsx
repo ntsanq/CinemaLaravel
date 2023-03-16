@@ -5,3 +5,5 @@ import "./components/TicketBooking";
 import "./components/TicketDetailsPopup";
 
 import "./components/WeeklyPost";
+
+import "./components/ProfileButton";

@@ -10,21 +10,31 @@
                 <div class="uk-form-row">
                     <input class="uk-width-1-1 uk-form-large" placeholder="Email" type="text" name="email" id="email">
                 </div>
-                <div class="uk-form-row">
+                @error('email')
+                <span class="uk-contrast" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+                <div class="uk-form-row uk-margin-top">
                     <input class="uk-width-1-1 uk-form-large" placeholder="Password" type="password" name="password"
                            id="password">
                 </div>
+                @error('password')
+                <span class="uk-contrast" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
 
                 <div class="uk-form-row uk-margin-top">
                     <input class="uk-width-1-1 uk-button uk-button-primary uk-button-large uk-margin-top" type="submit"
                            value="Login">
                 </div>
             </form>
-            <strong>
-                @if($errors->any())
-                    {{$errors->first()}}
-                @endif
-            </strong>
+            @error('failed_auth')
+            <span class="uk-contrast" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
     </div>
 

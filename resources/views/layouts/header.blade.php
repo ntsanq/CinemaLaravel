@@ -15,34 +15,7 @@
 
         <div class="uk-flex uk-flex-space-between">
             @if(!empty( $user ))
-                <div class="uk-button-group">
-                    <div
-                        class="uk-button-large uk-button-link uk-active uk-button-dropdown uk-button uk-button-success
-                        uk-button-large"
-                        data-uk-dropdown>
-                        @php
-                            $name = trim($user['name']);
-                            $nameArray = explode(' ', $name);
-                            if (count($nameArray) > 0) {
-                                $lastWord = end($nameArray);
-                                echo $lastWord;
-                            } else {
-                                echo "Error";
-                            }
-                        @endphp
-                        <i class="uk-icon-chevron-down"></i>
-                        <div class="uk-dropdown logout-btn">
-                            <form action="/signOut" method="post">
-                                @csrf
-                                <button id="sign-out-button" type="submit"
-                                        class="uk-button-large uk-button-link uk-active uk-button-dropdown uk-button
-                                         uk-button-success uk-button-large">
-                                    Logout <i class="uk-icon-sign-out"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <div id="profile_button" user="{{ json_encode($user) }}"></div>
             @else
                 <div class="uk-button-group">
                     <a class="uk-button uk-button-link uk-button-large" href="/signIn">Sign In</a>
