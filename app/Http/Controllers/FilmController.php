@@ -23,10 +23,12 @@ class FilmController extends Controller
             ->where('films.deleted_at', null)
             ->join('images', 'images.id', 'films.image_id')
             ->join('languages', 'languages.id', 'films.language_id')
+            ->join('productions', 'productions.id', 'films.production_id')
             ->select([
                 'films.*',
                 'images.path',
-                'languages.name as language'
+                'languages.name as language',
+                'productions.name as production'
             ])
             ->first()
             ->toArray();
@@ -49,10 +51,11 @@ class FilmController extends Controller
         $filmDetails['categories'] = $categoriesData;
         $filmDetails['rules'] = $rulesData;
 
+        $filmDetails['duration'] = $this->durationCalculate($filmDetails['id']);
+
         return view('film.index', [
             'user' => $user,
-            'filmDetails' => $filmDetails,
-            'search' => $search
+            'filmDetails' => $filmDetails
         ]);
     }
 }

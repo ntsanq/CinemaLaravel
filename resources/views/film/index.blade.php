@@ -21,58 +21,72 @@
                     </div>
                     <ul id="media-tabs" class="uk-switcher">
                         <!-- ================ start Tab Panel =================================== -->
-                        <li>
+                        <li class="uk-flex uk-flex-space-between">
                             <img
                                 src="{{ $filmDetails['path'] }}"
-                                class="about_img">
+                                class="about_img uk-height-1-1 uk-margin-large-top" alt=""
+                                style="width: 330px; object-fit: cover"
+                            >
 
-                            <h2 class="uk-text-contrast uk-margin-large-top">{{ $filmDetails['name'] }}</h2>
+                            <div class="uk-flex uk-flex-column uk-margin-large-top">
+                                <h2 class="uk-text-contrast">{{ $filmDetails['name'] }}</h2>
+                                <div>
+                                    <ul class="uk-subnav uk-subnav-line">
+                                        <li>
+                                            <i class="uk-icon-clock-o"></i>
+                                            {{ $filmDetails['duration'] }}
+                                        </li>
+                                        <li>
+                                            <i class="uk-icon-language"></i>
+                                            {{ $filmDetails['language'] }}
+                                        </li>
+                                    </ul>
+                                    <hr>
 
-                            <ul class="uk-subnav uk-subnav-line">
-                                <li>
-                                    <i class="uk-icon-bolt"></i>
-                                    @if(count($filmDetails['categories']) > 1)
-                                        {{ implode(', ', $filmDetails['categories']) }}
+                                    <p>
+                                        <span class="uk-text-bold uk-contrast">Description: </span>
+                                        {{ $filmDetails['description'] }}
+                                        <br>
+                                    </p>
+
+                                    <p>
+                                        <span class="uk-text-bold uk-contrast">Genres: </span>
+                                        @if(count($filmDetails['categories']) > 1)
+                                            {{ implode(', ', $filmDetails['categories']) }}
+                                        @else
+                                            {{ $filmDetails['categories'][0] }}
+                                        @endif
+                                    </p>
+                                </div>
+
+                                <div style="color: #c12525" class="">
+                                    <span class="uk-text-bold uk-contrast">Rules: </span>
+                                    @if(count($filmDetails['rules']) > 1)
+                                        {{ implode(', ', $filmDetails['rules']) }}
                                     @else
-                                        {{ $filmDetails['categories'][0] }}
+                                        {{ $filmDetails['rules'][0] }}
                                     @endif
-                                </li>
-                                <li>
-                                    <i class="uk-icon-language"></i>
-                                    {{ $filmDetails['language'] }}
-                                </li>
-                            </ul>
-                            <hr>
-                            <p class="uk-text-muted uk-h4">
-                            <p>
-                                {{ $filmDetails['description'] }}
-                                <br>
-                            </p>
-
-                            <div style="color: #f10b0b" class="">
-                                (*)
-                                @if(count($filmDetails['rules']) > 1)
-                                    {{ implode(', ', $filmDetails['rules']) }}
-                                @else
-                                    {{ $filmDetails['rules'][0] }}
-                                @endif
+                                </div>
+                                <div class="uk-grid-width uk-margin-large-top">
+                                    <p class="uk-text-muted uk-h4 uk-margin-top uk-flex uk-flex-column-reverse">
+                                        <a class="uk-button uk-button-primary uk-margin-small-right uk-height-1-1"
+                                           href="/ticket/select?filmId={{ $filmDetails['id'] }}">
+                                            Book
+                                        </a>
+                                    </p>
+                                </div>
                             </div>
-                            <p class="uk-text-muted uk-h4 uk-margin-large-top">
-                                <a class="uk-button uk-button-primary uk-margin-small-right uk-height-1-1"
-                                   href="/ticket/select?filmId={{ $filmDetails['id'] }}">
-                                    Book
-                                </a>
-                            </p>
                         </li>
-                        <!--  ================= ./ Tab Panel 1 =========================== -->
+                        <!--  ================= Description Tab =========================== -->
                         <li>
+                            <h3 class="uk-text-contrast uk-margin-top">{{ $filmDetails['name'] }}:</h3>
                             <div class="uk-margin-small-top">
-                                <h3 class="uk-text-contrast uk-margin-top">{{ $filmDetails['name'] }}:</h3>
-                                <iframe style="width: 100%; height: 650px" src="{{ $filmDetails['trailer_link'] }}"
-                                        uk-video="autoplay: true">
-                                </iframe>
-                                <span>{{ $filmDetails['trailer_link'] }}</span>
+                                <div class="">
+                                    <iframe style="height: 500px; width: 100%" src="{{ $filmDetails['trailer_link'] }}">
+                                    </iframe>
+                                </div>
                             </div>
+                            <span>{{ $filmDetails['trailer_link'] }}</span>
                         </li>
                     </ul>
                 </div>

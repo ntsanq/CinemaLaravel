@@ -16,14 +16,32 @@
         <div class="uk-flex uk-flex-space-between">
             @if(!empty( $user ))
                 <div class="uk-button-group">
-                    <a class="uk-button uk-button-success uk-button-large uk-margin-left">
-                        {{ $user['name'] }}
-                        <i class="uk-icon-user"></i>
-                    </a>
-                    <form action="/signOut" method="post">
-                        @csrf
-                        <button id="sign-out-button" type="submit" class="uk-button-large uk-button-link uk-active uk-button-dropdown"><i class="uk-icon-sign-out"></i></button>
-                    </form>
+                    <div
+                        class="uk-button-large uk-button-link uk-active uk-button-dropdown uk-button uk-button-success
+                        uk-button-large"
+                        data-uk-dropdown>
+                        @php
+                            $name = trim($user['name']);
+                            $nameArray = explode(' ', $name);
+                            if (count($nameArray) > 0) {
+                                $lastWord = end($nameArray);
+                                echo $lastWord;
+                            } else {
+                                echo "Error";
+                            }
+                        @endphp
+                        <i class="uk-icon-chevron-down"></i>
+                        <div class="uk-dropdown logout-btn">
+                            <form action="/signOut" method="post">
+                                @csrf
+                                <button id="sign-out-button" type="submit"
+                                        class="uk-button-large uk-button-link uk-active uk-button-dropdown uk-button
+                                         uk-button-success uk-button-large">
+                                    Logout <i class="uk-icon-sign-out"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             @else
                 <div class="uk-button-group">

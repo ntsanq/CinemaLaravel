@@ -1413,7 +1413,7 @@ html .uk-nav.uk-nav-offcanvas>li.uk-active>a {
 #tm-right-section  .rating {color: #ED213A}
 
 #tm-right-section .uk-overlay-icon:before {
-    content: "\f03d";
+    content: "\f044 ";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1421,23 +1421,21 @@ html .uk-nav.uk-nav-offcanvas>li.uk-active>a {
     height: 50px;
     margin-top: -25px;
     margin-left: -25px;
-    font-size: 35px;
+    font-size: 50px;
     line-height: 1;
     font-family: FontAwesome;
     text-align: center;
-    color: rgba(255, 255, 255, 0.59);
+    color: #ffffff;
+    opacity: 0.8;
 }
 
 #tm-right-section .uk-overlay-background {
-    background: #ED213A;
-    background: -webkit-linear-gradient(to right, #93291E, #ED213A);
-    background: linear-gradient(to right, #93291E, #ED213A);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
 
-#tm-right-section .uk-panel-title {padding-top: 10px; color: #fff; font-size: 15px; margin-bottom: 5px;}
+#tm-right-section .uk-panel-title {padding-top: 0; color: #fff; font-size: 15px; margin-bottom: 5px;}
 
 #tm-right-section .uk-panel {padding: 10px;}
 

@@ -43,11 +43,6 @@ class HomeController extends Controller
         foreach ($filmsWithPagination['data'] as $film) {
             $film['duration'] = $this->durationCalculate($film['id']);
             $filmData[] = $film;
-            unset(
-                $filmData['created_at'],
-                $filmData['updated_at'],
-                $filmData['deleted_at'],
-            );
         }
 
         $filmsWithPagination['data'] = $filmData;
@@ -55,8 +50,7 @@ class HomeController extends Controller
 
         return view('home.index', [
             'user' => $user,
-            'data' => $filmsWithPagination,
-            'search' => $search
+            'data' => $filmsWithPagination
         ]);
     }
 }

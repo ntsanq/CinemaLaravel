@@ -44,18 +44,18 @@
                     {{--end gernes--}}
 
                     {{--latest movies--}}
-                    {{--                    <ul class="uk-nav uk-nav-comments uk-nav-side" data-uk-nav="">--}}
-                    {{--                        <li class="uk-nav-header uk-margin-small-bottom">Latest Movies</li>--}}
-                    {{--                        <li>--}}
-                    {{--                            <a href="http://market.gorilletheme.com/Blockter/Movies/goodbye-solot">--}}
-                    {{--                                <img class="uk-scrollspy-init-inview uk-scrollspy-inview uk-animation-fade"--}}
-                    {{--                                     src="http://market.gorilletheme.com/Blockter/images/6315bbaaf38d91.jpg">--}}
-                    {{--                                Goodbye SoloT--}}
-                    {{--                                <div></div>--}}
-                    {{--                            </a>--}}
-                    {{--                        </li>--}}
-                    {{--                        <li class="uk-nav-divider"></li>--}}
-                    {{--                    </ul>--}}
+                    <ul class="uk-nav uk-nav-comments uk-nav-side" data-uk-nav="">
+                        <li class="uk-nav-header uk-margin-small-bottom">Week Movie</li>
+                        <li>
+                            <a href="http://market.gorilletheme.com/Blockter/Movies/goodbye-solot">
+                                <img class="uk-scrollspy-init-inview uk-scrollspy-inview uk-animation-fade"
+                                     src="http://market.gorilletheme.com/Blockter/images/6315bbaaf38d91.jpg">
+                                Goodbye SoloT
+                                <div></div>
+                            </a>
+                        </li>
+                        <li class="uk-nav-divider"></li>
+                    </ul>
                     {{--end latest movies--}}
 
                 </div>
@@ -83,11 +83,11 @@
                             <div class="uk-panel">
                                 <h5 class="uk-panel-title">{{ $film['name'] }}</h5>
                                 <p>
-                                <span class="">
+                                <span>
                                   {{ $film['duration'] }} <i class="uk-icon-clock-o"></i>
                                 </span>
-                                    <span class="uk-text-break uk-float-right uk-display-inline">
-                                     <a class="uk-button uk-button-primary uk-margin-small-right"
+                                <span class="uk-text-break uk-float-right uk-display-inline uk-margin-small-bottom">
+                                     <a class="uk-button uk-button-primary"
                                         href="/ticket/select?filmId={{ $film['id'] }}">
                                         Book
                                      </a>
