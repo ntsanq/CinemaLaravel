@@ -6,10 +6,13 @@ namespace App\Http\Controllers\API;
 use App\Http\Traits\ResponseTrait;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
 
 class TicketController
 {
     use ResponseTrait;
+
     public function getTickets(Request $request)
     {
         $sessionId = $request->sessionId;
@@ -43,5 +46,16 @@ class TicketController
         }
 
         return $this->success($ticketData);
+    }
+
+    public function getTotalBySessionId(Request $request)
+    {
+        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        $checkout_session = Session::retrieve($request->sessionId);
+
+
+        return $this->success(
+            $checkout_session->toArray()
+        );
     }
 }

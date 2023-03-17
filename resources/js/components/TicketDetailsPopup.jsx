@@ -4,12 +4,26 @@ import {Button, Modal} from "antd";
 import TicketService from "../services/TicketService";
 
 export default function TicketDetailsPopup(props) {
-    const ticketsData = JSON.parse(props.tickets);
-    const sessionId = ticketsData[0].session_id;
+    let sessionId = '';
+    if (props.sessionId) {
+        sessionId = props.sessionId;
+    }
+    if (props.tickets) {
+        const ticketsData = JSON.parse(props.tickets);
+        sessionId = ticketsData[0].session_id;
+    }
+
     const [tickets, setTickets] = useState([]);
+    const [total, setTotal] = useState([]);
 
     TicketService.getTickets(sessionId).then(r => {
         setTickets(r.data);
+    }).catch(e => {
+        console.log(e)
+    });
+
+    TicketService.getTotal(sessionId).then(r => {
+        setTotal(r.data.amount_total);
     }).catch(e => {
         console.log(e)
     });
@@ -31,7 +45,7 @@ export default function TicketDetailsPopup(props) {
     return (
         <>
             <span className="uk-link" onClick={showModal}>
-                here
+                {props.tickets ? 'here' : <i className='uk-icon-eye'></i>}
             </span>
             <Modal title="Ticket Information" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
                    footer={[
@@ -39,6 +53,7 @@ export default function TicketDetailsPopup(props) {
                            Close
                        </Button>,
                    ]}
+                   width={700}
             >
                 {tickets.map(ticket => {
                     return (
@@ -52,11 +67,12 @@ export default function TicketDetailsPopup(props) {
                                         <div
                                             className="uk-flex uk-flex-column ticket--film-name uk-margin-top uk-margin-small-bottom
                                     ticket--movie-name">
-                                <span className="ticket-label">
-                                    Movie
-                                </span>{ticket.film_name}<span className="">
-
-                                </span>
+                                            <span className="ticket-label">
+                                                Movie
+                                            </span>
+                                            <span>
+                                                {ticket.film_name}
+                                            </span>
                                         </div>
                                         <div
                                             className="uk-flex uk-flex-column ticket--book-person uk-margin-small-bottom
@@ -85,12 +101,13 @@ export default function TicketDetailsPopup(props) {
                                         <h3>{ticket.seat_name}</h3>
                                         <span>{ticket.seat_type}</span>
                                     </div>
-                                    <div className="barcode"></div>
+                                    <div className="barcode uk-text-center"></div>
                                 </div>
                             </div>
                         </div>
                     )
                 })}
+                <div className="uk-margin-top">Total price: {total}</div>
 
             </Modal>
         </>
@@ -101,4 +118,12 @@ export default function TicketDetailsPopup(props) {
 if (document.getElementById('ticket-details-popup')) {
     let tickets = document.getElementById('ticket-details-popup').getAttribute('tickets');
     createRoot(document.getElementById('ticket-details-popup')).render(<TicketDetailsPopup tickets={tickets}/>);
+}
+
+if (document.getElementsByClassName('ticket-details-popup')) {
+    const rows = document.querySelectorAll('.ticket-details-popup');
+    rows.forEach(row => {
+        const sessionId = row.getAttribute('data-session-id');
+        createRoot(row).render(<TicketDetailsPopup sessionId={sessionId}/>);
+    });
 }

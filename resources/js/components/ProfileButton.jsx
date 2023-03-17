@@ -12,7 +12,7 @@ export default function ProfileButton(props) {
                 {user.name}{" "}
                 <i className="uk-icon-chevron-down"></i>
                 <div className="uk-dropdown logout-btn uk-text-center">
-                    <div uk-dropdown>
+                    <div >
                         <a href="/profile" >
                             <button id="profile-button" type="submit"
                                     className="uk-button-link">
@@ -20,7 +20,15 @@ export default function ProfileButton(props) {
                             </button>
                         </a>
                     </div>
-                    <div uk-dropdown>
+                    <div >
+                        <a href="/myTickets" >
+                            <button id="profile-button" type="submit"
+                                    className="uk-button-link">
+                                My tickets <i className="uk-icon-ticket"></i>
+                            </button>
+                        </a>
+                    </div>
+                    <div >
                         <form action="/signOut" method="post">
                             <button id="sign-out-button" type="submit"
                                     className="uk-button-link">

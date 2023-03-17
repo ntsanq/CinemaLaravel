@@ -29,6 +29,7 @@ Route::middleware('auth.web')->group(function (){
     Route::get('/stripe/cancel', [TicketController::class, 'cancel'])->name('stripe.cancel');
     Route::get('/profile', [UserController::class, 'showProfile']);
     Route::put('/profile/update', [UserController::class, 'update']);
+    Route::get('/myTickets', [UserController::class, 'showUserTickets']);
 });
 
 
