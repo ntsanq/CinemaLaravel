@@ -29,7 +29,7 @@ export default function BookingDetails(props) {
         <div className="uk-flex uk-flex-column">
             <div className="uk-flex uk-margin-bottom">
                 <div className="uk-width-1-2 uk-overlay-background-blue uk-margin-bottom-remove booking-details--img">
-                    <img src={film.path} alt="film image"></img>
+                    <img src={film.path} alt="movie img"></img>
                 </div>
                 <div className="uk-flex-bottom uk-margin-left">
                     <div className="uk-text-left uk-text-contrast booking-details--film-name">{film.name}</div>
@@ -105,7 +105,7 @@ export default function BookingDetails(props) {
                     ]}
                 >
                     <p>
-                        <img className="booking-details--checkout-img" src={film.path} alt=""/>
+                        <img className="booking-details--checkout-img" src={film.path} alt="movie img"/>
                     </p>
                     <p>Showtime: {timeState.split(' ')[0]}</p>
                     <p>Seats: {seatInfos.map(seat => <span
@@ -119,7 +119,7 @@ export default function BookingDetails(props) {
                         <label htmlFor="stripe" style={{marginLeft: "7px"}}>
                             <img
                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/1280px-Stripe_Logo%2C_revised_2016.svg.png"
-                                alt="" width="60px"/>
+                                alt="stripe" width="60px"/>
                         </label>
                     </div>
 
@@ -129,7 +129,7 @@ export default function BookingDetails(props) {
                         <label htmlFor="momo" style={{marginLeft: "10px"}}>
                             <img
                                 src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-MoMo-Transparent.png"
-                                alt="" width="30px"/>
+                                alt="momo" width="30px"/>
                         </label>
                     </div>
                 </Modal>
