@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {createRoot} from "react-dom/client";
 import {Button, Modal} from "antd";
 import TicketService from "../services/TicketService";
@@ -16,17 +16,19 @@ export default function TicketDetailsPopup(props) {
     const [tickets, setTickets] = useState([]);
     const [total, setTotal] = useState([]);
 
-    TicketService.getTickets(sessionId).then(r => {
-        setTickets(r.data);
-    }).catch(e => {
-        console.log(e)
-    });
+    useEffect(() => {
+        TicketService.getTickets(sessionId).then(r => {
+            setTickets(r.data);
+        }).catch(e => {
+            console.log(e)
+        });
 
-    TicketService.getTotal(sessionId).then(r => {
-        setTotal(r.data.amount_total);
-    }).catch(e => {
-        console.log(e)
-    });
+        TicketService.getTotal(sessionId).then(r => {
+            setTotal(r.data.amount_total);
+        }).catch(e => {
+            console.log(e)
+        });
+    },[])
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
