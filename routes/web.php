@@ -27,6 +27,7 @@ Route::middleware('auth.web')->group(function (){
     Route::post('/signOut', [LogoutController::class, 'logout']);
     Route::get('/stripe/success', [TicketController::class, 'success'])->name('stripe.success');
     Route::get('/stripe/cancel', [TicketController::class, 'cancel'])->name('stripe.cancel');
+    Route::get('/stripe/repay', [TicketController::class, 'repay'])->name('stripe.repay');
     Route::get('/profile', [UserController::class, 'showProfile']);
     Route::put('/profile/update', [UserController::class, 'update']);
     Route::get('/myTickets', [UserController::class, 'showUserTickets']);

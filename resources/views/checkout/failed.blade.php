@@ -15,7 +15,7 @@
             </div>
             <h1 class="uk-text-center">Your payment was unsuccessful</h1>
             <div class="uk-text-center">
-                <span>Please check again. </span><a href="#">Go back</a>
+                <span>Please check again. </span><a href="/stripe/repay?sessionId={{ app('request')->input('sessionId') }}">Try again</a>
             </div>
         </div>
     </div>

@@ -186,7 +186,7 @@ class BookingController
             'line_items' => $lineItems,
             'mode' => 'payment',
             'success_url' => route('stripe.success', [], true) . "?sessionId={CHECKOUT_SESSION_ID}",
-            'cancel_url' => route('stripe.cancel', [], true),
+            'cancel_url' => route('stripe.cancel', [], true) . "?sessionId={CHECKOUT_SESSION_ID}",
         ]);
 
         foreach ($tickets as $ticket) {

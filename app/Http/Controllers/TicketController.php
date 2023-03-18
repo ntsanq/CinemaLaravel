@@ -6,6 +6,8 @@ use App\Enums\TicketStatus;
 use App\Models\Film;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TicketController extends Controller
@@ -55,6 +57,17 @@ class TicketController extends Controller
         return view('checkout.failed', [
             'user' => $user
         ]);
+    }
+
+    public function repay(Request $request)
+    {
+        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        $checkout_session = Session::retrieve($request->sessionId);
+        if ($checkout_session->url === null) {
+            throw new  NotFoundHttpException;
+        };
+
+        return redirect($checkout_session->url);
     }
 
     private function ticketsPaid($sessionId)
