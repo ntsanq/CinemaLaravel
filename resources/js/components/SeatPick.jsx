@@ -4,7 +4,7 @@ import Loading from "./Loading";
 
 export default function SeatPick(props) {
 
-    const alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+    const alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J'];
 
     const allSeats = props.seatsData.allSeats === undefined ? [] : props.seatsData.allSeats;
     const occupied = props.seatsData.occupied;
@@ -89,6 +89,22 @@ export default function SeatPick(props) {
                                             );
                                         })}
                                     </div>
+
+                                    <div className="uk-margin-large-top">
+                                        <hr width="103%"/>
+                                        <h3 style={{fontStyle: "italic"}}>Annotate:</h3>
+                                        <div className="seats-section">
+                                            <div className="seats">
+                                                <div className="seat"></div>
+                                                available seat
+                                                <div className="seat selected"></div>
+                                                current choosing seat
+                                                <div className="seat occupied"></div>
+                                                occupied seat
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </> : <div>Pick a date and a time first</div>
                         }
                     </>

@@ -5,7 +5,7 @@ export default function ProfileButton(props) {
     const user = JSON.parse(props.user);
 
     return (
-        <div className="uk-button-group">
+        <div className="uk-button-group uk-panel-box-primary-hover">
             <div
                 className="uk-button-large"
                 data-uk-dropdown>
