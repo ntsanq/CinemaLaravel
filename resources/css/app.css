@@ -206,3 +206,10 @@
     text-shadow: 1px 1px black;
     z-index: 1;
 }
+
+.movie-img {
+    width: 100%;
+    max-height: 368px;
+    object-fit: cover;
+    border-radius: 5px;
+}

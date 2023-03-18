@@ -54,7 +54,7 @@
                          data-uk-grid="{gutter:20}" style="position: relative; margin-left: 50px;">
                         @foreach($data['data'] as $film)
                             <div>
-                                <div class="uk-overlay uk-overlay-hover">
+                                <div class="uk-overlay uk-overlay-hover movie-img">
                                     <img src="{{ $film['path'] }}" alt="movie-img">
                                     <div
                                         class="uk-overlay-panel uk-overlay-fade uk-overlay-background uk-overlay-icon"></div>
