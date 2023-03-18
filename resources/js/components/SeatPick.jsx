@@ -14,6 +14,7 @@ export default function SeatPick(props) {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        setSelectedSeats([]);
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
