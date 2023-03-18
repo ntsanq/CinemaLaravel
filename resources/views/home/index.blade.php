@@ -61,7 +61,7 @@
                                 <span class="uk-text-break uk-float-right uk-display-inline uk-margin-small-bottom">
                                      <a class="uk-button uk-button-primary"
                                         href="/ticket/select?filmId={{ $film['id'] }}">
-                                        Book
+                                        Buy ticket
                                      </a>
                                 </span>
                                 </p>

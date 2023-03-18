@@ -6,7 +6,6 @@ export default function BookingDetails(props) {
     const timeState = props.timeState;
     const seatInfos = props.seatInfos;
     const handleEnoughInfo = props.handleEnoughInfo;
-    const handleSubmitConfirm = props.handleSubmitConfirm;
     const open = props.popUpOpen;
     const setPopUp = props.onPopUpData;
     const handlePayment = props.handelPayment;
@@ -18,6 +17,7 @@ export default function BookingDetails(props) {
             setLoading(false);
             setPopUp(false);
         }, 3000);
+        props.handleSubmitConfirm();
     };
 
     const handleCancel = () => {
@@ -99,7 +99,7 @@ export default function BookingDetails(props) {
                         <Button key="back" onClick={handleCancel}>
                             Cancel
                         </Button>,
-                        <Button key="submit" type="primary" loading={loading} onClick={handleSubmitConfirm}>
+                        <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
                             Pay
                         </Button>,
                     ]}

@@ -71,7 +71,7 @@
                                     <p class="uk-text-muted uk-h4 uk-margin-top uk-flex uk-flex-column-reverse">
                                         <a class="uk-button uk-button-primary uk-margin-small-right uk-height-1-1"
                                            href="/ticket/select?filmId={{ $filmDetails['id'] }}">
-                                            Book
+                                            Buy ticket
                                         </a>
                                     </p>
                                 </div>
