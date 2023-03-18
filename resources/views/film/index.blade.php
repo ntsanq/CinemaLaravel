@@ -24,7 +24,7 @@
                         <li class="uk-flex uk-flex-space-between">
                             <img
                                 src="{{ $filmDetails['path'] }}"
-                                class="about_img uk-height-1-1 uk-margin-large-top" alt=""
+                                class="about_img uk-height-1-1 uk-margin-large-top" alt="movie-img"
                                 style="width: 330px; object-fit: cover"
                             >
 

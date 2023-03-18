@@ -9,6 +9,10 @@
 @endsection
 
 @section('content')
+    <div id="banner-container">
+        <img id="banner-img" src="https://media.timeout.com/images/105771947/image.jpg" alt="banner-img">
+        <div id="banner-text">SAN Cinema</div>
+    </div>
 
     <div class="uk-container uk-container-center uk-margin-large-top uk-margin-large-bottom">
         <div class="uk-grid">
@@ -42,14 +46,16 @@
             </div>
             <div id="tm-right-section" class="uk-width-large-8-10 uk-width-medium-7-10"
                  data-uk-scrollspy="{cls:'uk-animation-fade', target:'img'}">
-
+                <div class="uk-flex uk-flex-center uk- uk-margin uk-contrast">
+                    <h1>Now showing</h1>
+                </div>
                 @if($data['data'])
                     <div class="uk-grid-width-small-1-4 uk-grid-width-medium-1-4 uk-grid-width-large-1-4"
                          data-uk-grid="{gutter:20}" style="position: relative; margin-left: 50px;">
                         @foreach($data['data'] as $film)
                             <div>
                                 <div class="uk-overlay uk-overlay-hover">
-                                    <img src="{{ $film['path'] }}" alt="">
+                                    <img src="{{ $film['path'] }}" alt="movie-img">
                                     <div
                                         class="uk-overlay-panel uk-overlay-fade uk-overlay-background uk-overlay-icon"></div>
                                     <a class="uk-position-cover" href="/films/{{ $film['id'] }}"></a>

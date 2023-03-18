@@ -8,7 +8,7 @@
     <div class="uk-flex uk-flex-center checkout-success">
         <div class="uk-flex uk-flex-column">
             <div class="uk-flex uk-flex-center">
-                <img class="checkout-success-img" src="{{ asset('assets/images/success.png') }}" alt="">
+                <img class="checkout-success-img" src="{{ asset('assets/images/success.png') }}" alt="success-img">
             </div>
             <h1 class="uk-text-center">Your payment was successful</h1>
             <div class="uk-text-center">

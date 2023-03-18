@@ -31,7 +31,7 @@
                data-uk-offcanvas=""></a>
         </div>
         <div class="uk-navbar-brand uk-navbar-center uk-visible-small">
-            <img alt="" src="{{ asset('assets/images/s-logo.png') }}" width="100px">
+            <img alt="s-logo" src="{{ asset('assets/images/s-logo.png') }}" width="100px">
         </div>
     </div>
 </nav>

@@ -5,7 +5,7 @@
             <div class="uk-grid">
                 <div class="uk-width-medium-5-10">
                     <div class="copyright-text">&copy; 2023
-                        <span class="uk-text-bold">Sang Flixer</span>
+                        <span class="uk-text-bold">SAN Cinema</span>
                         <span>- Copyright © 2023 . All rights reserved.</span>
                     </div>
                 </div>

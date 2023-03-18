@@ -63,7 +63,7 @@ export default function TicketDetailsPopup(props) {
                             <div className="cardWrap">
                                 <div className="card cardLeft">
                                     <div className="uk-flex uk-flex-column">
-                                        <div className="uk-text-contrast">Sang Flixer Cinema</div>
+                                        <div className="uk-text-contrast">SAN Cinema</div>
                                     </div>
                                     <div className="uk-margin-small-left">
                                         <div

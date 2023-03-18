@@ -20,7 +20,7 @@
             @foreach ($userTickets as $ticket)
                 <tr>
                     <td>{{ $ticket[0]['film_name'] }}</td>
-                    <td><img class="uk-preserve-width" src="{{ $ticket[0]['path'] }}" alt="" style="width: 100px; height: 120px; object-fit: cover"></td>
+                    <td><img class="uk-preserve-width" src="{{ $ticket[0]['path'] }}" alt="movie-img" style="width: 100px; height: 120px; object-fit: cover"></td>
                     <td>{{ $ticket[0]['created_date'] }}</td>
                     <td class="ticket-details-popup" data-session-id={{ $ticket[0]['session_id'] }}>sdfsd</td>
                 </tr>
