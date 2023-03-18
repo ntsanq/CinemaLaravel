@@ -92,16 +92,20 @@ export default function SeatPick(props) {
                                     </div>
 
                                     <div className="uk-margin-large-top">
-                                        <hr width="103%"/>
                                         <h3 style={{fontStyle: "italic"}}>Annotate:</h3>
-                                        <div className="seats-section">
-                                            <div className="seats">
+                                        <div>
+                                            <hr width="103%"/>
+                                        </div>
+                                        <div className="" style={{ fontStyle: "italic"}}>
+                                            <div className="uk-flex uk-flex-row">
+                                                <div className="seat" style={{background: "#ffc329"}}></div>
+                                                <span>Premium seat</span>
                                                 <div className="seat"></div>
-                                                available seat
+                                                Available seat
                                                 <div className="seat selected"></div>
-                                                current choosing seat
+                                                Selected seat
                                                 <div className="seat occupied"></div>
-                                                occupied seat
+                                                Occupied seat
                                             </div>
                                         </div>
                                     </div>
