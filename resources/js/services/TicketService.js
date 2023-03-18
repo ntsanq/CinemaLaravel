@@ -27,6 +27,14 @@ class TicketService {
         return response.data;
     }
 
+    async getNeighbour(seatId) {
+        let response = await axios.post(this.api + `/seats/getCouple`, {
+            seatId: seatId
+        });
+
+        return response.data;
+    }
+
     async getSeatInfo(seatId) {
         let response = await axios.get(this.api + `/seats/${seatId}`);
 
