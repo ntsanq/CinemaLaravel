@@ -13,6 +13,7 @@ html, body {
 #main-content {
     padding-bottom: 110px !important;
     margin-bottom: unset !important;
+    margin-top: 5rem;
 }
 
 #footer {

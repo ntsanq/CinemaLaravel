@@ -1309,7 +1309,12 @@ html .uk-nav.uk-nav-offcanvas>li.uk-active>a {
 
 }
 
-#tm-header {background: #222121; padding: 20px 0;}
+#tm-header {
+    background: #222121; padding: 20px 0;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+}
 
 #tm-header .uk-navbar-brand {
     font-family: Montserrat,"Helvetica Neue",sans-serif;

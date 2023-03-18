@@ -7,6 +7,8 @@
 @section('content')
     <div class="uk-flex uk-flex-center checkout-success">
         <div class="uk-flex uk-flex-column">
+            <div class="uk-margin-large-top"></div>
+            <div class="uk-margin-large-top"></div>
             <div class="uk-flex uk-flex-center">
                 <img class="checkout-success-img" src="{{ asset('assets/images/success.png') }}" alt="success-img">
             </div>
