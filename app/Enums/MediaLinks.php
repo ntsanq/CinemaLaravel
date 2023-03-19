@@ -40,7 +40,7 @@ final class MediaLinks
         'https://images.fandango.com/ImageRenderer/0/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/226753/BlackPanther-WakandaForever_Payoff_1-Sht_v10_lg.jpg',
         'https://images.fandango.com/ImageRenderer/0/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/219625/tgmdomonlinedigitalkeyartt-cruisestandingjetv10.jpg',
         'https://www.gscmovies.com.my/wp-content/uploads/2022/10/Catch-it-from-5-May-2020-onwards-on-Astro-Best-50.jpg',
-        'https://books.disney.com/content/uploads/2023/01/1368077226-240-scaled.jpg',
+        'https://imgs.smoothradio.com/images/60644?crop=16_9&width=660&relax=1&signature=vi7NBzBP2tGv1Zu4__iRcbZAJPw=',
         'https://m.media-amazon.com/images/M/MV5BOGZmYzVkMmItM2NiOS00MDI3LWI4ZWQtMTg0YWZkODRkMmViXkEyXkFqcGdeQXVyODY0NzcxNw@@._V1_.jpg',
         'https://m.media-amazon.com/images/M/MV5BY2NkZTEyYTgtMjcxYy00MzE4LTkxOTQtYzkyZjUxNjc4NTZhXkEyXkFqcGdeQXVyNzQ3NjE1MzI@._V1_.jpg',
         'https://miconcinemas.com/media/2141/john-wick.jpg',

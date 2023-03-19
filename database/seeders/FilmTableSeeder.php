@@ -22,11 +22,7 @@ class FilmTableSeeder extends Seeder
             $uniqueFilmCategoryIds = fake()->randomElements($filmCategoryIds, 2);
         } while (count(array_unique($uniqueFilmCategoryIds)) < 2);
 
-        $filmRuleIds = DB::table('film_rules')->pluck('id')->toArray();
-        do {
-            $uniqueFilmRuleIds = fake()->randomElements($filmRuleIds, 2);
-        } while (count(array_unique($uniqueFilmRuleIds)) < 1);
-
+        $filmRuleIds = DB::table('film_rules')->select('id')->get();
         $productionIds = DB::table('productions')->select('id')->get();
         $languageIds = DB::table('languages')->select('id')->get();
 
@@ -40,7 +36,7 @@ class FilmTableSeeder extends Seeder
                 'name' => $filmNames[$i],
                 'description' => fake()->sentences(20, true),
                 'language_id' => fake()->randomElement($languageIds)->id,
-                'film_rule_id' => "[" . $filmCategories[$i] . "]",    //cheat
+                'film_rule_id' => "[" . fake()->randomElement($filmRuleIds)->id . "]",    //cheat
                 'production_id' => fake()->randomElement($productionIds)->id
             ]);
         }
