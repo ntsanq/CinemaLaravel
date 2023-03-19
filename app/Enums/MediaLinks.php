@@ -56,7 +56,7 @@ final class MediaLinks
         'https://trailers.apple.com/trailers/sony_pictures/love-again/images/poster-large.jpg?lastmod=1',
         'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ3z02k66eMSWvUezGKF9m_1bdSn55NX6eEpJzqR1ZfqPEjOhoz',
         'https://m.media-amazon.com/images/M/MV5BY2E5MzIxNmYtOWY1OC00ZDVmLWIxZDctOWFhZjljOWMzZjcxXkEyXkFqcGdeQXVyNTA3MTU2MjE@._V1_FMjpg_UX1000_.jpg',
-        'https://m.media-amazon.com/images/M/MV5BY2NkZTEyYTgtMjcxYy00MzE4LTkxOTQtYzkyZjUxNjc4NTZhXkEyXkFqcGdeQXVyNzQ3NjE1MzI@._V1_.jpg'
+        'https://amc-theatres-res.cloudinary.com/v1583584975/amc-cdn/production/2/movies/57600/57550/Poster/p_800x1200_AMC_JumanjiTheNextLevel_03052020.jpg'
     ];
 
     const Categories = [
