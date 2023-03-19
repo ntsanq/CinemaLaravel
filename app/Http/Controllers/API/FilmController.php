@@ -64,7 +64,7 @@ class FilmController
     {
         return Film::query()
             ->where('films.id', $id)
-            ->join('media_links', 'media_links.id', 'films.image_id')
+            ->join('media_links', 'media_links.id', 'films.media_link_id')
             ->join('languages', 'languages.id', 'films.language_id')
             ->join('productions', 'productions.id', 'films.production_id')
             ->select([

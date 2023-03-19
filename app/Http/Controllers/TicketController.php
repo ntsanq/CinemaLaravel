@@ -15,7 +15,7 @@ class TicketController extends Controller
     public function select(Request $request)
     {
         $film = Film::where('films.id', $request->filmId)
-            ->join('media_links', 'media_links.id', 'films.image_id')
+            ->join('media_links', 'media_links.id', 'films.media_link_id')
             ->select([
                 'films.*',
                 'media_links.image_link as path',
