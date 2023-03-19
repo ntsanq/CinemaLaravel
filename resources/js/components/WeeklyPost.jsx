@@ -16,27 +16,29 @@ export default function WeeklyPost() {
             setLoading(false);
         }).catch(e => {
             console.log(e);
-        })}, [])
+        })
+    }, [])
 
-    return (
-        <> {
-            loading ? <Loading/> :
-                <>
-                    <ul className="uk-nav uk-nav-comments uk-nav-side" data-uk-nav="">
-                        <li className="uk-nav-header uk-margin-small-bottom">Weekly Movie</li>
-                        <li>
-                            <a href={`/films/${mostBookedFilm.id}`}>
-                                <img className="uk-scrollspy-init-inview uk-scrollspy-inview uk-animation-fade"
-                                     src={mostBookedFilm.path} alt="weekly"/>
-                                <span className="uk-margin-small-top">{mostBookedFilm.name}</span>
-                            </a>
-                        </li>
-                        <li className="uk-nav-divider"></li>
-                    </ul>
-                </>
-        }
-        </>
-    )
+    if (loading) {
+        return <Loading />;
+    } else {
+        return mostBookedFilm[0] ? (
+            <ul className="uk-nav uk-nav-comments uk-nav-side" data-uk-nav="">
+                <li className="uk-nav-header uk-margin-small-bottom">Weekly Movie</li>
+                <li>
+                    <a href={`/films/${mostBookedFilm.id}`}>
+                        <img
+                            className="uk-scrollspy-init-inview uk-scrollspy-inview uk-animation-fade"
+                            src={mostBookedFilm.path}
+                            alt="weekly"
+                        />
+                        <span className="uk-margin-small-top">{mostBookedFilm.name}</span>
+                    </a>
+                </li>
+                <li className="uk-nav-divider"></li>
+            </ul>
+        ) : null;
+    }
 }
 
 if (document.getElementById('weekly_post')) {

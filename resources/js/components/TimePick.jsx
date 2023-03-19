@@ -21,7 +21,7 @@ export default function TimePick(props) {
         <button
             key={index}
             onClick={(e) => handleButton(e, index)}
-            className={`time-button ${activeIndex === index ? 'active' : ''}`}
+            className={`time-button uk-margin-top ${activeIndex === index ? 'active' : ''}`}
             style={{marginLeft: '20px'}}
         >
             {time.start} <span hidden>{time.room_id}</span>
@@ -46,7 +46,7 @@ export default function TimePick(props) {
                         {
                             listItems[0] ?
                                 <div className="grid-button">
-                                    <div style={{display: "flex"}}>{listItems}</div>
+                                    <div>{listItems}</div>
                                 </div> :
                                 <div>Pick another date</div>
                         }

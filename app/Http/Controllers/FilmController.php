@@ -12,27 +12,21 @@ class FilmController extends Controller
     {
         $user = $this->getUserInfo();
 
-        if (!empty($request->search)) {
-            $search = $request->search;
-        } else {
-            $search = '';
-        }
-
         $filmDetails = Film::query()
             ->where('films.id', $id)
             ->where('films.deleted_at', null)
-            ->join('images', 'images.id', 'films.image_id')
+            ->join('media_links', 'media_links.id', 'films.image_id')
             ->join('languages', 'languages.id', 'films.language_id')
             ->join('productions', 'productions.id', 'films.production_id')
             ->select([
                 'films.*',
-                'images.path',
+                'media_links.image_link as path',
+                'media_links.trailer_link as trailer_link',
                 'languages.name as language',
                 'productions.name as production'
             ])
             ->first()
             ->toArray();
-
 
         $categories = json_decode($filmDetails['film_category_id']);
         $categoriesData = [];

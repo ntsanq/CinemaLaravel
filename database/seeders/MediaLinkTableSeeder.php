@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Image;
+use App\Models\MediaLink;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ImageTableSeeder extends Seeder
+class MediaLinkTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class ImageTableSeeder extends Seeder
      */
     public function run()
     {
-        Image::factory(100)->create();
+        MediaLink::factory(100)->create();
     }
 }

@@ -213,3 +213,9 @@
     object-fit: cover;
     border-radius: 5px;
 }
+
+.film-name-card {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

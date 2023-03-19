@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
                 UsersTableSeeder::class,
                 DiscountTableSeeder::class,
                 RoomTableSeeder::class,
-                ImageTableSeeder::class,
+                MediaLinkTableSeeder::class,
                 FilmCategoryTableSeeder::class,
                 SeatCategoryTableSeeder::class,
                 LanguagesTableSeeder::class,

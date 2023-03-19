@@ -20,11 +20,11 @@ class HomeController extends Controller
         $categories = FilmCategory::all()->toArray();
 
         $filmsWithPagination = Film::query()
-            ->join('images', 'images.id', 'films.image_id')
+            ->join('media_links', 'media_links.id', 'films.image_id')
             ->join('languages', 'languages.id', 'films.language_id')
             ->select([
                 'films.*',
-                'images.path as path',
+                'media_links.image_link as path',
                 'languages.name as language',
             ])
             ->where('films.deleted_at', null)

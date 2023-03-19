@@ -35,10 +35,10 @@ class UserController extends Controller
             $info = Ticket::query()
                 ->join('schedules', 'schedules.id', 'tickets.schedule_id')
                 ->join('films', 'films.id', 'schedules.film_id')
-                ->join('images', 'images.id', 'films.image_id')
+                ->join('media_links', 'media_links.id', 'films.image_id')
                 ->select([
                     'tickets.created_at as created_date',
-                    'images.path',
+                    'media_links.image_link as path',
                     'films.name as film_name',
                     'tickets.session_id',
                 ])

@@ -16,13 +16,12 @@ return new class extends Migration
         Schema::create('films', function (Blueprint $table) {
             $table->id();
             $table->string('film_category_id');
-            $table->foreignId('image_id')->constrained('images');
+            $table->foreignId('image_id')->constrained('media_links');
             $table->string('name',50);
             $table->text('description');
             $table->foreignId('language_id')->constrained('languages');
             $table->string('film_rule_id');
             $table->foreignId('production_id')->constrained('productions');
-            $table->string('trailer_link')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

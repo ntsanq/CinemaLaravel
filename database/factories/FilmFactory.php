@@ -26,22 +26,18 @@ class FilmFactory extends Factory
             $uniqueFilmRuleIds = fake()->randomElements($filmRuleIds, 2);
         } while (count(array_unique($uniqueFilmRuleIds)) < 2);
 
-        $imageIds = DB::table('images')->select('id')->get();
+        $mediaLinkIds = DB::table('media_links')->select('id')->get();
         $productionIds = DB::table('productions')->select('id')->get();
         $languageIds = DB::table('languages')->select('id')->get();
 
-        $faker = \Faker\Factory::create();
-        $faker->addProvider(new Youtube($faker));
-
         return [
             'film_category_id' => json_encode($uniqueFilmCategoryIds),
-            'image_id' => fake()->unique()->randomElement($imageIds)->id,
+            'image_id' => fake()->unique()->randomElement($mediaLinkIds)->id,
             'name' => fake()->sentence(2),
             'description' => fake()->sentences(20, true),
             'language_id' => fake()->randomElement($languageIds)->id,
             'film_rule_id' => json_encode($uniqueFilmRuleIds),
-            'production_id' => fake()->randomElement($productionIds)->id,
-            'trailer_link' => $faker->youtubeEmbedUri(),
+            'production_id' => fake()->randomElement($productionIds)->id
         ];
     }
 }

@@ -61,7 +61,7 @@
                                     <a class="uk-position-cover" href="/films/{{ $film['id'] }}"></a>
                                 </div>
                                 <div class="uk-panel">
-                                    <h5 class="uk-panel-title">{{ $film['name'] }}</h5>
+                                    <h5 class="uk-panel-title film-name-card">{{ $film['name'] }}</h5>
                                     <p>
                                 <span>
                                   {{ $film['duration'] }} <i class="uk-icon-clock-o"></i>

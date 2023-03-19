@@ -24,9 +24,9 @@ class Film extends Model
         return $this->belongsTo(FilmCategory::class);
     }
 
-    public function image()
+    public function mediaLink()
     {
-        return $this->belongsTo(Image::class);
+        return $this->belongsTo(MediaLink::class);
     }
 
     public function language()
