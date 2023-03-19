@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -32,5 +33,9 @@ Route::middleware('auth.web')->group(function (){
     Route::put('/profile/update', [UserController::class, 'update']);
     Route::get('/myTickets', [UserController::class, 'showUserTickets']);
 });
+
+//admin
+Route::get('/admin', [AdminController::class, 'index']);
+
 
 

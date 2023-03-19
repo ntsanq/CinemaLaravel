@@ -1,1 +1,4 @@
-This is admin page
+@extends('admin.master')
+
+@section('content')
+@endsection

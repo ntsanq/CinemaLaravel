@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {createRoot} from "react-dom/client";
 import FilmService from "../services/FilmService";
-import Loading from "./Loading";
+import Loading from "./Booking/Loading";
 
 export default function WeeklyPost() {
 

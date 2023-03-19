@@ -3,9 +3,9 @@ import {createRoot} from 'react-dom/client';
 import DatePick from './DatePick';
 import SeatPick from "./SeatPick";
 import TimePick from "./TimePick";
-import TicketService from "../services/TicketService";
+import TicketService from "../../services/TicketService";
 import moment from "moment/moment";
-import FilmService from "../services/FilmService";
+import FilmService from "../../services/FilmService";
 import BookingDetails from "./BookingDetails";
 
 export default function TicketBooking(props) {
