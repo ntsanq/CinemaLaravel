@@ -1418,7 +1418,7 @@ html .uk-nav.uk-nav-offcanvas>li.uk-active>a {
 #tm-right-section  .rating {color: #ED213A}
 
 #tm-right-section .uk-overlay-icon:before {
-    content: "\f044 ";
+    content: "\f065";
     position: absolute;
     top: 50%;
     left: 50%;
