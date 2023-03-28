@@ -10,32 +10,39 @@ import {
     EditButton,
     TextInput,
     DateInput,
-    useRecordContext
+    useRecordContext, ImageField, Link, ArrayField, SingleFieldList, ChipField, SimpleList, EmailField, UrlField
 } from 'react-admin';
 import BookIcon from '@mui/icons-material/Book';
+import { useMediaQuery } from "@mui/material";
+export const FilmIcon = BookIcon;
 
-export const PostIcon = BookIcon;
+export const FilmList = () => {
 
-export const PostList = () => (
-    <List>
-        <Datagrid>
-            <TextField source="id"/>
-            <TextField source="title"/>
-            <DateField source="published_at"/>
-            <TextField source="average_note"/>
-            <TextField source="views"/>
-            <EditButton/>
-        </Datagrid>
-    </List>
-);
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+    return (
 
-const PostTitle = () => {
-    const record = useRecordContext();
-    return <span>Post {record ? `"${record.title}"` : ''}</span>;
+        <List>
+                <Datagrid rowClick="edit">
+                    <TextField source="id"/>
+                    <TextField source="film_category_id"/>
+                    <TextField source="media_link_id"/>
+                    <TextField source="name"/>
+                    <ImageField source="path"/>
+                    <UrlField source="trailer"/>
+                    <EditButton />
+                </Datagrid>
+        </List>
+    )
+
 };
 
-export const PostEdit = () => (
-    <Edit title={<PostTitle/>}>
+const FilmTitle = () => {
+    const record = useRecordContext();
+    return <span>Film {record ? `"${record.title}"` : ''}</span>;
+};
+
+export const FilmEdit = () => (
+    <Edit title={<FilmTitle/>}>
         <SimpleForm>
             <TextInput disabled source="id"/>
             <TextInput source="title"/>
@@ -48,8 +55,8 @@ export const PostEdit = () => (
     </Edit>
 );
 
-export const PostCreate = () => (
-    <Create title="Create a Post">
+export const FilmCreate = () => (
+    <Create title="Create a Film">
         <SimpleForm>
             <TextInput source="title"/>
             <TextInput source="teaser" options={{multiline: true}}/>

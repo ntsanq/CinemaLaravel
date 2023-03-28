@@ -39,6 +39,11 @@ Route::post('/getTimes', [BookingController::class, 'getTimes']);
 Route::get('/seats/{id}', [SeatController::class, 'info']);
 Route::get('/films/{id}', [FilmController::class, 'info']);
 
+Route::prefix('films')->controller(FilmController::class)->group(function() {
+    Route::get('/', 'index');
+    Route::get('/{id}', 'info');
+});
+
 Route::post('/confirmBooking', [BookingController::class, 'checkout']);
 Route::post('/getTickets', [TicketController::class, 'getTickets']);
 

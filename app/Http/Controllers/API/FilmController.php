@@ -15,6 +15,51 @@ class FilmController
 {
     use ResponseTrait;
 
+    public function index()
+    {
+        $films = Film::query()
+            ->join('media_links', 'media_links.id', 'films.media_link_id')
+            ->join('languages', 'languages.id', 'films.language_id')
+            ->join('productions', 'productions.id', 'films.production_id')
+            ->select([
+                'films.*',
+                'media_links.image_link as path',
+                'media_links.trailer_link as trailer',
+                'languages.name as language',
+                'productions.name as production',
+            ])
+            ->get()
+            ->toArray();
+
+
+//        $filmsData = [];
+//        foreach ($films as $film) {
+//            //rules
+//            $rules = json_decode($film['film_rule_id']);
+//            $ruleData = [];
+//            foreach ($rules as $rule) {
+//                $ruleIns = FilmRule::findOrFail($rule);
+//                $ruleData[] = $ruleIns->name;
+//            }
+//            $film['rules'] = $ruleData;
+//
+//            //categories
+//            $categories = json_decode($film['film_category_id']);
+//            $categoriesData = [];
+//            foreach ($categories as $category) {
+//                $categoryIns = FilmCategory::findOrFail($category);
+//                $categoriesData[] = $categoryIns->name;
+//            }
+//
+//            $film['categories'] = $categoriesData;
+
+//            unset($film['film_rule_id'], $film['production_id'], $film['language_id'], $film['media_link_id'], $film['film_category_id']);
+//            $filmsData[] = $film;
+//        }
+
+        return response()->json($films)->header('X-Total-Count', count($films));
+    }
+
     public function info($id)
     {
         $filmDetails = $this->queryFilmInfo($id);
@@ -60,7 +105,7 @@ class FilmController
         return $this->success($film);
     }
 
-    private function queryFilmInfo($id)
+    private function queryFilmInfo($id = '')
     {
         return Film::query()
             ->where('films.id', $id)
