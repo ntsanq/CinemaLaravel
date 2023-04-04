@@ -33,7 +33,7 @@
                                     class="uk-nav-parent-icon-selected uk-contrast uk-active"
                                 @endif
                             >
-                                <a href="/?category={{ $category['name']}}">
+                                <a href="/?category={{ $category['name'] }}">
                                     {{ $category['name'] }}
                                 </a>
                             </li>
@@ -46,7 +46,42 @@
             </div>
             <div id="tm-right-section" class="uk-width-large-8-10 uk-width-medium-7-10"
                  data-uk-scrollspy="{cls:'uk-animation-fade', target:'img'}">
-                <div class="uk-flex uk-flex-center uk- uk-margin uk-contrast">
+                @if(!empty($interested) && !app('request')->input('category') && !app('request')->input('search') && !app('request')->input('page'))
+                    <div class="uk-flex uk-flex-center uk-margin uk-contrast">
+                        <h1>Maybe you like</h1>
+                    </div>
+                    <div class="uk-grid-width-small-1-4 uk-grid-width-medium-1-4 uk-grid-width-large-1-4"
+                         data-uk-grid="{gutter:20}" style="position: relative; margin-left: 50px;">
+                        @foreach($interested as $each)
+                            <div>
+                                <div class="uk-overlay uk-overlay-hover movie-img">
+                                    <img src="{{ $each['path'] }}" alt="movie-img">
+                                    <div
+                                        class="uk-overlay-panel uk-overlay-fade uk-overlay-background uk-overlay-icon"></div>
+                                    <a class="uk-position-cover" href="/films/{{ $each['id'] }}"></a>
+                                </div>
+                                <div class="uk-panel">
+                                    <h5 class="uk-panel-title film-name-card">{{ $each['name'] }}</h5>
+                                    <p>
+                                            <span>
+                                              {{ $each['duration'] }} <i class="uk-icon-clock-o"></i>
+                                            </span>
+                                        <span
+                                            class="uk-text-break uk-float-right uk-display-inline uk-margin-small-bottom">
+                                     <a class="uk-button uk-button-primary"
+                                        href="/ticket/select?filmId={{ $each['id'] }}">
+                                        Buy ticket
+                                     </a>
+                                </span>
+                                    </p>
+                                </div>
+                            </div>
+
+                        @endforeach
+                    </div>
+                @endif
+
+                <div class="uk-flex uk-flex-center uk-margin uk-contrast">
                     <h1>Now showing</h1>
                 </div>
                 @if($data['data'])
