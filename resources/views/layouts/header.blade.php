@@ -20,7 +20,8 @@
             @else
                 <div class="uk-button-group">
                     <a class="uk-button uk-button-link uk-button-large" href="/signIn">Sign In</a>
-                    <a class="uk-button uk-button-success uk-button-large uk-margin-left" href="/signUp">
+                    <a class="uk-button uk-button-success uk-button-large uk-margin-left"
+                       href="/signUp{{app('request')->get('filmId') ? "?filmId=".app('request')->get('filmId') : ''}}">
                         <i class="uk-icon-lock uk-margin-small-right"></i> Sign Up</a>
                 </div>
             @endif

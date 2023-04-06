@@ -6,6 +6,7 @@
             <h2>Sign up</h2>
             <form class="uk-panel uk-panel-box uk-form uk-flex uk-flex-column" action="/signUp" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="failedFilm" value="{{ request('filmId') }}">
                 <div class="uk-form-row">
                     <input class="uk-width-1-1 uk-form-large" placeholder="Name" type="text" name="name" id="name"
                            value="{{ old('name') }}">

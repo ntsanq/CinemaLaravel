@@ -34,7 +34,11 @@ class RegisterController
             $token = $user->createToken('authToken')->plainTextToken;
             session(['token' => $token]);
 
-            return redirect('/');
+            if ($request->failedFilm) {
+                return redirect("ticket/select?filmId=$request->failedFilm");
+            } else {
+                return redirect('/');
+            }
         }
 
 
