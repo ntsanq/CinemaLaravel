@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\BookingController;
+use App\Http\Controllers\API\FilmCategoryController;
 use App\Http\Controllers\API\FilmController;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\API\TicketController;
@@ -39,9 +40,17 @@ Route::post('/getTimes', [BookingController::class, 'getTimes']);
 Route::get('/seats/{id}', [SeatController::class, 'info']);
 Route::get('/films/{id}', [FilmController::class, 'info']);
 
-Route::prefix('films')->controller(FilmController::class)->group(function() {
-    Route::get('/', 'index');
-    Route::get('/{id}', 'info');
+//for ADMIN DASHBOARD usage
+Route::prefix('admin')->group(function () {
+    Route::prefix('films')->controller(FilmController::class)->group(function() {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'info');
+    });
+
+    Route::prefix('filmCategories')->controller(FilmCategoryController::class)->group(function() {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'info');
+    });
 });
 
 Route::post('/confirmBooking', [BookingController::class, 'checkout']);

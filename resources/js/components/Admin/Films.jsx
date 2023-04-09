@@ -10,10 +10,20 @@ import {
     EditButton,
     TextInput,
     DateInput,
-    useRecordContext, ImageField, Link, ArrayField, SingleFieldList, ChipField, SimpleList, EmailField, UrlField
+    useRecordContext,
+    ImageField,
+    Link,
+    ArrayField,
+    SingleFieldList,
+    ChipField,
+    SimpleList,
+    EmailField,
+    UrlField,
+    ReferenceField, ReferenceArrayField
 } from 'react-admin';
 import BookIcon from '@mui/icons-material/Book';
-import { useMediaQuery } from "@mui/material";
+import {useMediaQuery} from "@mui/material";
+
 export const FilmIcon = BookIcon;
 
 export const FilmList = () => {
@@ -22,15 +32,19 @@ export const FilmList = () => {
     return (
 
         <List>
-                <Datagrid rowClick="edit">
-                    <TextField source="id"/>
-                    <TextField source="film_category_id"/>
-                    <TextField source="media_link_id"/>
-                    <TextField source="name"/>
-                    <ImageField source="path"/>
-                    <UrlField source="trailer"/>
-                    <EditButton />
-                </Datagrid>
+            <Datagrid rowClick="edit">
+                <TextField source="id"/>
+                <ReferenceArrayField source="film_category_id" reference="filmCategories">
+                    <SingleFieldList>
+                        <ChipField source="name"/>
+                    </SingleFieldList>
+                </ReferenceArrayField>
+                <TextField source="media_link_id"/>
+                <TextField source="name"/>
+                <ImageField source="path"/>
+                <UrlField source="trailer"/>
+                <EditButton/>
+            </Datagrid>
         </List>
     )
 
