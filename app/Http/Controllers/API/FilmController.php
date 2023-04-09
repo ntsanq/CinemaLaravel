@@ -7,8 +7,10 @@ use App\Http\Traits\ResponseTrait;
 use App\Models\Film;
 use App\Models\FilmCategory;
 use App\Models\FilmRule;
+use App\Models\MediaLink;
 use App\Models\Ticket;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class FilmController
@@ -48,8 +50,29 @@ class FilmController
     {
         $filmDetails = $this->queryFilmInfo($id);
         $filmDetails['film_category_id'] = json_decode($filmDetails['film_category_id']);
+        $filmDetails['film_rule_id'] = json_decode($filmDetails['film_rule_id']);
 
         return response()->json($filmDetails)->header('X-Total-Count', count($filmDetails));
+    }
+
+    public function updateForAdmin($id, Request $request)
+    {
+        $film = Film::findOrFail($id);
+        $film->film_category_id = json_encode($request->film_category_id);
+        $film->film_rule_id = json_encode($request->film_rule_id);
+        $film->name = $request->name;
+        $film->description = $request->description;
+
+        if ($request->path) {
+            $mediaLinkIns = MediaLink::findOrFail($film->media_link_id);
+            $mediaLinkIns->image_link = $request->path;
+            $mediaLinkIns->save();
+        }
+
+        $film->save();
+
+        return response()->json($film);
+
     }
 
     public function info($id)

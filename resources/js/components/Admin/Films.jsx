@@ -13,12 +13,18 @@ import {
     SingleFieldList,
     ChipField,
     UrlField,
-    ReferenceArrayField, ReferenceArrayInput, SelectArrayInput
+    ReferenceArrayField, ReferenceArrayInput, SelectArrayInput, RichTextField
 } from 'react-admin';
 import BookIcon from '@mui/icons-material/Book';
 import {useMediaQuery} from "@mui/material";
+import {RichTextInput} from "ra-input-rich-text";
 
 export const FilmIcon = BookIcon;
+const HtmlField = ({record, source}) => {
+    return (
+        <div dangerouslySetInnerHTML={{__html: record[source]}}></div>
+    );
+};
 
 export const FilmList = () => {
 
@@ -41,6 +47,7 @@ export const FilmList = () => {
                 <TextField source="name"/>
                 <ImageField source="path" label="Image"/>
                 <UrlField source="trailer"/>
+                <RichTextField source="description"/>
                 <EditButton/>
             </Datagrid>
         </List>
@@ -50,7 +57,7 @@ export const FilmList = () => {
 
 const FilmTitle = () => {
     const record = useRecordContext();
-    return <span>Film {record ? `"${record.title}"` : ''}</span>;
+    return <span>Film{record ? `: ${record.name}` : ''}</span>;
 };
 
 export const FilmEdit = () => (
@@ -58,9 +65,20 @@ export const FilmEdit = () => (
         <SimpleForm>
             <TextInput disabled source="id" name="id"/>
             <TextInput source="name" name="name"/>
-            <ReferenceArrayInput source="film_category_id" reference="filmCategories"  name="film_category_id">
-                <SelectArrayInput />
+            <ReferenceArrayInput source="film_category_id" reference="filmCategories" name="film_category_id">
+                <SelectArrayInput/>
             </ReferenceArrayInput>
+            <ReferenceArrayInput source="film_rule_id" reference="filmRules" name="film_rule_id">
+                <SelectArrayInput/>
+            </ReferenceArrayInput>
+
+            <div style={{display: "flex"}}>
+                <TextInput label="Image" source="path" name="path"/>
+                <ImageField source="path"/>
+            </div>
+
+            <RichTextInput source="description" name="description"/>
+
         </SimpleForm>
     </Edit>
 );

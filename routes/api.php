@@ -22,8 +22,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function (){
-    Route::get('/user', function() {
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function () {
         return ['message' => 'Hello Sang!'];
     });
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -44,18 +44,20 @@ Route::get('/films/{id}', [FilmController::class, 'info']);
 
 //for ADMIN DASHBOARD usage
 Route::prefix('/admin')->group(function () {
-    Route::prefix('films')->controller(FilmController::class)->group(function() {
+    Route::prefix('films')->controller(FilmController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'infoForAdmin');
+        Route::put('/{id}', 'updateForAdmin');
+    });
+
+    Route::prefix('/filmCategories')->controller(FilmCategoryController::class)->group(function () {
         Route::get('/', 'index');
     });
 
-    Route::prefix('/filmCategories')->controller(FilmCategoryController::class)->group(function() {
+    Route::prefix('/rooms')->controller(RoomController::class)->group(function () {
         Route::get('/', 'index');
     });
-
-    Route::prefix('/rooms')->controller(RoomController::class)->group(function() {
-        Route::get('/', 'index');
-    });
-    Route::prefix('/filmRules')->controller(FilmRuleController::class)->group(function() {
+    Route::prefix('/filmRules')->controller(FilmRuleController::class)->group(function () {
         Route::get('/', 'index');
     });
 });
