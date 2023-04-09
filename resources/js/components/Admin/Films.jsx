@@ -5,21 +5,15 @@ import {
     Edit,
     Create,
     SimpleForm,
-    DateField,
     TextField,
     EditButton,
     TextInput,
-    DateInput,
     useRecordContext,
     ImageField,
-    Link,
-    ArrayField,
     SingleFieldList,
     ChipField,
-    SimpleList,
-    EmailField,
     UrlField,
-    ReferenceField, ReferenceArrayField
+    ReferenceArrayField, ReferenceArrayInput, SelectArrayInput
 } from 'react-admin';
 import BookIcon from '@mui/icons-material/Book';
 import {useMediaQuery} from "@mui/material";
@@ -62,13 +56,11 @@ const FilmTitle = () => {
 export const FilmEdit = () => (
     <Edit title={<FilmTitle/>}>
         <SimpleForm>
-            <TextInput disabled source="id"/>
-            <TextInput source="title"/>
-            <TextInput source="teaser" options={{multiline: true}}/>
-            <TextInput multiline source="body"/>
-            <DateInput label="Publication date" source="published_at"/>
-            <TextInput source="average_note"/>
-            <TextInput disabled label="Nb views" source="views"/>
+            <TextInput disabled source="id" name="id"/>
+            <TextInput source="name" name="name"/>
+            <ReferenceArrayInput source="film_category_id" reference="filmCategories"  name="film_category_id">
+                <SelectArrayInput />
+            </ReferenceArrayInput>
         </SimpleForm>
     </Edit>
 );

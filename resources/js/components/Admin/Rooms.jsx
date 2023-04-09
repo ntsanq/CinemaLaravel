@@ -3,9 +3,10 @@ import {
     List,
     Datagrid,
     TextField,
-    EditButton, UrlField
+    EditButton
 } from 'react-admin';
 import BookIcon from '@mui/icons-material/Book';
+
 export const RoomIcon = BookIcon;
 
 export const RoomList = () => {
@@ -13,8 +14,8 @@ export const RoomList = () => {
         <List>
             <Datagrid rowClick="edit">
                 <TextField source="id"/>
-                <UrlField source="name"/>
-                <UrlField source="status" disabled/>
+                <TextField source="name"/>
+                <TextField source="status" disabled/>
                 <EditButton basePath=""/>
             </Datagrid>
         </List>

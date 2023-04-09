@@ -3,9 +3,10 @@ import {
     List,
     Datagrid,
     TextField,
-    EditButton, UrlField
+    EditButton
 } from 'react-admin';
 import BookIcon from '@mui/icons-material/Book';
+
 export const FilmRuleIcon = BookIcon;
 
 export const FilmRuleList = () => {
@@ -13,7 +14,7 @@ export const FilmRuleList = () => {
         <List>
             <Datagrid rowClick="edit">
                 <TextField source="id"/>
-                <UrlField source="name"/>
+                <TextField source="name"/>
                 <EditButton basePath=""/>
             </Datagrid>
         </List>

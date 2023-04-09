@@ -32,35 +32,24 @@ class FilmController
             ->toArray();
 
 
-
         $filmsData = [];
         foreach ($films as $film) {
-//            //rules
             $rules = json_decode($film['film_rule_id']);
-//            $ruleData = [];
-//            foreach ($rules as $rule) {
-//                $ruleIns = FilmRule::findOrFail($rule);
-//                $ruleData[] = $ruleIns->name;
-//            }
             $film['film_rule_id'] = $rules;
-//
-//            //categories
             $categories = json_decode($film['film_category_id']);
-//            $categoriesData = [];
-//            foreach ($categories as $category) {
-//                $categoryIns = FilmCategory::findOrFail($category);
-//                $categoriesData[] = $categoryIns->name;
-//            }
-//            dd($categoriesData);
-
             $film['film_category_id'] = $categories;
-
-
-//            unset($film['film_rule_id'], $film['production_id'], $film['language_id'], $film['media_link_id'], $film['film_category_id']);
             $filmsData[] = $film;
         }
 
         return response()->json($filmsData)->header('X-Total-Count', count($filmsData));
+    }
+
+    public function infoForAdmin($id)
+    {
+        $filmDetails = $this->queryFilmInfo($id);
+        $filmDetails['film_category_id'] = json_decode($filmDetails['film_category_id']);
+
+        return response()->json($filmDetails)->header('X-Total-Count', count($filmDetails));
     }
 
     public function info($id)
