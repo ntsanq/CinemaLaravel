@@ -36,13 +36,13 @@ class FilmController
         $filmsData = [];
         foreach ($films as $film) {
 //            //rules
-//            $rules = json_decode($film['film_rule_id']);
+            $rules = json_decode($film['film_rule_id']);
 //            $ruleData = [];
 //            foreach ($rules as $rule) {
 //                $ruleIns = FilmRule::findOrFail($rule);
 //                $ruleData[] = $ruleIns->name;
 //            }
-//            $film['rules'] = $ruleData;
+            $film['film_rule_id'] = $rules;
 //
 //            //categories
             $categories = json_decode($film['film_category_id']);

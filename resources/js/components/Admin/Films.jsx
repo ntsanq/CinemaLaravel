@@ -39,9 +39,13 @@ export const FilmList = () => {
                         <ChipField source="name"/>
                     </SingleFieldList>
                 </ReferenceArrayField>
-                <TextField source="media_link_id"/>
+                <ReferenceArrayField source="film_rule_id" reference="filmRules">
+                    <SingleFieldList>
+                        <ChipField source="name"/>
+                    </SingleFieldList>
+                </ReferenceArrayField>
                 <TextField source="name"/>
-                <ImageField source="path"/>
+                <ImageField source="path" label="Image"/>
                 <UrlField source="trailer"/>
                 <EditButton/>
             </Datagrid>
