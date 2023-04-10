@@ -20,11 +20,6 @@ import {useMediaQuery} from "@mui/material";
 import {RichTextInput} from "ra-input-rich-text";
 
 export const FilmIcon = BookIcon;
-const HtmlField = ({record, source}) => {
-    return (
-        <div dangerouslySetInnerHTML={{__html: record[source]}}></div>
-    );
-};
 
 export const FilmList = () => {
 
@@ -46,7 +41,7 @@ export const FilmList = () => {
                 </ReferenceArrayField>
                 <TextField source="name"/>
                 <ImageField source="path" label="Image"/>
-                <UrlField source="trailer"/>
+                <UrlField source="trailer" sx={{maxWidth: "100px"}}/>
                 <RichTextField source="description"/>
                 <EditButton/>
             </Datagrid>
@@ -71,14 +66,9 @@ export const FilmEdit = () => (
             <ReferenceArrayInput source="film_rule_id" reference="filmRules" name="film_rule_id">
                 <SelectArrayInput/>
             </ReferenceArrayInput>
-
-            <div style={{display: "flex"}}>
-                <TextInput label="Image" source="path" name="path"/>
-                <ImageField source="path"/>
-            </div>
-
+            <TextInput label="Image" source="path" name="path" sx={{minWidth: "450px"}}/>
+            <TextInput source="trailer" name="trailer" sx={{minWidth: "450px"}}/>
             <RichTextInput source="description" name="description"/>
-
         </SimpleForm>
     </Edit>
 );

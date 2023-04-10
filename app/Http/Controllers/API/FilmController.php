@@ -68,6 +68,11 @@ class FilmController
             $mediaLinkIns->image_link = $request->path;
             $mediaLinkIns->save();
         }
+        if ($request->trailer) {
+            $mediaLinkIns = MediaLink::findOrFail($film->media_link_id);
+            $mediaLinkIns->trailer_link = $request->trailer;
+            $mediaLinkIns->save();
+        }
 
         $film->save();
 
@@ -130,6 +135,7 @@ class FilmController
             ->select([
                 'films.*',
                 'media_links.image_link as path',
+                'media_links.trailer_link as trailer',
                 'languages.name as language',
                 'productions.name as production',
             ])
