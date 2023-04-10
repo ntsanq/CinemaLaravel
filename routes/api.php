@@ -4,6 +4,8 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\BookingController;
 use App\Http\Controllers\API\FilmCategoryController;
 use App\Http\Controllers\API\FilmController;
+use App\Http\Controllers\API\LanguageController;
+use App\Http\Controllers\API\ProductionController;
 use App\Http\Controllers\API\RoomController;
 use App\Http\Controllers\API\FilmRuleController;
 use App\Http\Controllers\API\SeatController;
@@ -59,6 +61,14 @@ Route::prefix('/admin')->group(function () {
     });
     Route::prefix('/filmRules')->controller(FilmRuleController::class)->group(function () {
         Route::get('/', 'index');
+    });
+    Route::prefix('/productions')->controller(ProductionController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'infoForAdmin');
+    });
+    Route::prefix('/languages')->controller(LanguageController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'infoForAdmin');
     });
 });
 

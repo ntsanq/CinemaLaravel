@@ -12,12 +12,18 @@ import {
     ImageField,
     SingleFieldList,
     ChipField,
-    UrlField,
-    ReferenceArrayField, ReferenceArrayInput, SelectArrayInput, RichTextField
+    ReferenceArrayField,
+    ReferenceArrayInput,
+    SelectArrayInput,
+    RichTextField,
+    ReferenceField,
+    ReferenceInput,
+    SelectInput
 } from 'react-admin';
 import BookIcon from '@mui/icons-material/Book';
 import {useMediaQuery} from "@mui/material";
 import {RichTextInput} from "ra-input-rich-text";
+import IframeField from "./CustomFields/IframeField";
 
 export const FilmIcon = BookIcon;
 
@@ -41,7 +47,13 @@ export const FilmList = () => {
                 </ReferenceArrayField>
                 <TextField source="name"/>
                 <ImageField source="path" label="Image"/>
-                <UrlField source="trailer" sx={{maxWidth: "100px"}}/>
+                <IframeField source="trailer"/>
+                <ReferenceField source="production_id" reference="productions">
+                    <ChipField source="name"/>
+                </ReferenceField>
+                <ReferenceField source="language_id" reference="languages">
+                    <ChipField source="name"/>
+                </ReferenceField>
                 <RichTextField source="description"/>
                 <EditButton/>
             </Datagrid>
@@ -66,6 +78,12 @@ export const FilmEdit = () => (
             <ReferenceArrayInput source="film_rule_id" reference="filmRules" name="film_rule_id">
                 <SelectArrayInput/>
             </ReferenceArrayInput>
+            <ReferenceInput source="production_id" reference="productions" name="production_id">
+                <SelectArrayInput source="name"/>
+            </ReferenceInput>
+            <ReferenceInput source="language_id" reference="languages" name="language_id">
+                <SelectArrayInput source="name"/>
+            </ReferenceInput>
             <TextInput label="Image" source="path" name="path" sx={{minWidth: "450px"}}/>
             <TextInput source="trailer" name="trailer" sx={{minWidth: "450px"}}/>
             <RichTextInput source="description" name="description"/>

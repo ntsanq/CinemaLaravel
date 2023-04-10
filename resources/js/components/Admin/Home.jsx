@@ -6,6 +6,8 @@ import {FilmCreate, FilmEdit, FilmIcon, FilmList} from "./Films";
 import {FilmCategoryIcon, FilmCategoryList} from "./FilmCategories";
 import {RoomIcon, RoomList} from "./Rooms";
 import {FilmRuleIcon, FilmRuleList} from "./FilmRules";
+import {ProductionIcon, ProductionList} from "./Productions";
+import {LanguageIcon, LanguageList} from "./Languages";
 
 export default function Home() {
 
@@ -16,6 +18,8 @@ export default function Home() {
                 <Resource name="filmCategories" list={FilmCategoryList} icon={FilmCategoryIcon}/>
                 <Resource name="rooms" list={RoomList} icon={RoomIcon}/>
                 <Resource name="filmRules" list={FilmRuleList} icon={FilmRuleIcon}/>
+                <Resource name="productions" list={ProductionList} icon={ProductionIcon}/>
+                <Resource name="languages" list={LanguageList} icon={LanguageIcon}/>
             </Admin>,
         </>
     )
