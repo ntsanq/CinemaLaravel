@@ -14,10 +14,11 @@ export default function Home() {
     return (
         <>
             <Admin dataProvider={jsonServerProvider('http://localhost:8000/api/admin')}>
-                <Resource name="films" list={FilmList} edit={FilmEdit} create={FilmCreate} icon={FilmIcon}/>
-                <Resource name="filmCategories" list={FilmCategoryList} icon={FilmCategoryIcon}/>
+                <Resource options={{label: 'Films'}} name="films" list={FilmList} edit={FilmEdit} create={FilmCreate}
+                          icon={FilmIcon}/>
+                <Resource options={{label: 'Film Categories'}} name="filmCategories" list={FilmCategoryList} icon={FilmCategoryIcon}/>
                 <Resource name="rooms" list={RoomList} icon={RoomIcon}/>
-                <Resource name="filmRules" list={FilmRuleList} icon={FilmRuleIcon}/>
+                <Resource options={{label: 'Film Rules'}} name="filmRules" list={FilmRuleList} icon={FilmRuleIcon}/>
                 <Resource name="productions" list={ProductionList} icon={ProductionIcon}/>
                 <Resource name="languages" list={LanguageList} icon={LanguageIcon}/>
             </Admin>,
@@ -26,5 +27,5 @@ export default function Home() {
 }
 
 if (document.getElementById('admin_dashboard')) {
-    createRoot(document.getElementById('admin_dashboard')).render(<Home />);
+    createRoot(document.getElementById('admin_dashboard')).render(<Home/>);
 }
