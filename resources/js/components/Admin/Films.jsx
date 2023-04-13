@@ -18,7 +18,7 @@ import {
     RichTextField,
     ReferenceField,
     ReferenceInput,
-    SelectInput
+    SelectInput, UrlField
 } from 'react-admin';
 import BookIcon from '@mui/icons-material/Book';
 import {useMediaQuery} from "@mui/material";
@@ -47,14 +47,13 @@ export const FilmList = () => {
                 </ReferenceArrayField>
                 <TextField source="name"/>
                 <ImageField source="path" label="Image"/>
-                <IframeField source="trailer"/>
+                <UrlField source="trailer"/>
                 <ReferenceField source="production_id" reference="productions">
                     <ChipField source="name"/>
                 </ReferenceField>
                 <ReferenceField source="language_id" reference="languages">
                     <ChipField source="name"/>
                 </ReferenceField>
-                <RichTextField source="description"/>
                 <EditButton/>
             </Datagrid>
         </List>
