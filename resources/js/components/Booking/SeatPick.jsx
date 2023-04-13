@@ -99,10 +99,10 @@ export default function SeatPick(props) {
                                         <div className="" style={{ fontStyle: "italic"}}>
                                             <div className="uk-flex uk-flex-row">
                                                 <div className="seat" style={{background: "#ffc329"}}></div>
-                                                <span>Premium seat</span>
+                                                Premium seat
                                                 <div className="seat"></div>
                                                 Available seat
-                                                <div className="seat selected"></div>
+                                                <div className="seat selected" style={{marginLeft: 'auto'}}></div>
                                                 Selected seat
                                                 <div className="seat occupied"></div>
                                                 Occupied seat

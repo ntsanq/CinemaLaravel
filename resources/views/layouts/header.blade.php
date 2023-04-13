@@ -9,6 +9,7 @@
                   class="uk-search uk-margin-small-top uk-margin-left uk-hidden-small">
                 <input class="uk-search-field" placeholder="Search" name="search" type="search"
                        value="{{ $search ?? '' }}">
+                <input type="hidden" name="category" value="{{ app('request')->input('category') }}">
                 <div class="uk-dropdown uk-dropdown-flip uk-dropdown-search" aria-expanded="false"></div>
             </form>
         </div>
@@ -19,7 +20,8 @@
             @else
                 <div class="uk-button-group">
                     <a class="uk-button uk-button-link uk-button-large" href="/signIn">Sign In</a>
-                    <a class="uk-button uk-button-success uk-button-large uk-margin-left" href="/signUp">
+                    <a class="uk-button uk-button-success uk-button-large uk-margin-left"
+                       href="/signUp{{app('request')->get('filmId') ? "?filmId=".app('request')->get('filmId') : ''}}">
                         <i class="uk-icon-lock uk-margin-small-right"></i> Sign Up</a>
                 </div>
             @endif
