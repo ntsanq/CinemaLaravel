@@ -54,6 +54,7 @@ Route::prefix('/admin')->group(function () {
 
     Route::prefix('/filmCategories')->controller(FilmCategoryController::class)->group(function () {
         Route::get('/', 'index');
+        Route::get('/{id}', 'infoForAdmin');
     });
 
     Route::prefix('/rooms')->controller(RoomController::class)->group(function () {

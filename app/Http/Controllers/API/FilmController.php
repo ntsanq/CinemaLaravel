@@ -17,8 +17,14 @@ class FilmController
 {
     use ResponseTrait;
 
-    public function index()
+    public function index(Request $request)
     {
+        if (!empty($request->search)) {
+            $search = $request->search;
+        } else {
+            $search = '';
+        }
+
         $films = Film::query()
             ->join('media_links', 'media_links.id', 'films.media_link_id')
             ->join('languages', 'languages.id', 'films.language_id')
@@ -30,6 +36,7 @@ class FilmController
                 'languages.name as language',
                 'productions.name as production',
             ])
+            ->where('films.name', 'like', '%' . $search . '%')
             ->get()
             ->toArray();
 

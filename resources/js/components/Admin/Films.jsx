@@ -27,12 +27,16 @@ import IframeField from "./CustomFields/IframeField";
 
 export const FilmIcon = BookIcon;
 
+const filmFilters = [
+    <TextInput source="name" label="Search" alwaysOn name="search"/>
+];
+
+
 export const FilmList = () => {
 
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
     return (
-
-        <List>
+        <List filters={filmFilters}>
             <Datagrid rowClick="edit">
                 <TextField source="id"/>
                 <ReferenceArrayField source="film_category_id" reference="filmCategories">
