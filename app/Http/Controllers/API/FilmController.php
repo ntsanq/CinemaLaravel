@@ -85,7 +85,30 @@ class FilmController
         $film->save();
 
         return response()->json($film);
+    }
 
+    public function createForAdmin(Request $request)
+    {
+        $media = new MediaLink();
+        $media->image_link = $request->path;
+        $trailerUrl = $request->trailer;
+        $start_index = strpos($trailerUrl, "v=") + 2;
+        $end_index = strpos($trailerUrl, "&", $start_index);
+        $video_id = substr($trailerUrl, $start_index, $end_index - $start_index);
+        $media->trailer_link = "https://www.youtube.com/embed/" . $video_id;
+        $media->save();
+
+        $film = new Film();
+        $film->media_link_id = $media->id;
+        $film->name = $request->name;
+        $film->film_category_id = json_encode($request->film_category_id);
+        $film->film_rule_id = json_encode($request->film_rule_id);
+        $film->production_id = $request->production_id[0];
+        $film->language_id = $request->language_id[0];
+        $film->description = $request->description;
+        $film->save();
+
+        return response()->json($film);
     }
 
     public function info($id)

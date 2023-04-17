@@ -98,8 +98,22 @@ export const FilmEdit = () => (
 export const FilmCreate = () => (
     <Create title="Create a Film">
         <SimpleForm>
-            <TextInput source="title"/>
-            <TextInput source="body" multiline rows={5}/>
+            <TextInput source="name" name="name"/>
+            <ReferenceArrayInput source="film_category_id" reference="filmCategories" name="film_category_id">
+                <SelectArrayInput/>
+            </ReferenceArrayInput>
+            <ReferenceArrayInput source="film_rule_id" reference="filmRules" name="film_rule_id">
+                <SelectArrayInput/>
+            </ReferenceArrayInput>
+            <ReferenceInput source="production_id" reference="productions" name="production_id">
+                <SelectArrayInput source="name"/>
+            </ReferenceInput>
+            <ReferenceInput source="language_id" reference="languages" name="language_id">
+                <SelectArrayInput source="name"/>
+            </ReferenceInput>
+            <TextInput label="Image" source="path" name="path" sx={{minWidth: "450px"}}/>
+            <TextInput source="trailer" name="trailer" sx={{minWidth: "450px"}}/>
+            <RichTextInput source="description" name="description"/>
         </SimpleForm>
     </Create>
 );
