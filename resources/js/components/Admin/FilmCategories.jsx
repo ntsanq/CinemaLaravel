@@ -27,7 +27,7 @@ export const FilmCategoryList = () => {
 
 const FilmCategoryTitle = () => {
     const record = useRecordContext();
-    return <span>Film{record ? `: ${record.name}` : ''}</span>;
+    return <span>Film category{record ? `: ${record.name}` : ''}</span>;
 };
 export const FilmCategoryEdit = () => (
     <Edit title={<FilmCategoryTitle/>}>

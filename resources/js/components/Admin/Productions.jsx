@@ -26,7 +26,7 @@ export const ProductionList = () => {
 
 const ProductionTitle = () => {
     const record = useRecordContext();
-    return <span>Production: {record ? `: ${record.name}` : ''}</span>;
+    return <span>Production{record ? `: ${record.name}` : ''}</span>;
 };
 export const ProductionEdit = () => (
     <Edit title={<ProductionTitle/>}>

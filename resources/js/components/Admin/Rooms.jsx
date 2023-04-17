@@ -28,7 +28,7 @@ export const RoomList = () => {
 
 const RoomTitle = () => {
     const record = useRecordContext();
-    return <span>Film{record ? `: ${record.name}` : ''}</span>;
+    return <span>Room{record ? `: ${record.name}` : ''}</span>;
 };
 export const RoomEdit = () => (
     <Edit title={<RoomTitle/>}>

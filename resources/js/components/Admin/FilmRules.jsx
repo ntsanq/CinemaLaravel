@@ -26,7 +26,7 @@ export const FilmRuleList = () => {
 };
 const FilmRuleTitle = () => {
     const record = useRecordContext();
-    return <span>Film Rule: {record ? `: ${record.name}` : ''}</span>;
+    return <span>Film Rule{record ? `: ${record.name}` : ''}</span>;
 };
 
 export const FilmRuleEdit = () => (

@@ -26,7 +26,7 @@ export const LanguageList = () => {
 };
 const LanguageTitle = () => {
     const record = useRecordContext();
-    return <span>Film{record ? `: ${record.name}` : ''}</span>;
+    return <span>Language{record ? `: ${record.name}` : ''}</span>;
 };
 export const LanguageEdit = () => (
     <Edit title={<LanguageTitle/>}>
