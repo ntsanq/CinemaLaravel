@@ -2,7 +2,12 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\BookingController;
+use App\Http\Controllers\API\FilmCategoryController;
 use App\Http\Controllers\API\FilmController;
+use App\Http\Controllers\API\LanguageController;
+use App\Http\Controllers\API\ProductionController;
+use App\Http\Controllers\API\RoomController;
+use App\Http\Controllers\API\FilmRuleController;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\API\TicketController;
 use Illuminate\Http\Request;
@@ -19,8 +24,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function (){
-    Route::get('/user', function() {
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function () {
         return ['message' => 'Hello Sang!'];
     });
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -38,6 +43,36 @@ Route::post('/getSeats', [BookingController::class, 'getSeats']);
 Route::post('/getTimes', [BookingController::class, 'getTimes']);
 Route::get('/seats/{id}', [SeatController::class, 'info']);
 Route::get('/films/{id}', [FilmController::class, 'info']);
+
+//for ADMIN DASHBOARD usage
+Route::prefix('/admin')->group(function () {
+    Route::prefix('films')->controller(FilmController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'infoForAdmin');
+        Route::put('/{id}', 'updateForAdmin');
+        Route::post('/', 'createForAdmin');
+    });
+
+    Route::prefix('/filmCategories')->controller(FilmCategoryController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'infoForAdmin');
+    });
+
+    Route::prefix('/rooms')->controller(RoomController::class)->group(function () {
+        Route::get('/', 'index');
+    });
+    Route::prefix('/filmRules')->controller(FilmRuleController::class)->group(function () {
+        Route::get('/', 'index');
+    });
+    Route::prefix('/productions')->controller(ProductionController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'infoForAdmin');
+    });
+    Route::prefix('/languages')->controller(LanguageController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'infoForAdmin');
+    });
+});
 
 Route::post('/confirmBooking', [BookingController::class, 'checkout']);
 Route::post('/getTickets', [TicketController::class, 'getTickets']);

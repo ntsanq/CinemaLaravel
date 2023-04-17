@@ -45,7 +45,7 @@
 
                                     <p>
                                         <span class="uk-text-bold uk-contrast">Description: </span>
-                                        {{ $filmDetails['description'] }}
+                                        {!! $filmDetails['description'] !!}
                                         <br>
                                     </p>
 

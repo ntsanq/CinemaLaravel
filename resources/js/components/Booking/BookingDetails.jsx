@@ -57,9 +57,9 @@ export default function BookingDetails(props) {
                     </div>
 
                     <div className="uk-text-left booking-details--film-description uk-margin-small-bottom">
-                        <span>Description: {film.description}</span>
+                        <span className="uk-text-bold uk-contrast">Description: </span>
+                        <span dangerouslySetInnerHTML={{__html: film.description}}></span>
                     </div>
-
 
                 </div>
             </div>

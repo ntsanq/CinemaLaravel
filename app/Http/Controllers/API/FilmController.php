@@ -7,13 +7,109 @@ use App\Http\Traits\ResponseTrait;
 use App\Models\Film;
 use App\Models\FilmCategory;
 use App\Models\FilmRule;
+use App\Models\MediaLink;
 use App\Models\Ticket;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class FilmController
 {
     use ResponseTrait;
+
+    public function index(Request $request)
+    {
+        $search = !empty($request->search) ? $request->search : '';
+        $start = $request->input('_start', 0);
+        $end = $request->input('_end', 10);
+
+        $films = Film::query()
+            ->join('media_links', 'media_links.id', 'films.media_link_id')
+            ->join('languages', 'languages.id', 'films.language_id')
+            ->join('productions', 'productions.id', 'films.production_id')
+            ->select([
+                'films.*',
+                'media_links.image_link as path',
+                'media_links.trailer_link as trailer',
+                'languages.name as language',
+                'productions.name as production',
+            ])
+            ->where('films.name', 'like', '%' . $search . '%')
+            ->get()
+            ->toArray();
+
+        $films = array_map(function ($film) {
+            $rules = json_decode($film['film_rule_id']);
+            $film['film_rule_id'] = $rules;
+            $categories = json_decode($film['film_category_id']);
+            $film['film_category_id'] = $categories;
+            return $film;
+        }, $films);
+
+        $total = count($films);
+        $query = collect($films)->skip($start)->take($end - $start);
+        $data = array_values($query->toArray());
+
+        return response()->json($data)->header('X-Total-Count', $total);
+    }
+
+
+    public function infoForAdmin($id)
+    {
+        $filmDetails = $this->queryFilmInfo($id);
+        $filmDetails['film_category_id'] = json_decode($filmDetails['film_category_id']);
+        $filmDetails['film_rule_id'] = json_decode($filmDetails['film_rule_id']);
+
+        return response()->json($filmDetails)->header('X-Total-Count', count($filmDetails));
+    }
+
+    public function updateForAdmin($id, Request $request)
+    {
+        $film = Film::findOrFail($id);
+        $film->film_category_id = json_encode($request->film_category_id);
+        $film->film_rule_id = json_encode($request->film_rule_id);
+        $film->name = $request->name;
+        $film->description = $request->description;
+
+        if ($request->path) {
+            $mediaLinkIns = MediaLink::findOrFail($film->media_link_id);
+            $mediaLinkIns->image_link = $request->path;
+            $mediaLinkIns->save();
+        }
+        if ($request->trailer) {
+            $mediaLinkIns = MediaLink::findOrFail($film->media_link_id);
+            $mediaLinkIns->trailer_link = $request->trailer;
+            $mediaLinkIns->save();
+        }
+
+        $film->save();
+
+        return response()->json($film);
+    }
+
+    public function createForAdmin(Request $request)
+    {
+        $media = new MediaLink();
+        $media->image_link = $request->path;
+        $trailerUrl = $request->trailer;
+        $start_index = strpos($trailerUrl, "v=") + 2;
+        $end_index = strpos($trailerUrl, "&", $start_index);
+        $video_id = substr($trailerUrl, $start_index, $end_index - $start_index);
+        $media->trailer_link = "https://www.youtube.com/embed/" . $video_id;
+        $media->save();
+
+        $film = new Film();
+        $film->media_link_id = $media->id;
+        $film->name = $request->name;
+        $film->film_category_id = json_encode($request->film_category_id);
+        $film->film_rule_id = json_encode($request->film_rule_id);
+        $film->production_id = $request->production_id[0];
+        $film->language_id = $request->language_id[0];
+        $film->description = $request->description;
+        $film->save();
+
+        return response()->json($film);
+    }
 
     public function info($id)
     {
@@ -60,7 +156,7 @@ class FilmController
         return $this->success($film);
     }
 
-    private function queryFilmInfo($id)
+    private function queryFilmInfo($id = '')
     {
         return Film::query()
             ->where('films.id', $id)
@@ -70,6 +166,7 @@ class FilmController
             ->select([
                 'films.*',
                 'media_links.image_link as path',
+                'media_links.trailer_link as trailer',
                 'languages.name as language',
                 'productions.name as production',
             ])
