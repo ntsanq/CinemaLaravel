@@ -85,6 +85,9 @@ Route::prefix('/admin')->group(function () {
     Route::prefix('/languages')->controller(LanguageController::class)->group(function () {
         Route::get('/', 'index');
         Route::get('/{id}', 'infoForAdmin');
+        Route::put('/{id}', 'updateForAdmin');
+        Route::post('/', 'createForAdmin');
+        Route::delete('/{id}', 'deleteForAdmin');
     });
 });
 
