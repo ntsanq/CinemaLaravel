@@ -23,8 +23,10 @@ import {
 import BookIcon from '@mui/icons-material/Book';
 import {useMediaQuery} from "@mui/material";
 import {RichTextInput} from "ra-input-rich-text";
-import IframeField from "./CustomFields/IframeField";
 
+import {Pagination} from 'react-admin';
+
+const FilmPagination = () => <Pagination rowsPerPageOptions={[5, 10, 25, 50]}/>;
 export const FilmIcon = BookIcon;
 
 const filmFilters = [
@@ -33,10 +35,9 @@ const filmFilters = [
 
 
 export const FilmList = () => {
-
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
     return (
-        <List filters={filmFilters}>
+        <List filters={filmFilters} pagination={<FilmPagination/>}>
             <Datagrid rowClick="edit">
                 <TextField source="id"/>
                 <ReferenceArrayField source="film_category_id" reference="filmCategories">
@@ -98,10 +99,7 @@ export const FilmCreate = () => (
     <Create title="Create a Film">
         <SimpleForm>
             <TextInput source="title"/>
-            <TextInput source="teaser" options={{multiline: true}}/>
-            <TextInput multiline source="body"/>
-            <TextInput label="Publication date" source="published_at"/>
-            <TextInput source="average_note"/>
+            <TextInput source="body" multiline rows={5}/>
         </SimpleForm>
     </Create>
 );

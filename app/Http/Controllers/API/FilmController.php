@@ -19,11 +19,9 @@ class FilmController
 
     public function index(Request $request)
     {
-        if (!empty($request->search)) {
-            $search = $request->search;
-        } else {
-            $search = '';
-        }
+        $search = !empty($request->search) ? $request->search : '';
+        $start = $request->input('_start', 0);
+        $end = $request->input('_end', 10);
 
         $films = Film::query()
             ->join('media_links', 'media_links.id', 'films.media_link_id')
@@ -40,18 +38,21 @@ class FilmController
             ->get()
             ->toArray();
 
-
-        $filmsData = [];
-        foreach ($films as $film) {
+        $films = array_map(function ($film) {
             $rules = json_decode($film['film_rule_id']);
             $film['film_rule_id'] = $rules;
             $categories = json_decode($film['film_category_id']);
             $film['film_category_id'] = $categories;
-            $filmsData[] = $film;
-        }
+            return $film;
+        }, $films);
 
-        return response()->json($filmsData)->header('X-Total-Count', count($filmsData));
+        $total = count($films);
+        $query = collect($films)->skip($start)->take($end - $start);
+        $data = array_values($query->toArray());
+
+        return response()->json($data)->header('X-Total-Count', $total);
     }
+
 
     public function infoForAdmin($id)
     {
