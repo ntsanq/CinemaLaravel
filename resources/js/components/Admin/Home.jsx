@@ -5,7 +5,7 @@ import jsonServerProvider from "ra-data-json-server";
 import {FilmCreate, FilmEdit, FilmIcon, FilmList} from "./Films";
 import {FilmCategoryCreate, FilmCategoryEdit, FilmCategoryIcon, FilmCategoryList} from "./FilmCategories";
 import {RoomEdit, RoomIcon, RoomList} from "./Rooms";
-import {FilmRuleIcon, FilmRuleList} from "./FilmRules";
+import {FilmRuleCreate, FilmRuleEdit, FilmRuleIcon, FilmRuleList} from "./FilmRules";
 import {ProductionIcon, ProductionList} from "./Productions";
 import {LanguageIcon, LanguageList} from "./Languages";
 
@@ -37,6 +37,8 @@ export default function Home() {
                 <Resource options={{label: 'Film Rules'}}
                           name="filmRules"
                           list={FilmRuleList}
+                          edit={FilmRuleEdit}
+                          create={FilmRuleCreate}
                           icon={FilmRuleIcon}/>
 
                 <Resource name="productions"

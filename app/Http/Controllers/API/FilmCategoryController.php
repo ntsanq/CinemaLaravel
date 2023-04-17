@@ -18,6 +18,7 @@ class FilmCategoryController
             ->get();
 
         $data = $filmCategories->skip($start)->take($end - $start);
+        $data = array_values($data->toArray());
 
         return response()->json($data)->header('X-Total-Count', count($filmCategories));
     }
