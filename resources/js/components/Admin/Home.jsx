@@ -4,7 +4,7 @@ import {Admin, Resource} from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 import {FilmCreate, FilmEdit, FilmIcon, FilmList} from "./Films";
 import {FilmCategoryCreate, FilmCategoryEdit, FilmCategoryIcon, FilmCategoryList} from "./FilmCategories";
-import {RoomIcon, RoomList} from "./Rooms";
+import {RoomEdit, RoomIcon, RoomList} from "./Rooms";
 import {FilmRuleIcon, FilmRuleList} from "./FilmRules";
 import {ProductionIcon, ProductionList} from "./Productions";
 import {LanguageIcon, LanguageList} from "./Languages";
@@ -31,6 +31,7 @@ export default function Home() {
 
                 <Resource name="rooms"
                           list={RoomList}
+                          edit={RoomEdit}
                           icon={RoomIcon}/>
 
                 <Resource options={{label: 'Film Rules'}}
