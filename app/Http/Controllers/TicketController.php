@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TicketStatus;
+use App\Events\SuccessTicketBooked;
 use App\Models\Film;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -33,7 +34,6 @@ class TicketController extends Controller
     public function success(Request $request)
     {
         $sessionId = $request->input('sessionId');
-
         $tickets = Ticket::query()->where('session_id', $sessionId)->get()->toArray();
 
         if (empty($tickets)) {
@@ -44,6 +44,7 @@ class TicketController extends Controller
 
         $user = $this->getUserInfo();
 
+        event(new SuccessTicketBooked($user['email'], $sessionId));
 
         return view('checkout.success', [
             'user' => $user,
