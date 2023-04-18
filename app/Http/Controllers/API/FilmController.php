@@ -78,7 +78,7 @@ class FilmController
         }
         if ($request->trailer) {
             $mediaLinkIns = MediaLink::findOrFail($film->media_link_id);
-            $mediaLinkIns->trailer_link = $request->trailer;
+            $mediaLinkIns->trailer_link = $this->convertYoutubeLinkToEmbed($request->trailer);
             $mediaLinkIns->save();
         }
 
@@ -91,11 +91,7 @@ class FilmController
     {
         $media = new MediaLink();
         $media->image_link = $request->path;
-        $trailerUrl = $request->trailer;
-        $start_index = strpos($trailerUrl, "v=") + 2;
-        $end_index = strpos($trailerUrl, "&", $start_index);
-        $video_id = substr($trailerUrl, $start_index, $end_index - $start_index);
-        $media->trailer_link = "https://www.youtube.com/embed/" . $video_id;
+        $media->trailer_link = $this->convertYoutubeLinkToEmbed($request->trailer);
         $media->save();
 
         $film = new Film();
@@ -173,5 +169,14 @@ class FilmController
             ->get()
             ->first()
             ->toArray();
+    }
+
+    private function convertYoutubeLinkToEmbed($link)
+    {
+        $trailerUrl = $link;
+        $start_index = strpos($trailerUrl, "v=") + 2;
+        $end_index = strpos($trailerUrl, "&", $start_index);
+        $video_id = substr($trailerUrl, $start_index, $end_index - $start_index);
+        return "https://www.youtube.com/embed/" . $video_id;
     }
 }
