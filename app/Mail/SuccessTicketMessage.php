@@ -11,16 +11,16 @@ class SuccessTicketMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $sessionId;
+    public $ticketsData;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($sessionId)
+    public function __construct($ticketsData)
     {
-        $this->sessionId = $sessionId;
+        $this->ticketsData = $ticketsData;
     }
 
     /**
@@ -31,7 +31,7 @@ class SuccessTicketMessage extends Mailable
     public function build()
     {
         return $this->view('mail.success-message', [
-            'sessionId' => $this->sessionId
+            'ticketsData' => $this->ticketsData
         ]);
     }
 }
