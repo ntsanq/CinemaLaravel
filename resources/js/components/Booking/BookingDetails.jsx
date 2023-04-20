@@ -26,8 +26,9 @@ export default function BookingDetails(props) {
 
 
     return (
-        <div className="uk-flex uk-flex-column">
-            <div className="uk-flex uk-margin-bottom">
+        <div className="details-booking-block uk-flex uk-flex-column">
+            <h2 className="uk-text-contrast uk-visible-small">Your Ticket Details:</h2>
+            <div className="uk-flex uk-margin-bottom uk-hidden-small">
                 <div className="uk-width-1-2 uk-overlay-background-blue uk-margin-bottom-remove booking-details--img">
                     <img src={film.path} alt="movie img"></img>
                 </div>

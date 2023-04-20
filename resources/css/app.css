@@ -5,7 +5,12 @@
     padding: 35px 100px;
 }
 
+/*mobile*/
 @media (max-width: 767px) {
+    #main-content {
+        padding: 0 12px;
+    }
+
     .auth-buttons-group {
         margin-right: 10px;
     }
@@ -24,8 +29,50 @@
         font-size: 43px !important;
         width: 100%;
     }
+
+    #ticket_booking .booking-sections {
+        display: flex;
+        flex-direction: column;
+        padding: unset;
+    }
+
+    #ticket_booking .booking-sections .right-booking {
+        width: 100%;
+        position: relative;
+        top: unset;
+        left: unset;
+        margin-top: unset;
+        margin-right: unset;
+        padding: 0;
+        background: none;
+    }
+
+    #ticket_booking .booking-sections .left-booking {
+        width: 88%;
+    }
+    .seats-section {
+        width: 100%;
+        overflow-block: clip;
+    }
+
+    .seat-annotations-block {
+        width: 80%;
+    }
+
+    .seat-annotations-block hr {
+        border: none;
+    }
+
+    .screen {
+        width: 115%;
+    }
+
+    .details-booking-block {
+        /*background: red;*/
+    }
 }
 
+/*tablet and desktop*/
 @media (min-width: 767px) {
     .auth-buttons-group {
         margin-right: 50px;

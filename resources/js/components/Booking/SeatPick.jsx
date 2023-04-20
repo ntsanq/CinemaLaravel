@@ -91,7 +91,7 @@ export default function SeatPick(props) {
                                         })}
                                     </div>
 
-                                    <div className="uk-margin-large-top">
+                                    <div className="seat-annotations-block uk-margin-large-top">
                                         <h3 style={{fontStyle: "italic"}}>Annotate:</h3>
                                         <div>
                                             <hr width="103%"/>
