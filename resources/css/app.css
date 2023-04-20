@@ -5,6 +5,34 @@
     padding: 35px 100px;
 }
 
+@media (max-width: 767px) {
+    .auth-buttons-group {
+        margin-right: 10px;
+    }
+
+    .auth-buttons-group .uk-button-group {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .sign-in-button.uk-button.uk-button-link.uk-button-large {
+        text-align: right;
+    }
+
+    #banner-text {
+        left: 61% !important;
+        font-size: 43px !important;
+        width: 100%;
+    }
+}
+
+@media (min-width: 767px) {
+    .auth-buttons-group {
+        margin-right: 50px;
+        margin-left: 50px;
+    }
+}
+
 .left-booking {
     width: 40%;
     text-align: left;
