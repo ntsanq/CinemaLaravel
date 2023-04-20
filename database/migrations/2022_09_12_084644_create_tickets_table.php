@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('status');
             $table->unsignedInteger('price');
             $table->string('session_id')->nullable();
+            $table->boolean('is_announced')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

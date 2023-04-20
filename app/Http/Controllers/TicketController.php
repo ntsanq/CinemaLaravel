@@ -38,13 +38,15 @@ class TicketController extends Controller
 
         if (empty($tickets)) {
             throw new NotFoundHttpException;
+        };
+
+        $user = $this->getUserInfo();
+        if ($tickets[0]['is_announced'] === 0) {
+            event(new SuccessTicketBooked($user['email'], $sessionId));
+            Ticket::query()->where('session_id', $sessionId)->update(['is_announced' => 1]);
         }
 
         $this->ticketsPaid($sessionId);
-
-        $user = $this->getUserInfo();
-
-        event(new SuccessTicketBooked($user['email'], $sessionId));
 
         return view('checkout.success', [
             'user' => $user,

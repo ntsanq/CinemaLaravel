@@ -1,24 +1,23 @@
-<h1>
-    You successfully booked ticket from SAN Cinema:
+@component('mail::message')
+    <h1>
+        You successfully booked ticket from SAN Cinema:
+    </h1>
 
-    <br>
+    Thank you for using our website as SAN Cinema Service.
+    We are pleased to announce your transaction has been done as follows:
+    User: {{ $ticketsData[0]['user_name'] }}
     @foreach($ticketsData as $ticket)
-        "id": {{ $ticket['id'] }},
-        <br>
-        "start_time": {{ $ticket['start_time'] }},
-        <br>
-        "end_time": {{ $ticket['end_time'] }},
-        <br>
-        "film_name": {{ $ticket['film_name'] }},
-        <br>
-        "seat_name": {{ $ticket['seat_name'] }},
-        <br>
-        "user_name": {{ $ticket['user_name'] }},
-        <br>
-        "seat_type": {{ $ticket['seat_type'] }}
-        <br>
-        ---------------------
-        <br>
+
+        Movie: {{ $ticket['film_name'] }}
+        Show time: {{ $ticket['start_time'] }}
+        Seat: {{ $ticket['seat_name'] }}
+        Seat type: {{ $ticket['seat_type'] }}
+        Price: {{ $ticket['price'] }} vnd
     @endforeach
 
-</h1>
+    Booked time: {{ \Carbon\Carbon::parse($ticketsData[0]['created_at'])->format('d-m-Y h:i:s A')}}
+
+    Total paid time: {{ $totalAmount }} vnd
+
+    Pay app: Stripe
+@endcomponent

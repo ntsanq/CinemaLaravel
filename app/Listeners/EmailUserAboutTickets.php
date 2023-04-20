@@ -8,6 +8,8 @@ use App\Models\Ticket;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
 
 class EmailUserAboutTickets implements ShouldQueue
 {
@@ -39,8 +41,7 @@ class EmailUserAboutTickets implements ShouldQueue
                 ->join('seat_categories', 'seat_categories.id', 'seats.seat_category_id')
                 ->join('users', 'users.id', 'tickets.user_id')
                 ->select([
-                    'tickets.id',
-                    'tickets.id',
+                    'tickets.*',
                     'schedules.start as start_time',
                     'schedules.end as end_time',
                     'films.name as film_name',
@@ -53,10 +54,15 @@ class EmailUserAboutTickets implements ShouldQueue
             $ticketData[] = $ticket;
         }
 
+
+        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        $checkout_session = Session::retrieve($ticketData[0]['session_id']);
+
         foreach ($ticketData as &$ticketItem) {
             $ticketItem['start_time'] = date("H:i", strtotime($ticketItem['start_time']));
         }
 
-        Mail::to($event->email)->send(new SuccessTicketMessage($ticketData));
+
+        Mail::to($event->email)->send(new SuccessTicketMessage($ticketData, $checkout_session->amount_total));
     }
 }

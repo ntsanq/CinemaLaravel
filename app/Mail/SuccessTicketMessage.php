@@ -12,15 +12,17 @@ class SuccessTicketMessage extends Mailable
     use Queueable, SerializesModels;
 
     public $ticketsData;
+    public $totalAmount;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($ticketsData)
+    public function __construct($ticketsData, $totalAmount)
     {
         $this->ticketsData = $ticketsData;
+        $this->totalAmount = $totalAmount;
     }
 
     /**
@@ -30,8 +32,9 @@ class SuccessTicketMessage extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.success-message', [
-            'ticketsData' => $this->ticketsData
+        return $this->subject('Successfully booking - SAN Cinema')->markdown('mail.success-message', [
+            'ticketsData' => $this->ticketsData,
+            'totalAmount' => $this->totalAmount
         ]);
     }
 }
