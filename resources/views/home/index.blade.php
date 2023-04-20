@@ -82,7 +82,7 @@
                 @endif
 
                 <div class="uk-flex uk-flex-center uk-margin uk-contrast">
-                    <h1>Now showing</h1>
+                    <h1>Now showing 🎥</h1>
                 </div>
                 @if($data['data'])
                     <div class="uk-grid-width-small-1-4 uk-grid-width-medium-1-4 uk-grid-width-large-1-4"

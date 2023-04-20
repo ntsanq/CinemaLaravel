@@ -78,18 +78,26 @@ class HomeController extends Controller
                 'films.*',
             ])
             ->where('user_id', $userId)
-            ->get()->toArray();
+            ->get()
+            ->unique('session_id')
+            ->toArray();
 
         $list = [];
-        foreach ($userTickets as $ticket) {
-            $categories = json_decode($ticket['film_category_id']);
-            $categoryList = [];
-            foreach ($categories as $categoryId) {
-                $categoryIns = FilmCategory::findOrFail($categoryId);
-                $categoryList[] = $categoryIns->id;
+        if (count($userTickets) === 1) {
+            $category = json_decode($userTickets[0]['film_category_id']);
+            return $this->getRecommendedFilms($category);
+        } else {
+            foreach ($userTickets as $ticket) {
+                $categories = json_decode($ticket['film_category_id']);
+                $categoryList = [];
+                foreach ($categories as $categoryId) {
+                    $categoryIns = FilmCategory::findOrFail($categoryId);
+                    $categoryList[] = $categoryIns->id;
+                }
+                $list = array_merge($list, $categoryList);
             }
-            $list = array_merge($list, $categoryList);
         }
+
 
         //get 2 most frequent
         $counted = array_count_values($list);
@@ -99,10 +107,30 @@ class HomeController extends Controller
         return $this->getRecommendedFilms($twoMostFrequent);
     }
 
-    private function getRecommendedFilms($twoMostFrequent)
+    private function getRecommendedFilms($ids)
     {
+        if (count($ids) === 1) {
+            $films = Film::query()
+                ->join('media_links', 'media_links.id', 'films.media_link_id')
+                ->join('languages', 'languages.id', 'films.language_id')
+                ->select([
+                    'films.*',
+                    'media_links.image_link as path',
+                    'languages.name as language',
+                ])
+                ->whereRaw("JSON_CONTAINS(film_category_id, CAST('$ids[0]' AS JSON))")
+                ->take(4)->get()->toArray();
+            $finalFilmData = [];
+            foreach ($films as $film) {
+                $film['duration'] = $this->durationCalculate($film['id']);
+                $finalFilmData[] = $film;
+            }
+
+            return $finalFilmData;
+        }
+
         $filmsData = [];
-        foreach ($twoMostFrequent as $item) {
+        foreach ($ids as $item) {
             $film = Film::query()
                 ->join('media_links', 'media_links.id', 'films.media_link_id')
                 ->join('languages', 'languages.id', 'films.language_id')
