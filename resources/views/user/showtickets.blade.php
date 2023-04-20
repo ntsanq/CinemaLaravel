@@ -13,7 +13,7 @@
                 <tr>
                     <th>Movie</th>
                     <th>Image</th>
-                    <th>Created Date</th>
+                    <th>Date</th>
                     <th>Details</th>
                 </tr>
                 </thead>

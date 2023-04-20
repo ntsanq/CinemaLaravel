@@ -15,7 +15,7 @@
                         </a>
                     </div>
                     <div>
-                        <form action="">
+                        <form method="GET" action="/" role="search" name="myForm">
                             <input class="uk-search-field uk-icon-search uk-margin-left" placeholder="Search"
                                    name="search" type="search">
                         </form>

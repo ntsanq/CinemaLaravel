@@ -261,6 +261,12 @@
     padding: 0 80px;
 }
 
+@media (max-width: 767px) {
+    .my-tickets-table {
+        padding: unset;
+    }
+}
+
 #banner-img {
     width: 100%;
     height: 400px;
