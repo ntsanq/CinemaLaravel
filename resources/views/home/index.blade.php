@@ -121,13 +121,18 @@
                                     @if($link['url'] === null)
                                         style="pointer-events: none"
                                     @endif
-                                ><a href="{{ $link['url'] }}"><i class="uk-icon-chevron-left"></i></a></li>
+                                ><a href="{{ $link['url'] }}"><i class="uk-icon-chevron-left" @if($link['url'] === null)
+                                            style="color: grey; opacity: 50%"
+                                            @endif></i></a></li>
                             @elseif($link['label'] == 'Next &raquo;')
                                 <li
                                     @if($link['url'] === null)
                                         style="pointer-events: none"
                                     @endif
-                                ><a href="{{ $link['url'] }}"><i class="uk-icon-chevron-right"></i></a></li>
+                                ><a href="{{ $link['url'] }}"><i class="uk-icon-chevron-right"
+                                                                 @if($link['url'] === null)
+                                                                     style="color: grey; opacity: 50%"
+                                            @endif></i></a></li>
                             @elseif($link['active'] === true)
                                 <li class="uk-active"><span>{{ $link['label'] }}</span></li>
                             @else

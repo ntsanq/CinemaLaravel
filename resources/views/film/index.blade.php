@@ -79,14 +79,14 @@
                         </li>
                         <!--  ================= Trailer Tab =========================== -->
                         <li>
-                            <h3 class="uk-text-contrast uk-margin-top">{{ $filmDetails['name'] }}:</h3>
+                            <h3 class="uk-text-contrast uk-margin-top">{{ $filmDetails['name'] }} - trailer:</h3>
                             <div class="uk-margin-small-top">
                                 <div class="">
                                     <iframe style="height: 500px; width: 100%" src="{{ $filmDetails['trailer_link'] }}">
                                     </iframe>
                                 </div>
                             </div>
-                            <span>{{ $filmDetails['trailer_link'] }}</span>
+                            <span class="uk-hidden">{{ $filmDetails['trailer_link'] }}</span>
                         </li>
                     </ul>
                 </div>
