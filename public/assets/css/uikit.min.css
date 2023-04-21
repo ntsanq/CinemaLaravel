@@ -6882,6 +6882,13 @@ a.uk-thumbnail:hover, a.uk-thumbnail:focus {
     touch-action: cross-slide-y pinch-zoom double-tap-zoom
 }
 
+@media (max-width: 768px) {
+    .uk-switcher .uk-active {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 .uk-switcher > :not(.uk-active) {
     display: none
 }

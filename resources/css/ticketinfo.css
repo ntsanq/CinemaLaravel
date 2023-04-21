@@ -5,6 +5,28 @@
     margin: 1.2rem 0;
 }
 
+@media (max-width: 767px) {
+    .cardWrap {
+        width: 110%;
+        height: 100%;
+    }
+
+    .ticket--seat-info--seat {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .ticket--seat-info--time {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .barcode.uk-text-center {
+        margin-left: 10px;
+    }
+
+}
+
 .card {
     background: linear-gradient(to bottom, #e84c3d 0%, #e84c3d 26%, #dadada 21%, #e5e6e7 101%);
     height: 12em;

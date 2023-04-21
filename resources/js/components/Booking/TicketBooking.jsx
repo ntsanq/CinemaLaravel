@@ -125,6 +125,7 @@ export default function TicketBooking(props) {
 
     return (
         <div className="booking-sections">
+            <div className="uk-margin-top uk-visible-small"></div>
             <div className="left-booking">
                 <DatePick getTimes={getTimes} filmId={filmId} onData={handleDateState}/>
                 <TimePick timesData={timesData} getSeats={getSeats} onData={handleTimeState}/>

@@ -20,11 +20,11 @@
                         </ul>
                     </div>
                     <ul id="media-tabs" class="uk-switcher">
-                        <!-- ================ start Tab Panel =================================== -->
-                        <li class="uk-flex uk-flex-space-between">
+                        <!-- ================ Description Tab =================================== -->
+                        <li class="">
                             <img
                                 src="{{ $filmDetails['path'] }}"
-                                class="about_img uk-height-1-1 uk-margin-large-top" alt="movie-img"
+                                class="about_img" alt="movie-img"
                                 style="width: 330px; object-fit: cover"
                             >
 
@@ -67,8 +67,8 @@
                                         {{ $filmDetails['rules'][0] }}
                                     @endif
                                 </div>
-                                <div class="uk-grid-width uk-margin-large-top">
-                                    <p class="uk-text-muted uk-h4 uk-margin-top uk-flex uk-flex-column-reverse">
+                                <div class="uk-margin-small-top">
+                                    <p class="uk-text-muted uk-h4 uk-margin-top uk-flex">
                                         <a class="uk-button uk-button-primary uk-margin-small-right uk-height-1-1"
                                            href="/ticket/select?filmId={{ $filmDetails['id'] }}">
                                             Buy ticket
@@ -77,16 +77,16 @@
                                 </div>
                             </div>
                         </li>
-                        <!--  ================= Description Tab =========================== -->
+                        <!--  ================= Trailer Tab =========================== -->
                         <li>
-                            <h3 class="uk-text-contrast uk-margin-top">{{ $filmDetails['name'] }}:</h3>
+                            <h3 class="uk-text-contrast uk-margin-top">{{ $filmDetails['name'] }} - trailer:</h3>
                             <div class="uk-margin-small-top">
                                 <div class="">
                                     <iframe style="height: 500px; width: 100%" src="{{ $filmDetails['trailer_link'] }}">
                                     </iframe>
                                 </div>
                             </div>
-                            <span>{{ $filmDetails['trailer_link'] }}</span>
+                            <span class="uk-hidden">{{ $filmDetails['trailer_link'] }}</span>
                         </li>
                     </ul>
                 </div>

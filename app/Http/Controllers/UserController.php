@@ -81,6 +81,7 @@ class UserController extends Controller
                 $user->save();
                 return redirect('/profile')->with('status', 'Profile updated successfully!');
             }
+            $user->save();
 
             return redirect('/profile')->with('status', 'Profile updated successfully!');
         }

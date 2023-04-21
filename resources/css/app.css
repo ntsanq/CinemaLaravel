@@ -5,6 +5,115 @@
     padding: 35px 100px;
 }
 
+/*mobile*/
+@media (max-width: 767px) {
+    #main-content {
+        padding: 0 12px;
+    }
+
+    #main-content #banner-container {
+        margin: 0 -12px;
+    }
+
+    #tm-footer .uk-container-center.uk-container {
+        padding: unset;
+    }
+
+    #tm-footer .uk-grid {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #tm-footer .uk-grid .copyright-text {
+        display: inline-block;
+        width: 100%;
+        text-overflow: ellipsis;
+        font-size: 12px;
+        line-height: 24px;
+        margin-top: 10px;
+    }
+
+    #tm-footer .uk-grid .uk-width-medium-5-10 {
+        width: unset;
+        float: unset;
+        align-items: center;
+
+    }
+
+    #tm-footer .uk-grid .uk-width-medium-5-10 .uk-float-right .uk-subnav {
+        margin-bottom: 10px;
+    }
+
+    .auth-buttons-group {
+        margin-right: 10px;
+    }
+
+    .auth-buttons-group .uk-button-group {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .sign-in-button.uk-button.uk-button-link.uk-button-large {
+        text-align: right;
+    }
+
+    #banner-text {
+        left: 61% !important;
+        font-size: 43px !important;
+        width: 100%;
+    }
+
+    #ticket_booking .booking-sections {
+        display: flex;
+        flex-direction: column;
+        padding: unset;
+    }
+
+    #ticket_booking .booking-sections .right-booking {
+        width: 100%;
+        position: relative;
+        top: unset;
+        left: unset;
+        margin-top: unset;
+        margin-right: unset;
+        padding: 0;
+        background: none;
+    }
+
+    #ticket_booking .booking-sections .left-booking {
+        width: 88%;
+    }
+
+    .seats-section {
+        width: 100%;
+        overflow-block: clip;
+    }
+
+    .seat-annotations-block {
+        width: 80%;
+    }
+
+    .seat-annotations-block hr {
+        border: none;
+    }
+
+    .screen {
+        width: 115%;
+    }
+
+    .details-booking-block {
+        /*background: red;*/
+    }
+}
+
+/*tablet and desktop*/
+@media (min-width: 767px) {
+    .auth-buttons-group {
+        margin-right: 50px;
+        margin-left: 50px;
+    }
+}
+
 .left-booking {
     width: 40%;
     text-align: left;
@@ -184,6 +293,12 @@
 
 .my-tickets-table {
     padding: 0 80px;
+}
+
+@media (max-width: 767px) {
+    .my-tickets-table {
+        padding: unset;
+    }
 }
 
 #banner-img {
