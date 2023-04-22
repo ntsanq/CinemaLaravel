@@ -8,6 +8,7 @@ use App\Http\Controllers\API\LanguageController;
 use App\Http\Controllers\API\ProductionController;
 use App\Http\Controllers\API\RoomController;
 use App\Http\Controllers\API\FilmRuleController;
+use App\Http\Controllers\API\ScheduleController;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\API\TicketController;
 use Illuminate\Http\Request;
@@ -83,6 +84,13 @@ Route::prefix('/admin')->group(function () {
         Route::delete('/{id}', 'deleteForAdmin');
     });
     Route::prefix('/languages')->controller(LanguageController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'infoForAdmin');
+        Route::put('/{id}', 'updateForAdmin');
+        Route::post('/', 'createForAdmin');
+        Route::delete('/{id}', 'deleteForAdmin');
+    });
+    Route::prefix('/schedules')->controller(ScheduleController::class)->group(function () {
         Route::get('/', 'index');
         Route::get('/{id}', 'infoForAdmin');
         Route::put('/{id}', 'updateForAdmin');

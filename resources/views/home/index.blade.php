@@ -82,7 +82,7 @@
                 @endif
 
                 <div class="uk-flex uk-flex-center uk-margin uk-contrast">
-                    <h1 style="border-top: 0.5px solid #dfdfdf; border-bottom: 0.5px solid #dfdfdf; padding-bottom: 7px">
+                    <h1 style="border-bottom: 0.5px solid #dfdfdf; padding-bottom: 10px">
                         Now showing </h1>
                 </div>
                 @if($data['data'])

@@ -19,6 +19,22 @@ class FilmController
 
     public function index(Request $request)
     {
+
+        $firstThreeWords = substr($request->server('QUERY_STRING'), 0, 3);
+        if ($firstThreeWords === "id=") {
+            $queryParams = explode('&', $request->server('QUERY_STRING'));
+            $ids = array_map(function ($param) {
+                return intval(urldecode(explode('id=', $param)[1]));
+            }, $queryParams);
+
+            $filmDetails = [];
+            foreach ($ids as $id) {
+                $filmDetails[] = $this->queryFilmInfo($id);
+            }
+
+            return response()->json($filmDetails);
+        }
+
         $search = !empty($request->search) ? $request->search : '';
         $productionId = !empty($request->production_id) ? $request->production_id : '';
         $languageId = !empty($request->language_id) ? $request->language_id : '';
