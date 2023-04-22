@@ -83,10 +83,10 @@ export const FilmEdit = () => (
                 <SelectArrayInput/>
             </ReferenceArrayInput>
             <ReferenceInput source="production_id" reference="productions" name="production_id">
-                <SelectArrayInput source="name"/>
+                <SelectInput optionText="name"/>
             </ReferenceInput>
             <ReferenceInput source="language_id" reference="languages" name="language_id">
-                <SelectArrayInput source="name"/>
+                <SelectInput optionText="name"/>
             </ReferenceInput>
             <TextInput label="Image" source="path" name="path" sx={{minWidth: "450px"}}/>
             <TextInput source="trailer" name="trailer" sx={{minWidth: "450px"}}/>

@@ -70,6 +70,8 @@ class FilmController
         $film->film_rule_id = json_encode($request->film_rule_id);
         $film->name = $request->name;
         $film->description = $request->description;
+        $film->language_id = $request->language_id;
+        $film->production_id = $request->production_id;
 
         if ($request->path) {
             $mediaLinkIns = MediaLink::findOrFail($film->media_link_id);
