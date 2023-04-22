@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Room;
 use App\Models\Schedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -41,36 +42,63 @@ class ScheduleController extends Controller
 
     public function infoForAdmin($id)
     {
-        $room = Room::findOrFail($id);
-
-        return response()->json($room);
+        $schedule = Schedule::query()
+            ->join('films', 'films.id', 'schedules.film_id')
+            ->select([
+                'schedules.*',
+                'films.name as film_name',
+                'films.id as film_id',
+            ])
+            ->where('schedules.id', $id)
+            ->first();
+        $schedule['duration'] = $this->durationCalculate($schedule->id, 'int');
+        return response()->json($schedule);
     }
 
     public function updateForAdmin($id, Request $request)
     {
-        $room = Room::findOrFail($id);
-        $room->name = $request->name;
-        $room->status = $request->status;
-        $room->save();
+        $schedule = Schedule::findOrFail($id);
+        $schedule->film_id = $request->film_id;
+        $schedule->room_id = $request->room_id;
 
-        return response()->json($room);
+        $time_start = Carbon::parse($request->start)->format('H:i');
+        $date_start = Carbon::parse($request->start_time)->format('Y-m-d');
+        $startTime = $date_start . " " . $time_start;
+        $startTime = Carbon::parse($startTime);
+        $endTime = $startTime->copy()->addMinutes($request->duration);
+
+        $schedule->start = $startTime;
+        $schedule->end = $endTime;
+
+        $schedule->save();
+
+        return response()->json($schedule);
     }
 
     public function createForAdmin(Request $request)
     {
-        $room = new Room();
-        $room->name = $request->name;
-        $room->status = $request->status;
-        $room->save();
+        $time_start = Carbon::parse($request->start)->format('H:i');
+        $date_start = Carbon::parse($request->start_time)->format('Y-m-d');
+        $startTime = $date_start . " " . $time_start;
+        $startTime = Carbon::parse($startTime);
+        $endTime = $startTime->copy()->addMinutes($request->duration);
 
-        return response()->json($room);
+        $schedule = new Schedule();
+        $schedule->film_id = $request->film_id;
+        $schedule->room_id = $request->room_id;
+        $schedule->start = $startTime;
+        $schedule->end = $endTime;
+
+        $schedule->save();
+
+        return response()->json($schedule);
     }
 
     public function deleteForAdmin($id)
     {
-//        $room = Room::findOrFail($id);
-//        $room->delete();
+        $schedule = Schedule::findOrFail($id);
+        $schedule->delete();
 
-        return response()->json(['message' => 'Can not delete Room'], 400);
+        return response()->json("Deleted");
     }
 }

@@ -3,7 +3,7 @@ import {
     List,
     Datagrid,
     TextField,
-    EditButton, Edit, useRecordContext, SimpleForm, TextInput
+    EditButton, Edit, useRecordContext, SimpleForm, TextInput, Create
 } from 'react-admin';
 import BookIcon from '@mui/icons-material/Book';
 

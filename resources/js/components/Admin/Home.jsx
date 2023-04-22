@@ -8,7 +8,7 @@ import {RoomEdit, RoomIcon, RoomList} from "./Rooms";
 import {FilmRuleCreate, FilmRuleEdit, FilmRuleIcon, FilmRuleList} from "./FilmRules";
 import {ProductionCreate, ProductionEdit, ProductionIcon, ProductionList} from "./Productions";
 import {LanguageCreate, LanguageEdit, LanguageIcon, LanguageList} from "./Languages";
-import {ScheduleIcon, ScheduleList} from "./Schedules";
+import {ScheduleCreate, ScheduleEdit, ScheduleIcon, ScheduleList} from "./Schedules";
 
 export default function Home() {
 
@@ -56,6 +56,8 @@ export default function Home() {
 
                 <Resource name="schedules"
                           list={ScheduleList}
+                          edit={ScheduleEdit}
+                          create={ScheduleCreate}
                           icon={ScheduleIcon}/>
 
             </Admin>,
