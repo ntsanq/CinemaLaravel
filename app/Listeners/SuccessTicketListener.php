@@ -2,16 +2,18 @@
 
 namespace App\Listeners;
 
-use App\Events\SuccessTicketBooked;
-use App\Mail\SuccessTicketMessage;
+use App\Events\SuccessTicketEvent;
+use App\Mail\SuccessTicketMail;
 use App\Models\Ticket;
+use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
+use function GuzzleHttp\Promise\all;
 
-class EmailUserAboutTickets implements ShouldQueue
+class SuccessTicketListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -29,7 +31,7 @@ class EmailUserAboutTickets implements ShouldQueue
      * @param object $event
      * @return void
      */
-    public function handle(SuccessTicketBooked $event)
+    public function handle(SuccessTicketEvent $event)
     {
         $ticketIds = Ticket::query()->where('session_id', $event->sessionId)->get('id')->toArray();
         $ticketData = [];
@@ -60,9 +62,11 @@ class EmailUserAboutTickets implements ShouldQueue
 
         foreach ($ticketData as &$ticketItem) {
             $ticketItem['start_time'] = date("H:i", strtotime($ticketItem['start_time']));
+            $ticketItem['updated_at'] = Carbon::parse($ticketData[0]['updated_at'])
+                ->setTimezone(env('APP_TIMEZONE'))
+                ->format('d-m-Y h:i:s A');
         }
 
-
-        Mail::to($event->email)->send(new SuccessTicketMessage($ticketData, $checkout_session->amount_total));
+        Mail::to($event->email)->send(new SuccessTicketMail($ticketData, $checkout_session->amount_total));
     }
 }

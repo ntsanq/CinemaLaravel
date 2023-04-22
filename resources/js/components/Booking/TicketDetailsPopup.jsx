@@ -92,7 +92,7 @@ export default function TicketDetailsPopup(props) {
                                             <div
                                                 className="uk-flex uk-flex-column ticket--seat-info--time uk-margin-large-left">
                                                 <span className="ticket-label">Time</span>
-                                                <span>13:30</span>
+                                                <span>{ticket.start_time}</span>
                                             </div>
                                         </div>
                                     </div>

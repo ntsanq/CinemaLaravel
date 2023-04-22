@@ -15,7 +15,7 @@
         Price: {{ $ticket['price'] }} vnd
     @endforeach
 
-    Booked time: {{ \Carbon\Carbon::parse($ticketsData[0]['created_at'])->format('d-m-Y h:i:s A')}}
+    Booked time: {{ $ticketsData[0]['updated_at'] }}
 
     Total paid time: {{ $totalAmount }} vnd
 

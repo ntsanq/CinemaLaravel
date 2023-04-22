@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Events\SuccessTicketBooked;
-use App\Listeners\EmailUserAboutTickets;
+use App\Events\SuccessTicketEvent;
+use App\Listeners\SuccessTicketListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -20,8 +20,8 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        SuccessTicketBooked::class => [
-            EmailUserAboutTickets::class,
+        SuccessTicketEvent::class => [
+            SuccessTicketListener::class,
         ]
     ];
 

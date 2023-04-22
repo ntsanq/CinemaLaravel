@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TicketStatus;
-use App\Events\SuccessTicketBooked;
+use App\Events\SuccessTicketEvent;
 use App\Models\Film;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -42,7 +42,7 @@ class TicketController extends Controller
 
         $user = $this->getUserInfo();
         if ($tickets[0]['is_announced'] === 0) {
-            event(new SuccessTicketBooked($user['email'], $sessionId));
+            event(new SuccessTicketEvent($user['email'], $sessionId));
             Ticket::query()->where('session_id', $sessionId)->update(['is_announced' => 1]);
         }
 
