@@ -6,7 +6,7 @@ use BenSampo\Enum\Enum;
 
 final class TicketStatus extends Enum
 {
-    const NonPaid = 0;
+    const UnPaid = 0;
     const  Paid = 1;
-    const Expired = 1;
+    const Expired = 2;
 }

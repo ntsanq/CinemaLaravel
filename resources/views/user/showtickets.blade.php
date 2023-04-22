@@ -14,6 +14,7 @@
                     <th>Movie</th>
                     <th>Image</th>
                     <th>Date</th>
+                    <th>Status</th>
                     <th>Details</th>
                 </tr>
                 </thead>
@@ -24,6 +25,18 @@
                         <td><img class="uk-preserve-width" src="{{ $ticket[0]['path'] }}" alt="movie-img"
                                  style="width: 100px; height: 120px; object-fit: cover"></td>
                         <td>{{ $ticket[0]['created_date'] }}</td>
+
+                        @if($ticket[0]['status'] === "UnPaid")
+                            <td style="color: red; min-width: 67px;">{{ $ticket[0]['status'] }}<a style="text-decoration: none;"
+                                                                                href="/stripe/repay?sessionId={{ $ticket[0]['session_id'] }}"> <i
+                                        class="uk-icon-refresh refresh-icon"></i></a></td>
+
+                        @elseif($ticket[0]['status'] === "Expired")
+                            <td style="color: red">{{ $ticket[0]['status'] }}</td>
+                        @else
+                            <td style="color: limegreen">{{ $ticket[0]['status'] }}</td>
+                        @endif
+
                         <td class="ticket-details-popup" data-session-id={{ $ticket[0]['session_id'] }}></td>
                     </tr>
                 @endforeach
@@ -47,4 +60,18 @@
             </ul>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(".refresh-icon").on("click", function () {
+            $(this).addClass("repay-rotate-animation");
+            setTimeout(() => {
+                $(this).removeClass("repay-rotate-animation");
+                setTimeout(() => {
+                    window.location.href = $(this).parent().attr("href");
+                }, 3000); // 3 seconds delay
+            }, 1000);
+        });
+    </script>
 @endsection

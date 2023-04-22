@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 
+use App\Enums\TicketStatus;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
 
@@ -41,6 +43,14 @@ class UserController extends Controller
                     'media_links.image_link as path',
                     'films.name as film_name',
                     'tickets.session_id',
+                    // Use a CASE statement to update the 'status' value
+                    DB::raw('CASE
+                        WHEN tickets.status = ' . TicketStatus::UnPaid . ' THEN "' . TicketStatus::getKey(TicketStatus::UnPaid) . '"
+                        WHEN tickets.status = ' . TicketStatus::Paid . ' THEN "' . TicketStatus::getKey(TicketStatus::Paid) . '"
+                        WHEN tickets.status = ' . TicketStatus::Expired . ' THEN "' . TicketStatus::getKey(TicketStatus::Expired) . '"
+                        ELSE ""
+                        END as status'
+                    ),
                 ])
                 ->where('tickets.session_id', $each['session_id'])
                 ->get()->toArray();

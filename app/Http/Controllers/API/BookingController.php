@@ -161,7 +161,7 @@ class BookingController
                 if ($discountId !== null) {
                     $ticket->discount_id = $discountId;
                 }
-                $ticket->status = TicketStatus::NonPaid;
+                $ticket->status = TicketStatus::UnPaid;
                 $ticket->save();
                 $tickets[] = $ticket;
 
