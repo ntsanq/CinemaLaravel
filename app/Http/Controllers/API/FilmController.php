@@ -20,6 +20,10 @@ class FilmController
     public function index(Request $request)
     {
         $search = !empty($request->search) ? $request->search : '';
+        $productionId = !empty($request->production_id) ? $request->production_id : '';
+        $languageId = !empty($request->language_id) ? $request->language_id : '';
+        $filmCategoryId = !empty($request->film_category_id) ? $request->film_category_id : '';
+        $filmRuleId = !empty($request->film_rule_id) ? $request->film_rule_id : '';
         $start = $request->input('_start', 0);
         $end = $request->input('_end', 10);
 
@@ -31,10 +35,17 @@ class FilmController
                 'films.*',
                 'media_links.image_link as path',
                 'media_links.trailer_link as trailer',
+                'productions.id',
+                'languages.id',
                 'languages.name as language',
                 'productions.name as production',
             ])
             ->where('films.name', 'like', '%' . $search . '%')
+            ->where('productions.id', 'like', '%' . $productionId . '%')
+            ->where('languages.id', 'like', '%' . $languageId . '%')
+            ->where('languages.id', 'like', '%' . $languageId . '%')
+            ->where('films.film_category_id', 'like', '%' . $filmCategoryId . '%')
+            ->where('films.film_rule_id', 'like', '%' . $filmRuleId . '%')
             ->get()
             ->toArray();
 

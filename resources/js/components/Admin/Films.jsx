@@ -30,7 +30,19 @@ const FilmPagination = () => <Pagination rowsPerPageOptions={[5, 10, 25, 50]}/>;
 export const FilmIcon = BookIcon;
 
 const filmFilters = [
-    <TextInput source="name" label="Search" alwaysOn name="search"/>
+    <TextInput source="name" label="Search" alwaysOn name="search"/>,
+    <ReferenceInput source="production_id" label="Productions" reference="productions" name="production_id">
+        <SelectInput optionText="name"/>
+    </ReferenceInput>,
+    <ReferenceInput source="language_id" label="Languages" reference="languages" name="language_id">
+        <SelectInput optionText="name"/>
+    </ReferenceInput>,
+    <ReferenceArrayInput source="film_category_id" reference="filmCategories" name="film_category_id">
+        <SelectInput optionText="name"/>
+    </ReferenceArrayInput>,
+    <ReferenceArrayInput source="film_rule_id" reference="filmRules" name="film_rule_id">
+        <SelectInput optionText="name"/>
+    </ReferenceArrayInput>
 ];
 
 
