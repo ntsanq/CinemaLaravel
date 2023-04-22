@@ -3,15 +3,18 @@ import {
     List,
     Datagrid,
     TextField,
-    EditButton, ReferenceField, ChipField
+    EditButton, ReferenceField, ChipField, TextInput
 } from 'react-admin';
 import BookIcon from '@mui/icons-material/Book';
 
 export const ScheduleIcon = BookIcon;
 
+const scheduleFilters = [
+    <TextInput source="film_id" label="Search" alwaysOn name="search"/>
+];
 export const ScheduleList = () => {
     return (
-        <List>
+        <List filters={scheduleFilters}>
             <Datagrid rowClick="edit">
                 <TextField source="id"/>
                 <ReferenceField source="film_id" reference="films">

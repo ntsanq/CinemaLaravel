@@ -11,16 +11,32 @@ class ScheduleController extends Controller
 {
     public function index(Request $request)
     {
-        $schedules = Schedule::query()
-            ->get()->toArray();
+        $search = !empty($request->search) ? $request->search : '';
+        $start = $request->input('_start', 0);
+        $end = $request->input('_end', 10);
 
-        $data = [];
+        $schedules = Schedule::query()
+            ->join('films', 'films.id', 'schedules.film_id')
+            ->join('rooms', 'rooms.id', 'schedules.room_id')
+            ->select([
+                'schedules.*',
+                'films.name as film_name',
+                'rooms.name as room_name'
+            ])
+            ->where('films.name', 'like', '%' . $search . '%')
+            ->orWhere('rooms.name', 'like', '%' . $search . '%')
+            ->get();
+
+        $schedulesData = [];
         foreach ($schedules as $schedule) {
             $schedule['duration'] = $this->durationCalculate($schedule['id'], "int");
-            $data[] = $schedule;
+            $schedulesData[] = $schedule;
         }
+        $total = count($schedulesData);
+        $query = collect($schedulesData)->skip($start)->take($end - $start);
+        $data = array_values($query->toArray());
 
-        return response()->json($data)->header('X-Total-Count', count($data));
+        return response()->json($data)->header('X-Total-Count', $total);
     }
 
     public function infoForAdmin($id)
