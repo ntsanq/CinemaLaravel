@@ -27,14 +27,14 @@
                         <td>{{ $ticket[0]['created_date'] }}</td>
 
                         @if($ticket[0]['status'] === "UnPaid")
-                            <td style="color: red; min-width: 67px;">{{ $ticket[0]['status'] }}<a style="text-decoration: none;"
-                                                                                href="/stripe/repay?sessionId={{ $ticket[0]['session_id'] }}"> <i
+                            <td style="color: #bc5f5f; min-width: 67px;">{{ $ticket[0]['status'] }}<a style="text-decoration: none;"
+                                                                                                      href="/stripe/repay?sessionId={{ $ticket[0]['session_id'] }}"> <i
                                         class="uk-icon-refresh refresh-icon"></i></a></td>
 
                         @elseif($ticket[0]['status'] === "Expired")
-                            <td style="color: red">{{ $ticket[0]['status'] }}</td>
+                            <td style="color: #b50404">{{ $ticket[0]['status'] }}</td>
                         @else
-                            <td style="color: limegreen">{{ $ticket[0]['status'] }}</td>
+                            <td style="color: #2ba22b">{{ $ticket[0]['status'] }}</td>
                         @endif
 
                         <td class="ticket-details-popup" data-session-id={{ $ticket[0]['session_id'] }}></td>
