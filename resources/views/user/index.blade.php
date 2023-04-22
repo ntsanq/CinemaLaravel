@@ -18,7 +18,7 @@
                     <input class="uk-width-1-1 uk-form-large" placeholder="Name" type="text" name="name" id="name"  value="{{ $user['name'] }}" >
                 </div>
                 <div class="uk-form-row">
-                    <input class="uk-width-1-1 uk-form-large" placeholder="Birthday" type="date" name="birthday" id="birthday"  value="{{ $user['birthday'] }}" >
+                    <input style="-webkit-appearance: none;" class="uk-width-1-1 uk-form-large" placeholder="Birthday" type="date" name="birthday" id="birthday"  value="{{ $user['birthday'] }}" >
                 </div>
                 <div class="uk-form-row">
                     <input class="uk-width-1-1 uk-form-large" placeholder="Your city" type="text" name="address" id="address"  value="{{ $user['address'] }}" >
