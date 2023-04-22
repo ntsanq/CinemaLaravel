@@ -32,7 +32,8 @@ final class MediaLinks
         '2QKg5SZ_35I'
     ];
 
-    const ImageLinks = ['https://lumiere-a.akamaihd.net/v1/images/p_luca_21670_3c13c611.jpeg',
+    const ImageLinks = [
+        'https://lumiere-a.akamaihd.net/v1/images/p_luca_21670_3c13c611.jpeg',
         'https://dx35vtwkllhj9.cloudfront.net/paramountpictures/smile/images/regions/us/onesheet.jpg',
         'https://dvvy6louqcr7j.cloudfront.net/vista/HO00013811/heroPoster/Shazam-Fury-of-the-Gods.png',
         'https://cdn.tuftsdaily.com/2018/04/a-quiet-place.jpg',
@@ -40,7 +41,7 @@ final class MediaLinks
         'https://images.fandango.com/ImageRenderer/0/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/226753/BlackPanther-WakandaForever_Payoff_1-Sht_v10_lg.jpg',
         'https://images.fandango.com/ImageRenderer/0/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/219625/tgmdomonlinedigitalkeyartt-cruisestandingjetv10.jpg',
         'https://www.gscmovies.com.my/wp-content/uploads/2022/10/Catch-it-from-5-May-2020-onwards-on-Astro-Best-50.jpg',
-        'https://imgs.smoothradio.com/images/60644?crop=16_9&width=660&relax=1&signature=vi7NBzBP2tGv1Zu4__iRcbZAJPw=',
+        'https://m.media-amazon.com/images/M/MV5BYTUxYjczMWUtYzlkZC00NTcwLWE3ODQtN2I2YTIxOTU0ZTljXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg',
         'https://m.media-amazon.com/images/M/MV5BOGZmYzVkMmItM2NiOS00MDI3LWI4ZWQtMTg0YWZkODRkMmViXkEyXkFqcGdeQXVyODY0NzcxNw@@._V1_.jpg',
         'https://m.media-amazon.com/images/M/MV5BY2NkZTEyYTgtMjcxYy00MzE4LTkxOTQtYzkyZjUxNjc4NTZhXkEyXkFqcGdeQXVyNzQ3NjE1MzI@._V1_.jpg',
         'https://miconcinemas.com/media/2141/john-wick.jpg',

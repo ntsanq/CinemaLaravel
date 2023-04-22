@@ -35,15 +35,14 @@ class FilmController
                 'films.*',
                 'media_links.image_link as path',
                 'media_links.trailer_link as trailer',
-                'productions.id',
-                'languages.id',
+                'productions.id as production_id',
+                'languages.id as language_id',
                 'languages.name as language',
                 'productions.name as production',
             ])
             ->where('films.name', 'like', '%' . $search . '%')
-            ->where('productions.id', 'like', '%' . $productionId . '%')
-            ->where('languages.id', 'like', '%' . $languageId . '%')
-            ->where('languages.id', 'like', '%' . $languageId . '%')
+            ->where('production_id', 'like', '%' . $productionId . '%')
+            ->where('language_id', 'like', '%' . $languageId . '%')
             ->where('films.film_category_id', 'like', '%' . $filmCategoryId . '%')
             ->where('films.film_rule_id', 'like', '%' . $filmRuleId . '%')
             ->get()
@@ -112,8 +111,8 @@ class FilmController
         $film->name = $request->name;
         $film->film_category_id = json_encode($request->film_category_id);
         $film->film_rule_id = json_encode($request->film_rule_id);
-        $film->production_id = $request->production_id[0];
-        $film->language_id = $request->language_id[0];
+        $film->production_id = $request->production_id;
+        $film->language_id = $request->language_id;
         $film->description = $request->description;
         $film->save();
 
