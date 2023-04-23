@@ -14,8 +14,16 @@ class ScheduleController extends Controller
     public function index(Request $request)
     {
         $search = !empty($request->search) ? $request->search : '';
+        $start_date = !empty($request->start_date) ? $request->start_date : '';
+        $room_id = !empty($request->room_id) ? $request->room_id : '';
+        $film_id = !empty($request->film_id) ? $request->film_id : '';
+
+
         $start = $request->input('_start', 0);
         $end = $request->input('_end', 10);
+
+        $sort = $request->input('_sort', '');
+        $order = $request->input('_order', '');
 
         $schedules = Schedule::query()
             ->join('films', 'films.id', 'schedules.film_id')
@@ -23,17 +31,22 @@ class ScheduleController extends Controller
             ->select([
                 'schedules.*',
                 'films.name as film_name',
-                'films.duration as duration',
-                'rooms.name as room_name'
+                'films.duration as duration'
             ])
             ->where('films.name', 'like', '%' . $search . '%')
-            ->orWhere('rooms.name', 'like', '%' . $search . '%')
+            ->where('schedules.start', 'like', '%' . $start_date . '%')
+            ->where('schedules.room_id', 'like', '%' . $room_id . '%')
+            ->where('schedules.film_id', 'like', '%' . $film_id . '%')
+            ->orderBy($sort, $order)
             ->get();
 
         $schedulesData = [];
         foreach ($schedules as $schedule) {
+            $schedule['start'] = Carbon::parse($schedule['start'])->format('d-m-Y h:i A');
+            $schedule['end'] = Carbon::parse($schedule['end'])->format('d-m-Y h:i A');
             $schedulesData[] = $schedule;
         }
+
         $total = count($schedulesData);
         $query = collect($schedulesData)->skip($start)->take($end - $start);
         $data = array_values($query->toArray());

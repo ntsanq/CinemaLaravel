@@ -19,7 +19,14 @@ import BookIcon from '@mui/icons-material/Book';
 export const ScheduleIcon = BookIcon;
 
 const scheduleFilters = [
-    <TextInput source="film_id" label="Search" alwaysOn name="search"/>
+    <TextInput source="film_id" label="Search film names" alwaysOn name="search"/>,
+    <ReferenceInput source="film_id" reference="films" name="film_id">
+        <SelectInput optionText="name"/>
+    </ReferenceInput>,
+    <ReferenceInput source="room_id" reference="rooms" name="room_id">
+        <SelectInput optionText="name"/>
+    </ReferenceInput>,
+    <DateInput name="start_date" source="date"/>
 ];
 export const ScheduleList = () => {
     return (
