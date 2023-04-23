@@ -43,7 +43,10 @@ class FilmController
         $start = $request->input('_start', 0);
         $end = $request->input('_end', 10);
 
-        $films = Film::query()
+        $sort = $request->input('_sort', '');
+        $order = $request->input('_order', '');
+
+        $filmsQuery = Film::query()
             ->join('media_links', 'media_links.id', 'films.media_link_id')
             ->join('languages', 'languages.id', 'films.language_id')
             ->join('productions', 'productions.id', 'films.production_id')
@@ -57,12 +60,16 @@ class FilmController
                 'productions.name as production',
             ])
             ->where('films.name', 'like', '%' . $search . '%')
-            ->where('production_id', 'like', '%' . $productionId . '%')
-            ->where('language_id', 'like', '%' . $languageId . '%')
+            ->where('productions.id', 'like', '%' . $productionId . '%')
+            ->where('languages.id', 'like', '%' . $languageId . '%')
             ->where('films.film_category_id', 'like', '%' . $filmCategoryId . '%')
-            ->where('films.film_rule_id', 'like', '%' . $filmRuleId . '%')
-            ->get()
-            ->toArray();
+            ->where('films.film_rule_id', 'like', '%' . $filmRuleId . '%');
+        // Avoid $sort is not 'path'
+        if ($sort !== 'path') {
+            $filmsQuery->orderBy('films.' . $sort, $order);
+        }
+
+        $films = $filmsQuery->get()->toArray();
 
         $films = array_map(function ($film) {
             $rules = json_decode($film['film_rule_id']);
