@@ -15,41 +15,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function durationCalculate($id, $valueExpect = 'string')
-    {
-        if ($valueExpect == "int") {
-            $filmSchedule = Schedule::query()
-                ->where('film_id', $id)
-                ->get()
-                ->first();
-
-            if ($filmSchedule === null) {
-                return 'No schedule yet';
-            }
-            $filmSchedule = $filmSchedule->toArray();
-
-            $startTime = Carbon::parse($filmSchedule['start']);
-            $finishTime = Carbon::parse($filmSchedule['end']);
-            return $finishTime->diffInMinutes($startTime);
-        }
-
-        $filmSchedule = Schedule::query()
-            ->where('film_id', $id)
-            ->get()
-            ->first();
-
-        if ($filmSchedule === null) {
-            return 'No schedule yet';
-        }
-        $filmSchedule = $filmSchedule->toArray();
-
-        $startTime = Carbon::parse($filmSchedule['start']);
-        $finishTime = Carbon::parse($filmSchedule['end']);
-
-
-        return $finishTime->diffInMinutes($startTime) . ' minutes';
-    }
-
     public function getUserInfo()
     {
         $user = null;

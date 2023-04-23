@@ -34,7 +34,7 @@
                                     <ul class="uk-subnav uk-subnav-line">
                                         <li>
                                             <i class="uk-icon-clock-o"></i>
-                                            {{ $filmDetails['duration'] }}
+                                            {{ $filmDetails['duration'] }} minutes
                                         </li>
                                         <li>
                                             <i class="uk-icon-language"></i>

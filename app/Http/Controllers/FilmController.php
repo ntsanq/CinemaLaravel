@@ -45,8 +45,6 @@ class FilmController extends Controller
         $filmDetails['categories'] = $categoriesData;
         $filmDetails['rules'] = $rulesData;
 
-        $filmDetails['duration'] = $this->durationCalculate($filmDetails['id']);
-
         return view('film.index', [
             'user' => $user,
             'filmDetails' => $filmDetails

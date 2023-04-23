@@ -12,7 +12,7 @@ import {
     SimpleForm,
     Create,
     ReferenceInput,
-    SelectInput, TimeInput, NumberInput, DateInput
+    SelectInput, TimeInput, NumberInput, DateInput, DateTimeInput
 } from 'react-admin';
 import BookIcon from '@mui/icons-material/Book';
 
@@ -55,9 +55,8 @@ export const ScheduleEdit = () => (
             <ReferenceInput source="room_id" reference="rooms" name="room_id">
                 <SelectInput optionText="name"/>
             </ReferenceInput>
-            <DateInput name="date" source="start"/>
-            <TimeInput name="start_time" source="start" />
-            <NumberInput name="duration" source="duration" placeholder="Duration (minutes)"/>
+            <DateTimeInput name="start" source="start"/>
+            <NumberInput name="duration" source="duration" disabled/>
         </SimpleForm>
     </Edit>
 );
@@ -71,9 +70,7 @@ export const ScheduleCreate = () => (
             <ReferenceInput source="room_id" reference="rooms" name="room_id">
                 <SelectInput optionText="name"/>
             </ReferenceInput>
-            <DateInput name="date" source="" />
-            <TimeInput name="start_time" source="" />
-            <NumberInput name="duration" source="" placeholder="Duration (minutes)"/>
+            <DateTimeInput name="start" source=""/>
         </SimpleForm>
     </Create>
 )

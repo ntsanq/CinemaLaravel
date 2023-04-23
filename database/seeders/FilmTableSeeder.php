@@ -37,7 +37,8 @@ class FilmTableSeeder extends Seeder
                 'description' => fake()->sentences(20, true),
                 'language_id' => fake()->randomElement($languageIds)->id,
                 'film_rule_id' => "[" . fake()->randomElement($filmRuleIds)->id . "]",    //cheat
-                'production_id' => fake()->randomElement($productionIds)->id
+                'production_id' => fake()->randomElement($productionIds)->id,
+                'duration' => 120,
             ]);
         }
     }

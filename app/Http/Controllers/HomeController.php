@@ -57,7 +57,6 @@ class HomeController extends Controller
 
         $filmData = [];
         foreach ($filmsWithPagination['data'] as $film) {
-            $film['duration'] = $this->durationCalculate($film['id']);
             $filmData[] = $film;
         }
 
@@ -122,7 +121,6 @@ class HomeController extends Controller
                 ->take(4)->get()->toArray();
             $finalFilmData = [];
             foreach ($films as $film) {
-                $film['duration'] = $this->durationCalculate($film['id']);
                 $finalFilmData[] = $film;
             }
 
@@ -146,7 +144,6 @@ class HomeController extends Controller
 
         $finalFilmData = [];
         foreach ($filmsData as $film) {
-            $film['duration'] = $this->durationCalculate($film['id']);
             $finalFilmData[] = $film;
         }
 

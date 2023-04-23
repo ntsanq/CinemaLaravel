@@ -100,7 +100,7 @@
                                     <h5 class="uk-panel-title film-name-card">{{ $film['name'] }}</h5>
                                     <p>
                                 <span>
-                                  {{ $film['duration'] }} <i class="uk-icon-clock-o"></i>
+                                  {{ $film['duration'] }} minutes <i class="uk-icon-clock-o"></i>
                                 </span>
                                         <span
                                             class="uk-text-break uk-float-right uk-display-inline uk-margin-small-bottom">
