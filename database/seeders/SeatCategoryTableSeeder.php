@@ -17,7 +17,7 @@ class SeatCategoryTableSeeder extends Seeder
     {
         $categories = [
             'Standard',
-            'Premium Couple',
+            'Premium',
         ];
 
         foreach ($categories as $category) {

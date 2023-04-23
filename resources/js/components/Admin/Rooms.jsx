@@ -19,7 +19,6 @@ export const RoomList = () => {
             <Datagrid rowClick="edit">
                 <TextField source="id"/>
                 <TextField source="name"/>
-                <TextField source="status" disabled/>
                 <EditButton basePath=""/>
             </Datagrid>
         </List>
@@ -35,11 +34,15 @@ export const RoomEdit = () => (
         <SimpleForm>
             <TextInput disabled source="id" name="id"/>
             <TextInput source="name" name="name"/>
-            <TextInput disabled
-                       source="status"
-                       name="status"
-                       format={value => value === 1 ? 'Full' : 'Unfull'}/>
         </SimpleForm>
     </Edit>
 );
+
+export const RoomCreate = () => (
+    <Create>
+        <SimpleForm>
+            <TextInput source="name" name="name"/>
+        </SimpleForm>
+    </Create>
+)
 

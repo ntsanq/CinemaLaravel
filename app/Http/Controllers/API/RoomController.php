@@ -18,18 +18,8 @@ class RoomController
             ->where('name','like', '%' . $search . '%')
             ->get();
 
-        $roomsData = [];
-        foreach ($rooms as $room) {
-            if ($room['status'] === RoomStatus::Full) {
-                $room['status'] = 'Full';
-            } elseif ($room['status'] === RoomStatus::UnFull) {
-                $room['status'] = 'Unfull';
-            }
-            $roomsData[] = $room;
-        }
-
-        $total = count($roomsData);
-        $query = collect($roomsData)->skip($start)->take($end - $start);
+        $total = count($rooms);
+        $query = collect($rooms)->skip($start)->take($end - $start);
         $data = array_values($query->toArray());
 
         return response()->json($data)->header('X-Total-Count', $total);
@@ -56,7 +46,6 @@ class RoomController
     {
         $room = new Room();
         $room->name = $request->name;
-        $room->status = $request->status;
         $room->save();
 
         return response()->json($room);
