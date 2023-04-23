@@ -17,7 +17,14 @@
 
     Booked time: {{ $ticketsData[0]['updated_at'] }}
 
-    Total paid time: {{ $totalAmount }} vnd
+    Total paid: {{ $totalAmount }} vnd
 
     Pay app: Stripe
+
+    Please show this id or the QR CODE IN THE ATTACHMENT to our staffs for getting your tickets:
+    {{ $ticketsData[0]['session_id'] }}
+
+    Or use this link to see your tickets: http://localhost:8000/stripe/success?sessionId={{ $ticketsData[0]['session_id'] }}
+
 @endcomponent
+
