@@ -19,7 +19,7 @@ export const FilmCategoryList = () => {
             <Datagrid rowClick="edit">
                 <TextField source="id"/>
                 <TextField source="name"/>
-                <EditButton basePath=""/>
+                <EditButton/>
             </Datagrid>
         </List>
     )
@@ -34,7 +34,7 @@ export const FilmCategoryEdit = () => (
         <SimpleForm>
             <TextInput disabled source="id" name="id"/>
             <TextInput source="name" name="name"/>
-            <EditButton basePath=""/>
+            <EditButton/>
         </SimpleForm>
     </Edit>
 );

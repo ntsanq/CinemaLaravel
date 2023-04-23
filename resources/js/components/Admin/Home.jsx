@@ -9,6 +9,7 @@ import {FilmRuleCreate, FilmRuleEdit, FilmRuleIcon, FilmRuleList} from "./FilmRu
 import {ProductionCreate, ProductionEdit, ProductionIcon, ProductionList} from "./Productions";
 import {LanguageCreate, LanguageEdit, LanguageIcon, LanguageList} from "./Languages";
 import {ScheduleCreate, ScheduleEdit, ScheduleIcon, ScheduleList} from "./Schedules";
+import {TicketIcon, TicketList} from "./Tickets";
 
 export default function Home() {
 
@@ -61,6 +62,7 @@ export default function Home() {
                           create={ScheduleCreate}
                           icon={ScheduleIcon}/>
 
+                <Resource name="tickets" options={{ label: 'Tickets' }} list={TicketList} icon={TicketIcon}/>
             </Admin>,
         </>
     )

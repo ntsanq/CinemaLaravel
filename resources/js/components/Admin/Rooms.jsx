@@ -19,7 +19,7 @@ export const RoomList = () => {
             <Datagrid rowClick="edit">
                 <TextField source="id"/>
                 <TextField source="name"/>
-                <EditButton basePath=""/>
+                <EditButton/>
             </Datagrid>
         </List>
     )
