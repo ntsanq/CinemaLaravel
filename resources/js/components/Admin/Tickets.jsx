@@ -20,11 +20,30 @@ export const TicketIcon = BookIcon;
 export const TicketList = () => {
     const [inputValue, setInputValue] = useState('');
     const [ticketDetails, setTicketDetails] = useState(null);
-    const [messagePlace, setMessagePlace] = useState('Input the session id')
+    const [messagePlace, setMessagePlace] = useState('Input the session id');
+
+    // useEffect(()=> {
+    //     TicketService.getTickets(inputValue)
+    //         .then(r => {
+    //             setTicketDetails(r.data);
+    //         })
+    //         .catch(e => {
+    //             console.log(e.message);
+    //             setMessagePlace('Wrong session id');
+    //             setInputValue('');
+    //         });
+    // },[inputValue])
 
     const onChange = (e) => {
         setInputValue(e.currentTarget.value);
     }
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            handleClick();
+        }
+    };
+
 
     const handleClick = () => {
         TicketService.getTickets(inputValue)
@@ -33,7 +52,8 @@ export const TicketList = () => {
             })
             .catch(e => {
                 console.log(e.message);
-                setMessagePlace('Wrong session id')
+                setMessagePlace('Wrong session id');
+                setTicketDetails(null);
             });
     }
 
@@ -43,7 +63,7 @@ export const TicketList = () => {
                 Insert the session Id sent in the email
 
                 <div style={{display: "flex", flexDirection: "row", gap: "20px"}}>
-                    <Input onChange={onChange}/>
+                    <Input onChange={onChange} onKeyDown={handleKeyDown}/>
                     <Button type="primary" onClick={handleClick}>Get info</Button></div>
             </div>
 
