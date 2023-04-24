@@ -265,6 +265,10 @@
 }
 
 .checkout-success-img {
+    width: 30px;
+}
+
+.checkout-failed-img {
     width: 140px;
 }
 

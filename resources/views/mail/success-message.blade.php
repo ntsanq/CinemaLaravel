@@ -21,10 +21,7 @@
 
     Pay app: Stripe
 
-    Please show this id or the QR CODE IN THE ATTACHMENT to our staffs for getting your tickets:
-<h5>{{ $ticketsData[0]['session_id'] }}</h5>
-
-    Or use this link to see your tickets: http://localhost:8000/stripe/success?sessionId={{ $ticketsData[0]['session_id'] }}
+    Please show the QR CODE in this link to get your tickets: http://localhost:8000/stripe/success?sessionId={{ $ticketsData[0]['session_id'] }}
 
 @endcomponent
 
