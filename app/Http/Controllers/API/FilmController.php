@@ -19,11 +19,34 @@ class FilmController
 
     public function index(Request $request)
     {
+
+        $firstThreeWords = substr($request->server('QUERY_STRING'), 0, 3);
+        if ($firstThreeWords === "id=") {
+            $queryParams = explode('&', $request->server('QUERY_STRING'));
+            $ids = array_map(function ($param) {
+                return intval(urldecode(explode('id=', $param)[1]));
+            }, $queryParams);
+
+            $filmDetails = [];
+            foreach ($ids as $id) {
+                $filmDetails[] = $this->queryFilmInfo($id);
+            }
+
+            return response()->json($filmDetails);
+        }
+
         $search = !empty($request->search) ? $request->search : '';
+        $productionId = !empty($request->production_id) ? $request->production_id : '';
+        $languageId = !empty($request->language_id) ? $request->language_id : '';
+        $filmCategoryId = !empty($request->film_category_id) ? $request->film_category_id : '';
+        $filmRuleId = !empty($request->film_rule_id) ? $request->film_rule_id : '';
         $start = $request->input('_start', 0);
         $end = $request->input('_end', 10);
 
-        $films = Film::query()
+        $sort = $request->input('_sort', '');
+        $order = $request->input('_order', '');
+
+        $filmsQuery = Film::query()
             ->join('media_links', 'media_links.id', 'films.media_link_id')
             ->join('languages', 'languages.id', 'films.language_id')
             ->join('productions', 'productions.id', 'films.production_id')
@@ -31,12 +54,22 @@ class FilmController
                 'films.*',
                 'media_links.image_link as path',
                 'media_links.trailer_link as trailer',
+                'productions.id as production_id',
+                'languages.id as language_id',
                 'languages.name as language',
                 'productions.name as production',
             ])
             ->where('films.name', 'like', '%' . $search . '%')
-            ->get()
-            ->toArray();
+            ->where('productions.id', 'like', '%' . $productionId . '%')
+            ->where('languages.id', 'like', '%' . $languageId . '%')
+            ->where('films.film_category_id', 'like', '%' . $filmCategoryId . '%')
+            ->where('films.film_rule_id', 'like', '%' . $filmRuleId . '%');
+        // Avoid $sort is not 'path'
+        if ($sort !== 'path') {
+            $filmsQuery->orderBy('films.' . $sort, $order);
+        }
+
+        $films = $filmsQuery->get()->toArray();
 
         $films = array_map(function ($film) {
             $rules = json_decode($film['film_rule_id']);
@@ -101,8 +134,8 @@ class FilmController
         $film->name = $request->name;
         $film->film_category_id = json_encode($request->film_category_id);
         $film->film_rule_id = json_encode($request->film_rule_id);
-        $film->production_id = $request->production_id[0];
-        $film->language_id = $request->language_id[0];
+        $film->production_id = $request->production_id;
+        $film->language_id = $request->language_id;
         $film->description = $request->description;
         $film->save();
 

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('language_id')->constrained('languages');
             $table->string('film_rule_id');
             $table->foreignId('production_id')->constrained('productions');
+            $table->integer('duration');
             $table->timestamps();
             $table->softDeletes();
         });

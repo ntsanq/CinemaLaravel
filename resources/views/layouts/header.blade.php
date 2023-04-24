@@ -62,17 +62,6 @@
                         <i class="uk-icon-lock uk-margin-small-right"></i> Sign Up</a>
                 </div>
             @endif
-
         </div>
     </div>
 </nav>
-
-
-<script>
-    // Add an event listener for click event on search icon
-    document.getElementById('search-icon').addEventListener('click', function () {
-        // Toggle display of search input container
-        var searchInputContainer = document.getElementById('search-input-container');
-        searchInputContainer.style.display = (searchInputContainer.style.display === 'none') ? 'block' : 'none';
-    });
-</script>

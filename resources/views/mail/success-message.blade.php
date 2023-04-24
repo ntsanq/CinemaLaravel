@@ -1,7 +1,7 @@
 @component('mail::message')
-    <h1>
+    <h2>
         You successfully booked ticket from SAN Cinema:
-    </h1>
+    </h2>
 
     Thank you for using our website as SAN Cinema Service.
     We are pleased to announce your transaction has been done as follows:
@@ -17,7 +17,11 @@
 
     Booked time: {{ $ticketsData[0]['updated_at'] }}
 
-    Total paid time: {{ $totalAmount }} vnd
+    Total paid: {{ $totalAmount }} vnd
 
     Pay app: Stripe
+
+    Please show the QR CODE in this link to get your tickets: http://localhost:8000/stripe/success?sessionId={{ $ticketsData[0]['session_id'] }}
+
 @endcomponent
+

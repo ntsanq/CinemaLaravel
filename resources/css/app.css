@@ -128,7 +128,7 @@
     margin-top: 200px;
     margin-right: 30px;
     padding: 40px 40px;
-    width: 29%;
+    min-width: 29%;
     max-height: 90%;
     text-align: center;
     float: right;
@@ -265,6 +265,10 @@
 }
 
 .checkout-success-img {
+    width: 30px;
+}
+
+.checkout-failed-img {
     width: 140px;
 }
 

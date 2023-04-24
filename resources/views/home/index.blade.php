@@ -82,7 +82,7 @@
                 @endif
 
                 <div class="uk-flex uk-flex-center uk-margin uk-contrast">
-                    <h1 style="border-top: 0.5px solid #dfdfdf; border-bottom: 0.5px solid #dfdfdf; padding-bottom: 7px">
+                    <h1 style="border-bottom: 0.5px solid #dfdfdf; padding-bottom: 10px">
                         Now showing </h1>
                 </div>
                 @if($data['data'])
@@ -100,7 +100,7 @@
                                     <h5 class="uk-panel-title film-name-card">{{ $film['name'] }}</h5>
                                     <p>
                                 <span>
-                                  {{ $film['duration'] }} <i class="uk-icon-clock-o"></i>
+                                  {{ $film['duration'] }} minutes <i class="uk-icon-clock-o"></i>
                                 </span>
                                         <span
                                             class="uk-text-break uk-float-right uk-display-inline uk-margin-small-bottom">

@@ -18,7 +18,7 @@ class RoomTableSeeder extends Seeder
     {
         $letters = ['A'];
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             Room::create([
                 'name' => 'Room ' . $i,
                 'status' => fake()->randomElement(RoomStatus::getValues()),
