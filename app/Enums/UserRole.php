@@ -16,7 +16,13 @@ final class UserRole extends Enum
     public static function getDescription($value): string
     {
         if ($value === self::Admin) {
-            return 'This is super user of system';
+            return 'Administration user of system';
+        }
+        if ($value === self::Clerk) {
+            return 'Staff of our system';
+        }
+        if ($value === self::Customer) {
+            return 'Customer user in our system';
         }
 
         return parent::getDescription($value);

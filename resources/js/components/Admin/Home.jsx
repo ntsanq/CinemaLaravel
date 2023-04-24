@@ -11,50 +11,51 @@ import {LanguageCreate, LanguageEdit, LanguageIcon, LanguageList} from "./Langua
 import {ScheduleCreate, ScheduleEdit, ScheduleIcon, ScheduleList} from "./Schedules";
 import {TicketIcon, TicketList} from "./Tickets";
 
-export default function Home() {
-
+export default function Home(props) {
     return (
         <>
             <Admin dataProvider={jsonServerProvider('http://localhost:8000/api/admin')}>
+                {
+                    props.role === "admin" ? <>    <Resource options={{label: 'Films'}}
+                                                             name="films"
+                                                             list={FilmList}
+                                                             edit={FilmEdit}
+                                                             create={FilmCreate}
+                                                             icon={FilmIcon}/>
 
-                <Resource options={{label: 'Films'}}
-                          name="films"
-                          list={FilmList}
-                          edit={FilmEdit}
-                          create={FilmCreate}
-                          icon={FilmIcon}/>
+                        <Resource options={{label: 'Film Categories'}}
+                                  name="filmCategories"
+                                  list={FilmCategoryList}
+                                  edit={FilmCategoryEdit}
+                                  create={FilmCategoryCreate}
+                                  icon={FilmCategoryIcon}/>
 
-                <Resource options={{label: 'Film Categories'}}
-                          name="filmCategories"
-                          list={FilmCategoryList}
-                          edit={FilmCategoryEdit}
-                          create={FilmCategoryCreate}
-                          icon={FilmCategoryIcon}/>
+                        <Resource name="rooms"
+                                  list={RoomList}
+                                  edit={RoomEdit}
+                                  create={RoomCreate}
+                                  icon={RoomIcon}/>
 
-                <Resource name="rooms"
-                          list={RoomList}
-                          edit={RoomEdit}
-                          create={RoomCreate}
-                          icon={RoomIcon}/>
+                        <Resource options={{label: 'Film Rules'}}
+                                  name="filmRules"
+                                  list={FilmRuleList}
+                                  edit={FilmRuleEdit}
+                                  create={FilmRuleCreate}
+                                  icon={FilmRuleIcon}/>
 
-                <Resource options={{label: 'Film Rules'}}
-                          name="filmRules"
-                          list={FilmRuleList}
-                          edit={FilmRuleEdit}
-                          create={FilmRuleCreate}
-                          icon={FilmRuleIcon}/>
+                        <Resource name="productions"
+                                  list={ProductionList}
+                                  edit={ProductionEdit}
+                                  create={ProductionCreate}
+                                  icon={ProductionIcon}/>
 
-                <Resource name="productions"
-                          list={ProductionList}
-                          edit={ProductionEdit}
-                          create={ProductionCreate}
-                          icon={ProductionIcon}/>
-
-                <Resource name="languages"
-                          list={LanguageList}
-                          edit={LanguageEdit}
-                          create={LanguageCreate}
-                          icon={LanguageIcon}/>
+                        <Resource name="languages"
+                                  list={LanguageList}
+                                  edit={LanguageEdit}
+                                  create={LanguageCreate}
+                                  icon={LanguageIcon}/>
+                    </> : null
+                }
 
                 <Resource name="schedules"
                           list={ScheduleList}
@@ -62,12 +63,13 @@ export default function Home() {
                           create={ScheduleCreate}
                           icon={ScheduleIcon}/>
 
-                <Resource name="tickets" options={{ label: 'Tickets' }} list={TicketList} icon={TicketIcon}/>
+                <Resource name="tickets" options={{label: 'Tickets'}} list={TicketList} icon={TicketIcon}/>
             </Admin>,
         </>
     )
 }
 
 if (document.getElementById('admin_dashboard')) {
-    createRoot(document.getElementById('admin_dashboard')).render(<Home/>);
+    let role = document.getElementById('admin_dashboard').getAttribute('role');
+    createRoot(document.getElementById('admin_dashboard')).render(<Home role={role}/>);
 }
