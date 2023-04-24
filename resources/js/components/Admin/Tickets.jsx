@@ -20,6 +20,7 @@ export const TicketIcon = BookIcon;
 export const TicketList = () => {
     const [inputValue, setInputValue] = useState('');
     const [ticketDetails, setTicketDetails] = useState(null);
+    const [messagePlace, setMessagePlace] = useState('Input the session id')
 
     const onChange = (e) => {
         setInputValue(e.currentTarget.value);
@@ -31,7 +32,8 @@ export const TicketList = () => {
                 setTicketDetails(r.data);
             })
             .catch(e => {
-                console.log(e);
+                console.log(e.message);
+                setMessagePlace('Wrong session id')
             });
     }
 
@@ -51,18 +53,28 @@ export const TicketList = () => {
                         {ticketDetails.map(ticket => {
                             return (
                                 <div className="" key={ticket.id}>
+                                    <br/>
                                     <div>
-                                        Movie: {ticket.film_name}
+                                        Movie: <b>{ticket.film_name}</b>
+                                        <br/>
                                         Name: {ticket.user_name}
-                                        Seat: {ticket.seat_name}
+                                        <br/>
+                                        Seat: <b>{ticket.seat_name}</b>
+                                        <br/>
                                         Time: {ticket.start_time}
+                                        <br/>
                                         Seat type: {ticket.seat_type}
                                     </div>
                                 </div>
                             )
                         })}
                     </>
-                ) : (<div style={{fontStyle: "italic", fontSize: "14px", marginTop: "5px"}}>Wrong id</div>)
+                ) : (<div style={{fontStyle: "italic", fontSize: "14px", marginTop: "5px"}}>
+                    <span>
+                        {messagePlace}
+                    </span>
+
+                </div>)
             }
 
         </div>

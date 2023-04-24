@@ -18,6 +18,12 @@ class TicketController
         $sessionId = $request->sessionId;
         $ticketIds = Ticket::query()->where('session_id', $sessionId)->get('id')->toArray();
 
+        if ($ticketIds === []) {
+            return response()->json([
+                'status' => false,
+                'message' => 'failed'
+            ], 400);
+        }
         $ticketData = [];
         foreach ($ticketIds as $ticketId) {
             $ticket = Ticket::query()
