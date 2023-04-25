@@ -24,7 +24,7 @@ Route::prefix('/ticket')->group(function () {
     Route::get('/select', [TicketController::class, 'select']);
 });
 
-Route::middleware('auth.web')->group(function (){
+Route::middleware('auth.web')->group(function () {
     Route::post('/signOut', [LogoutController::class, 'logout']);
     Route::get('/stripe/success', [TicketController::class, 'success'])->name('stripe.success');
     Route::get('/stripe/cancel', [TicketController::class, 'cancel'])->name('stripe.cancel');
@@ -34,8 +34,10 @@ Route::middleware('auth.web')->group(function (){
     Route::get('/myTickets', [UserController::class, 'showUserTickets']);
 });
 
-//admin
-Route::get('/admin', [AdminController::class, 'index']);
+Route::middleware('auth.admin')->group(function () {
+    Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/admin/logout', [AdminController::class, 'logout']);
+});
 
-
-
+Route::get('/admin/login', [AdminController::class, 'login']);
+Route::post('/admin/login', [AdminController::class, 'loginCheck']);
