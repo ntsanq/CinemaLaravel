@@ -57,7 +57,7 @@ export const TicketList = () => {
                                         <br/>
                                         Seat: <b>{ticket.seat_name}</b>
                                         <br/>
-                                        Time: {ticket.start_time}
+                                        Time: {ticket.start_datetime}
                                         <br/>
                                         Seat type: {ticket.seat_type}
                                     </div>

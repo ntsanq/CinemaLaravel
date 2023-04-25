@@ -28,7 +28,7 @@ export default function TicketDetailsPopup(props) {
         }).catch(e => {
             console.log(e)
         });
-    },[])
+    }, [])
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -93,6 +93,11 @@ export default function TicketDetailsPopup(props) {
                                                 className="uk-flex uk-flex-column ticket--seat-info--time uk-margin-large-left">
                                                 <span className="ticket-label">Time</span>
                                                 <span>{ticket.start_time}</span>
+                                            </div>
+                                            <div
+                                                className="uk-flex uk-flex-column ticket--seat-info--time uk-margin-large-left">
+                                                <span className="ticket-label">Date</span>
+                                                <span>{ticket.start_date}</span>
                                             </div>
                                         </div>
                                     </div>

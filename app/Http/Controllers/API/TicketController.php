@@ -49,6 +49,9 @@ class TicketController
 
         foreach ($ticketData as &$ticketItem) {
             $ticketItem['start_time'] = date("H:i", strtotime($ticketItem['start_time']));
+            $ticketItem['start_date'] = date("d-m-Y", strtotime($ticketItem['start_time']));
+            $ticketItem['start_datetime'] = date("d-m-Y H:iA", strtotime($ticketItem['start_time']));
+            unset($ticketItem['end_time']);
         }
 
         return $this->success($ticketData);
