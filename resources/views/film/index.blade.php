@@ -4,10 +4,6 @@
     {{  __('Film details') }}
 @endsection
 
-@section('head')
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
-@endsection
-
 @section('content')
     <div id="tm-media-section">
         <div class="uk-container uk-container-center uk-width-8-10">

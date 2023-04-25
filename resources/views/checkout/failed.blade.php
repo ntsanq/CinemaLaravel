@@ -4,9 +4,6 @@
     {{  __('Checkout failed') }}
 @endsection
 
-@include('layouts/head')
-
-
 @section('content')
     <div class="uk-flex uk-flex-center checkout-success">
         <div class="uk-flex uk-flex-column">

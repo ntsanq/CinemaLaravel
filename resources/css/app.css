@@ -20,6 +20,10 @@
         padding: unset;
     }
 
+    #tm-media-section div {
+        width: 100% !important;
+    }
+
     #tm-footer .uk-grid {
         display: flex;
         flex-direction: row;
