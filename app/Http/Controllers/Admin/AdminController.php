@@ -43,4 +43,11 @@ class AdminController extends Controller
 
         return redirect('/admin');
     }
+
+    public function logout()
+    {
+        session()->forget('admin_token');
+
+        return redirect('admin/login');
+    }
 }

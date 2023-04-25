@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {createRoot} from "react-dom/client";
-import {Admin, Resource} from "react-admin";
+import {Admin, Resource,Layout} from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 import {FilmCreate, FilmEdit, FilmIcon, FilmList} from "./Films";
 import {FilmCategoryCreate, FilmCategoryEdit, FilmCategoryIcon, FilmCategoryList} from "./FilmCategories";
@@ -11,10 +11,14 @@ import {LanguageCreate, LanguageEdit, LanguageIcon, LanguageList} from "./Langua
 import {ScheduleCreate, ScheduleEdit, ScheduleIcon, ScheduleList} from "./Schedules";
 import {TicketIcon, TicketList} from "./Tickets";
 
+import AdminBar from './AdminBar';
+
+export const MyLayout = props => <Layout {...props} appBar={AdminBar} />;
+
 export default function Home(props) {
     return (
         <>
-            <Admin dataProvider={jsonServerProvider('http://localhost:8000/api/admin')}>
+            <Admin layout={MyLayout} dataProvider={jsonServerProvider('http://localhost:8000/api/admin')}>
                 {
                     props.role === "admin" ? <>    <Resource options={{label: 'Films'}}
                                                              name="films"

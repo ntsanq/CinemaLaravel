@@ -36,6 +36,7 @@ Route::middleware('auth.web')->group(function () {
 
 Route::middleware('auth.admin')->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/admin/logout', [AdminController::class, 'logout']);
 });
 
 Route::get('/admin/login', [AdminController::class, 'login']);
