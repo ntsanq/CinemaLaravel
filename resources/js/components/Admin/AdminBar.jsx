@@ -17,8 +17,8 @@ export default function AdminBar() {
         <AppBar color="primary">
             <Box flex="1"/>
             <Box flex="1"/>
-            <ToggleThemeButton lightTheme={defaultTheme} darkTheme={darkTheme} />
             <Button type="text" style={{color: "white"}} onClick={handleLogout}>Log out</Button>
+            <ToggleThemeButton lightTheme={defaultTheme} darkTheme={darkTheme} />
         </AppBar>
     );
 };
