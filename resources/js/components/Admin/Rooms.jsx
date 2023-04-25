@@ -5,9 +5,11 @@ import {
     TextField,
     EditButton, Edit, useRecordContext, SimpleForm, TextInput, Create
 } from 'react-admin';
-import BookIcon from '@mui/icons-material/Book';
 
-export const RoomIcon = BookIcon;
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+
+export const RoomIcon = MeetingRoomIcon;
+
 const roomFilters = [
     <TextInput source="name" label="Search" alwaysOn name="search"/>
 ];

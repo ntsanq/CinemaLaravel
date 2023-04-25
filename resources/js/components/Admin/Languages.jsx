@@ -5,9 +5,9 @@ import {
     TextField,
     EditButton, useRecordContext, SimpleForm, TextInput, Edit, Create
 } from 'react-admin';
-import BookIcon from '@mui/icons-material/Book';
+import LanguageMIcon from '@mui/icons-material/Language';
 
-export const LanguageIcon = BookIcon;
+export const LanguageIcon = LanguageMIcon;
 
 const filmFilters = [
     <TextInput source="name" label="Search" alwaysOn name="search"/>

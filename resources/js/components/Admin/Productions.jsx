@@ -5,9 +5,10 @@ import {
     TextField,
     EditButton, useRecordContext, TextInput, Edit, SimpleForm, Create
 } from 'react-admin';
-import BookIcon from '@mui/icons-material/Book';
 
-export const ProductionIcon = BookIcon;
+import BusinessIcon from '@mui/icons-material/Business';
+
+export const ProductionIcon = BusinessIcon;
 
 const productionFilters = [
     <TextInput source="name" label="Search" alwaysOn name="search"/>

@@ -5,9 +5,9 @@ import {
     TextField,
     EditButton, useRecordContext, Edit, TextInput, SimpleForm, Create, Pagination,
 } from 'react-admin';
-import BookIcon from '@mui/icons-material/Book';
+import CategoryIcon from '@mui/icons-material/Category';
 
-export const FilmCategoryIcon = BookIcon;
+export const FilmCategoryIcon = CategoryIcon;
 const FilmCategoryPagination = () => <Pagination rowsPerPageOptions={[5, 10, 25, 50]}/>;
 
 const filmCategoryFilters = [

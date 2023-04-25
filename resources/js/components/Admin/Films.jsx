@@ -18,16 +18,17 @@ import {
     RichTextField,
     ReferenceField,
     ReferenceInput,
-    SelectInput, UrlField
+    SelectInput,
+    UrlField,
+    Pagination
 } from 'react-admin';
-import BookIcon from '@mui/icons-material/Book';
+
 import {useMediaQuery} from "@mui/material";
 import {RichTextInput} from "ra-input-rich-text";
+import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 
-import {Pagination} from 'react-admin';
-
+export const FilmIcon = LocalMoviesIcon;
 const FilmPagination = () => <Pagination rowsPerPageOptions={[5, 10, 25, 50]}/>;
-export const FilmIcon = BookIcon;
 
 const filmFilters = [
     <TextInput source="name" label="Search" alwaysOn name="search"/>,

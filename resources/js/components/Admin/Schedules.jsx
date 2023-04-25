@@ -14,9 +14,9 @@ import {
     ReferenceInput,
     SelectInput, TimeInput, NumberInput, DateInput, DateTimeInput
 } from 'react-admin';
-import BookIcon from '@mui/icons-material/Book';
+import ScheduleMIcon from '@mui/icons-material/Schedule';
 
-export const ScheduleIcon = BookIcon;
+export const ScheduleIcon = ScheduleMIcon;
 
 const scheduleFilters = [
     <TextInput source="film_id" label="Search film names" alwaysOn name="search"/>,

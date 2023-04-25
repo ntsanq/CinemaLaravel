@@ -1,39 +1,15 @@
 import * as React from "react";
-import {
-    List,
-    Datagrid,
-    TextField,
-    EditButton,
-    Edit,
-    useRecordContext,
-    SimpleForm,
-    TextInput,
-    Create
-} from 'react-admin';
-import BookIcon from '@mui/icons-material/Book';
 import {useEffect, useState} from "react";
 import {Input, Button} from "antd";
 import TicketService from "../../services/TicketService";
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 
-export const TicketIcon = BookIcon;
+export const TicketIcon = ConfirmationNumberIcon;
 
 export const TicketList = () => {
     const [inputValue, setInputValue] = useState('');
     const [ticketDetails, setTicketDetails] = useState(null);
     const [messagePlace, setMessagePlace] = useState('Input the session id');
-
-    // useEffect(()=> {
-    //     TicketService.getTickets(inputValue)
-    //         .then(r => {
-    //             setTicketDetails(r.data);
-    //         })
-    //         .catch(e => {
-    //             console.log(e.message);
-    //             setMessagePlace('Wrong session id');
-    //             setInputValue('');
-    //         });
-    // },[inputValue])
-
     const onChange = (e) => {
         setInputValue(e.currentTarget.value);
     }

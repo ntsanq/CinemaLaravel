@@ -5,9 +5,10 @@ import {
     TextField,
     EditButton, Edit, useRecordContext, TextInput, SimpleForm, Create
 } from 'react-admin';
-import BookIcon from '@mui/icons-material/Book';
 
-export const FilmRuleIcon = BookIcon;
+import BlockIcon from '@mui/icons-material/Block';
+
+export const FilmRuleIcon = BlockIcon;
 
 const filmRuleFilters = [
     <TextInput source="name" label="Search" alwaysOn name="search"/>
