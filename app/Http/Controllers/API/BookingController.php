@@ -9,6 +9,7 @@ use App\Models\Schedule;
 use App\Models\Seat;
 use App\Models\SeatCategory;
 use App\Models\Ticket;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Stripe\StripeClient;
@@ -84,18 +85,24 @@ class BookingController
             ])
             ->where('schedules.film_id', $request->filmId)
             ->whereDate('schedules.start', date('Y/m/d', $date))
+            ->orderBy('schedules.start', 'asc')
             ->get()->toArray();
 
         if ($schedules === null) {
             return $this->successMessage([]);
         }
 
-        foreach ($schedules as &$schedule) {
-            $schedule['start'] = date('H:i', strtotime($schedule['start']));
-            $schedule['end'] = date('H:i', strtotime($schedule['end']));
+        $currentDateTime = Carbon::now();
+        $data = [];
+        foreach ($schedules as $schedule) {
+            if (Carbon::parse($schedule['start'])->greaterThan($currentDateTime)) {
+                $schedule['start'] = date('H:i', strtotime($schedule['start']));
+                $schedule['end'] = date('H:i', strtotime($schedule['end']));
+                $data[] = $schedule;
+            }
         }
 
-        return $this->success($schedules);
+        return $this->success($data);
     }
 
     public function checkout(Request $request)
