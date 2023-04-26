@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('remove:expired')->everyMinute();
         $schedule->command('change:expired')->everyMinute();
-        $schedule->command('room:reset')->everyMinute();
+//        $schedule->command('room:reset')->everyMinute();
     }
 
     /**
