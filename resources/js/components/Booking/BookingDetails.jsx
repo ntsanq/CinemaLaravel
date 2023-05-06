@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import {Button, Modal} from "antd";
+import moment from "moment/moment";
 
 export default function BookingDetails(props) {
     const film = props.film;
     const timeState = props.timeState;
+    const dateState = moment(props.dateState).format('DD-MM-YYYY');
     const seatInfos = props.seatInfos;
     const handleEnoughInfo = props.handleEnoughInfo;
     const open = props.popUpOpen;
@@ -72,6 +74,7 @@ export default function BookingDetails(props) {
                 <div className="uk-text-left uk-margin-small">
                     <span style={{opacity: 0.7}}>Showtime: </span>
                     <span> {timeState.split(' ')[0] === 'null' ? '' : timeState.split(' ')[0]}</span>
+                    <span>{" "}{dateState}</span>
                 </div>
                 <div className="uk-text-left uk-margin-small light">
                     <span style={{opacity: 0.7}}>Seat numbers: </span>

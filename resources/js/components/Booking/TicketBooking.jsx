@@ -133,7 +133,10 @@ export default function TicketBooking(props) {
             </div>
 
             <div className="right-booking">
-                <BookingDetails film={film} timeState={timeState} seatInfos={seatInfos}
+                <BookingDetails film={film}
+                                timeState={timeState}
+                                dateState={dateState}
+                                seatInfos={seatInfos}
                                 handleEnoughInfo={handleEnoughInfo}
                                 handleSubmitConfirm={handleSubmitConfirm} popUpOpen={popUpOpen}
                                 onPopUpData={handlePopUp}
