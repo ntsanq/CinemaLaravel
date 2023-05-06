@@ -137,6 +137,7 @@ class FilmController
         $film->production_id = $request->production_id;
         $film->language_id = $request->language_id;
         $film->description = $request->description;
+        $film->duration = $request->duration;
         $film->save();
 
         return response()->json($film);

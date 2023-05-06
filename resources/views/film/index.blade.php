@@ -57,10 +57,12 @@
 
                                 <div style="color: #c12525" class="">
                                     <span class="uk-text-bold uk-contrast">Rules: </span>
-                                    @if(count($filmDetails['rules']) > 1)
-                                        {{ implode(', ', $filmDetails['rules']) }}
-                                    @else
-                                        {{ $filmDetails['rules'][0] }}
+                                    @if(!empty($filmDetails['rules']))
+                                        @if(count($filmDetails['rules']) > 1)
+                                            {{ implode(', ', $filmDetails['rules']) }}
+                                        @else
+                                            {{ $filmDetails['rules'][0] }}
+                                        @endif
                                     @endif
                                 </div>
                                 <div class="uk-margin-small-top">

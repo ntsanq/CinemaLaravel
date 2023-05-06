@@ -20,7 +20,8 @@ import {
     ReferenceInput,
     SelectInput,
     UrlField,
-    Pagination
+    Pagination,
+    NumberInput
 } from 'react-admin';
 
 import {useMediaQuery} from "@mui/material";
@@ -127,6 +128,7 @@ export const FilmCreate = () => (
             <TextInput label="Image" source="path" name="path" sx={{minWidth: "450px"}}/>
             <TextInput source="trailer" name="trailer" sx={{minWidth: "450px"}}/>
             <RichTextInput source="description" name="description"/>
+            <NumberInput name="duration" source="duration"/>
         </SimpleForm>
     </Create>
 );

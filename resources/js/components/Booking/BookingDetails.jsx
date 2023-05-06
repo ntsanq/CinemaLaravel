@@ -35,7 +35,9 @@ export default function BookingDetails(props) {
                 <div className="uk-flex-bottom uk-margin-left">
                     <div className="uk-text-left uk-text-contrast booking-details--film-name">{film.name}</div>
                     <div className="uk-text-left booking-details--film-rules uk-margin-bottom ">
-                        <span className="booking-details--film-rules">(*)</span>
+                        {film.rules && film.rules.length > 0 && (
+                            <span className="booking-details--film-rules">(*)</span>
+                        )}
                         {film.rules ? film.rules.map((item, i) => {
                             return (<span className="uk-text-left uk-margin-small-left" key={i}>{item}
                                 {i !== film.rules.length - 1 && ','}
