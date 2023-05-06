@@ -45,7 +45,8 @@
             <form method="GET" action="/" role="search" name="myForm"
                   class="uk-search uk-margin-small-top uk-margin-left uk-hidden-small">
                 <input class="uk-search-field" placeholder="Search" name="search" type="search"
-                       value="{{ $search ?? '' }}">
+                       value="{{ app('request')->get('search') ?? '' }}"
+                       style="border: 1px solid #353535;border-radius: 20px;">
                 <input type="hidden" name="category" value="{{ app('request')->input('category') }}">
                 <div class="uk-dropdown uk-dropdown-flip uk-dropdown-search" aria-expanded="false"></div>
             </form>
