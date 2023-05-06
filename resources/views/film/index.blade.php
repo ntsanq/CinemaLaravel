@@ -6,8 +6,8 @@
 
 @section('content')
     <div id="tm-media-section">
-        <div class="uk-container uk-container-center ">
-            <div class="mt-50">
+        <div class="uk-container uk-container-center uk-width-8-10">
+            <div class="uk-grid mt-50">
                 <div class="uk-width-medium-10-10">
                     <div>
                         <ul class="uk-tab uk-tab-grid" data-uk-switcher="{connect:'#media-tabs'}">
