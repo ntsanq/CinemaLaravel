@@ -679,6 +679,7 @@ select.uk-form-width-mini {
  */
 .uk-search:before {
     content: "\f002";
+    padding-left: 10px;
     position: absolute;
     top: 0;
     left: 0;
@@ -1538,7 +1539,7 @@ html .uk-nav.uk-nav-offcanvas>li.uk-active>a {
     /* 6 */
     width: 150px;
     height: 30px;
-    padding: 0 0 0 30px;
+    padding: 0 0 0 40px;
     border: 1px solid rgba(0, 0, 0, 0);
     background: rgba(0, 0, 0, 0);
     -webkit-transition: all 0.2s linear;
@@ -1550,15 +1551,12 @@ html .uk-nav.uk-nav-offcanvas>li.uk-active>a {
 }
 /* Placeholder */
 .uk-search-field:-ms-input-placeholder {
-    text-align: center;
     color: #999999 !important;
 }
 .uk-search-field::-moz-placeholder {
-    text-align: center;
     color: #999999;
 }
 .uk-search-field::-webkit-input-placeholder {
-    text-align: center;
     color: #999999;
 }
 /* Focus */
