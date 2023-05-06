@@ -1536,13 +1536,13 @@ html .uk-nav.uk-nav-offcanvas>li.uk-active>a {
     /* 5 */
     -webkit-appearance: none;
     /* 6 */
-    width: 120px;
+    width: 150px;
     height: 30px;
     padding: 0 0 0 30px;
     border: 1px solid rgba(0, 0, 0, 0);
     background: rgba(0, 0, 0, 0);
     -webkit-transition: all 0.2s linear;
-    transition: all 0.2s linear;
+    transition: all 0.3s linear;
     vertical-align: middle;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -1550,12 +1550,15 @@ html .uk-nav.uk-nav-offcanvas>li.uk-active>a {
 }
 /* Placeholder */
 .uk-search-field:-ms-input-placeholder {
+    text-align: center;
     color: #999999 !important;
 }
 .uk-search-field::-moz-placeholder {
+    text-align: center;
     color: #999999;
 }
 .uk-search-field::-webkit-input-placeholder {
+    text-align: center;
     color: #999999;
 }
 /* Focus */
@@ -1565,7 +1568,7 @@ html .uk-nav.uk-nav-offcanvas>li.uk-active>a {
 /* Focus + Active */
 .uk-search-field:focus,
 .uk-search.uk-active .uk-search-field {
-    width: 180px;
+    width: 300px;
 }
 /* Dropdown modifier: `uk-dropdown-search`
  ========================================================================== */
