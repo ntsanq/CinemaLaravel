@@ -114,7 +114,7 @@ export default function TicketDetailsPopup(props) {
                         </div>
                     )
                 })}
-                <div className="uk-margin-top">Total price: {total}</div>
+                <div className="uk-margin-top">Total price: <b>{total} VND</b></div>
 
             </Modal>
         </>
