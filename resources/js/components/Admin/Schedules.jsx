@@ -41,7 +41,6 @@ export const ScheduleList = () => {
                 </ReferenceField>
                 <TextField source="start"/>
                 <TextField source="end"/>
-                <TextField source="duration"/>
                 <EditButton/>
             </Datagrid>
         </List>
@@ -63,7 +62,6 @@ export const ScheduleEdit = () => (
                 <SelectInput optionText="name"/>
             </ReferenceInput>
             <DateTimeInput name="start" source="start"/>
-            <NumberInput name="duration" source="duration" disabled/>
         </SimpleForm>
     </Edit>
 );

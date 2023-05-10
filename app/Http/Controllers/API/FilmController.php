@@ -143,6 +143,15 @@ class FilmController
         return response()->json($film);
     }
 
+    public function deleteForAdmin($id)
+    {
+        $film = Film::findOrFail($id);
+        $film->delete();
+
+        return response()->json(['message'=>'Can not delete this film'], 400);
+    }
+
+
     public function info($id)
     {
         $filmDetails = $this->queryFilmInfo($id);
