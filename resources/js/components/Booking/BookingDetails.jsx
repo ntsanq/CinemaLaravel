@@ -83,7 +83,8 @@ export default function BookingDetails(props) {
                 <div className="uk-text-left uk-margin-small wei">
                     <span style={{opacity: 0.7}}>Total prices:</span>
                     <span
-                        className="uk-text-bold"> {seatInfos.reduce((total, seat) => total + seat.price, 0)} VND</span>
+                        className="uk-text-bold"> {seatInfos.reduce((total, seat) => total + seat.price, 0)
+                        .toLocaleString('vi-VN')} VND</span>
                 </div>
             </div>
 
@@ -116,7 +117,7 @@ export default function BookingDetails(props) {
                     <p>Showtime: {timeState.split(' ')[0]}</p>
                     <p>Seats: {seatInfos.map(seat => <span
                         key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</p>
-                    <p>Total prices: {seatInfos.reduce((total, seat) => total + seat.price, 0)} VND</p>
+                    <p>Total price: {seatInfos.reduce((total, seat) => total + seat.price, 0).toLocaleString('vi-VN')} VND</p>
 
                     <h3 className="payment-label">Payment method</h3>
                     <div>
