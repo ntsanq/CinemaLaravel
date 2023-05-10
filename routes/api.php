@@ -102,6 +102,7 @@ Route::prefix('/admin')->group(function () {
 
 Route::post('/confirmBooking', [BookingController::class, 'checkout']);
 Route::post('/getTickets', [TicketController::class, 'getTickets']);
+Route::post('/printed', [TicketController::class, 'printed']);
 
 Route::get('/getWeeklyFilm', [FilmController::class, 'getWeekly']);
 

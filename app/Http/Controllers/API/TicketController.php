@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 
+use App\Enums\TicketStatus;
 use App\Http\Traits\ResponseTrait;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -13,6 +14,27 @@ class TicketController
 {
     use ResponseTrait;
 
+    public function printed(Request $request)
+    {
+        $sessionId = $request->sessionId;
+        $ticketIds = Ticket::query()->where('session_id', $sessionId)->get('id')->toArray();
+
+        if ($ticketIds === []) {
+            return response()->json([
+                'status' => false,
+                'message' => 'failed'
+            ], 400);
+        }
+        foreach ($ticketIds as $ticketId) {
+            Ticket::query()
+                ->where('tickets.id', $ticketId)
+                ->update([
+                    'status' => TicketStatus::Printed
+                ]) ;
+        }
+
+        return $this->successMessage('success');
+    }
     public function getTickets(Request $request)
     {
         $sessionId = $request->sessionId;

@@ -48,6 +48,7 @@ class UserController extends Controller
                         WHEN tickets.status = ' . TicketStatus::UnPaid . ' THEN "' . TicketStatus::getKey(TicketStatus::UnPaid) . '"
                         WHEN tickets.status = ' . TicketStatus::Paid . ' THEN "' . TicketStatus::getKey(TicketStatus::Paid) . '"
                         WHEN tickets.status = ' . TicketStatus::Expired . ' THEN "' . TicketStatus::getKey(TicketStatus::Expired) . '"
+                        WHEN tickets.status = ' . TicketStatus::Printed . ' THEN "' . TicketStatus::getKey(TicketStatus::Printed) . '"
                         ELSE ""
                         END as status'
                     ),

@@ -54,6 +54,14 @@ class TicketService {
         return response.data;
     }
 
+    async printed(sessionId) {
+        let response = await axios.post(this.api + `/printed`, {
+            sessionId: sessionId
+        });
+
+        return response.data;
+    }
+
     async getTotal(sessionId) {
         let response = await axios.post(this.api + `/tickets/getTotal`, {
             sessionId: sessionId

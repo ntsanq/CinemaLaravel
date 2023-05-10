@@ -34,6 +34,14 @@ export const TicketList = () => {
             });
     }
 
+    const handlePrint = (sessionId) => {
+        TicketService.printed(sessionId).then(r => {
+            console.log(r.data)
+        }).catch(e => {
+            console.log(e)
+        });
+    }
+
     return (
         <div className="ticket-check-page">
             <div className="ticket-check--title noPrint">
@@ -52,7 +60,7 @@ export const TicketList = () => {
                 <br/>
                 Staff: Thanh Sang
                 <br/>
-                Customer: {ticketDetails[0].user_name}
+                Customer: {ticketDetails ? ticketDetails[0].user_name : ""}
                 <div>====================</div>
                 <br/>
             </div>
@@ -87,7 +95,10 @@ export const TicketList = () => {
                             </div>
                         </div>
                         <Button className="ticket-check--print-button noPrint" type="default"
-                                onClick={() => window.print()}>Print</Button>
+                                onClick={() => {
+                                    window.print();
+                                    handlePrint(inputValue);
+                                }}>Print</Button>
                     </>
                 ) : (<div className="ticket-check--message">
                     <span>

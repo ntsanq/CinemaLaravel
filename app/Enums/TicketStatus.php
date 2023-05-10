@@ -9,4 +9,5 @@ final class TicketStatus extends Enum
     const UnPaid = 0;
     const  Paid = 1;
     const Expired = 2;
+    const Printed = 3;
 }

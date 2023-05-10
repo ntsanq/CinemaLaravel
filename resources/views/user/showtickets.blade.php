@@ -33,6 +33,9 @@
 
                         @elseif($ticket[0]['status'] === "Expired")
                             <td style="color: #b50404">{{ $ticket[0]['status'] }}</td>
+
+                        @elseif($ticket[0]['status'] === "Printed")
+                            <td style="color: #02c8e8">{{ $ticket[0]['status'] }}</td>
                         @else
                             <td style="color: #2ba22b">{{ $ticket[0]['status'] }}</td>
                         @endif
