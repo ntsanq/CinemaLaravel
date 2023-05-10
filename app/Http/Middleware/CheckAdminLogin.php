@@ -21,6 +21,9 @@ class CheckAdminLogin
     {
         if (session()->get('admin_token')) {
             $token = PersonalAccessToken::findToken(session()->get('admin_token'));
+            if ($token === null) {
+                return redirect('/admin/login');
+            }
             $user = $token->tokenable;
             if ($user->role == UserRole::Clerk || $user->role == UserRole::Admin) {
                 return $next($request);
