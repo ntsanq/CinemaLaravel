@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\DB;
 class SeatTableSeeder extends Seeder
 {
 
-    const VILLAGER = 1;
-    const DREAMER = 2;
+    const STANDARD = 1;
+    const PREMIUM = 2;
 
 
     /**
@@ -60,11 +60,15 @@ class SeatTableSeeder extends Seeder
                 $seatIns->room_id = $room->id;
                 $seatIns->name = $seat;
                 if (in_array($seatIns->name, $vipSeatsList)) {
-                    $seatIns->seat_category_id = self::DREAMER;
+                    $seatIns->seat_category_id = self::PREMIUM;
                 } else {
-                    $seatIns->seat_category_id = self::VILLAGER;
+                    $seatIns->seat_category_id = self::STANDARD;
                 }
-                $seatIns->status = fake()->randomElement(SeatStatus::getValues());
+                if ($room->id == 9 || $room->id == 10) {
+                    $seatIns->status = SeatStatus::UnBooked;
+                } else {
+                    $seatIns->status = fake()->randomElement(SeatStatus::getValues());
+                }
                 $seatIns->save();
             }
         }

@@ -19,9 +19,9 @@ class ScheduleFactory extends Factory
     public function definition()
     {
         $filmIds = DB::table('films')->select('id')->get();
-        $roomIds = DB::table('rooms')->select('id')->get();
+        $roomIds = DB::table('rooms')->select('id')->whereNotIn('id', [9, 10])->get();;
 
-        $startTime = fake()->dateTimeInInterval('now', '+ 2 days', 'Asia/Ho_Chi_Minh');
+        $startTime = fake()->dateTimeInInterval('now', '+ 3 days', 'Asia/Ho_Chi_Minh');
         $endTime = Carbon::parse($startTime)->addHours(2);
 
         return [
