@@ -8,21 +8,21 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class RemoveExpiredSeatCommand extends Command
+class RemoveUnpaidSeatCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'remove:expired';
+    protected $signature = 'remove:unpaid';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Remove expired tickets';
+    protected $description = 'Remove unpaid tickets';
 
     /**
      * @return void
@@ -42,7 +42,7 @@ class RemoveExpiredSeatCommand extends Command
             };
         }
 
-        $this->info("Deleted " . $count . " expired tickets");
+        $this->info("Deleted " . $count . " unpaid tickets");
     }
 
 }

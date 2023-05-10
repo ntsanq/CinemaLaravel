@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('remove:expired')->everyMinute();
+        $schedule->command('remove:unpaid')->everyMinute();
         $schedule->command('change:expired')->everyMinute();
 //        $schedule->command('room:reset')->everyMinute();
     }
