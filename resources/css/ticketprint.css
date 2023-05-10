@@ -1,0 +1,65 @@
+.ticket-check--title {
+    font-size: 18px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ticket-check--details {
+    margin-top: 20px;
+}
+
+
+.ticket-check--input {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.ticket-check--message {
+    font-style: italic;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.ticket-check--print-button {
+    margin-top: 20px;
+}
+
+.print-no-display {
+    display: none;
+}
+
+.ticket-check-print--barcode {
+    width: 100%;
+    height: 10px;
+}
+
+@media print {
+    .noPrint {
+        display: none;
+    }
+
+    .print-no-display {
+        display: block;
+    }
+
+    .ticket-check--details {
+        margin-top: 0px;
+    }
+
+    header,
+    .RaLayout-appFrame,
+    .RaSidebar-fixed,
+    .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-colorPrimary.MuiAppBar-positionFixed.mui-fixed.css-h9eeb9-MuiPaper-root-MuiAppBar-root-RaAppBar-root,
+    .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.RaSidebar-paper.MuiDrawer-paperAnchorLeft.RaSidebar-paperAnchorLeft.css-4t3x6l-MuiPaper-root-MuiDrawer-paper,
+    .MuiDrawer-root.MuiDrawer-docked.RaSidebar-docked.css-9lo51-MuiDrawer-docked-RaSidebar-root {
+        display: none;
+    }
+
+    body{
+        text-align: center;
+        align-items: center;
+    }
+}

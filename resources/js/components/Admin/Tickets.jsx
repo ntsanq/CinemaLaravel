@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import {Input, Button} from "antd";
 import TicketService from "../../services/TicketService";
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import Barcode from 'react-barcode';
+
 
 export const TicketIcon = ConfirmationNumberIcon;
 
@@ -20,7 +22,6 @@ export const TicketList = () => {
         }
     };
 
-
     const handleClick = () => {
         TicketService.getTickets(inputValue)
             .then(r => {
@@ -34,42 +35,64 @@ export const TicketList = () => {
     }
 
     return (
-        <div>
-            <div style={{fontSize: "18px", marginTop: "30px", display: "flex", flexDirection: "column", gap: "20px"}}>
+        <div className="ticket-check-page">
+            <div className="ticket-check--title noPrint">
                 Insert the session Id sent in the email
 
-                <div style={{display: "flex", flexDirection: "row", gap: "20px"}}>
+                <div className="ticket-check--input">
                     <Input onChange={onChange} onKeyDown={handleKeyDown}/>
                     <Button type="primary" onClick={handleClick}>Get info</Button></div>
             </div>
 
+
+            <div className="print-no-display">
+                <b>SAN Cinema Ticket</b>
+                <br/>
+                Date: {new Date().toLocaleString() + ""}
+                <br/>
+                Staff: Thanh Sang
+                <br/>
+                Customer: {ticketDetails[0].user_name}
+                <div>====================</div>
+                <br/>
+            </div>
             {
                 ticketDetails ? (
                     <>
                         {ticketDetails.map(ticket => {
                             return (
-                                <div className="" key={ticket.id}>
-                                    <br/>
-                                    <div>
-                                        Movie: <b>{ticket.film_name}</b>
-                                        <br/>
-                                        Name: {ticket.user_name}
-                                        <br/>
-                                        Seat: <b>{ticket.seat_name}</b>
-                                        <br/>
-                                        Time: {ticket.start_datetime}
-                                        <br/>
-                                        Seat type: {ticket.seat_type}
+                                <>
+                                    <div className="ticket-check--details" key={ticket.id}>
+                                        <div>
+                                            Movie: <b>{ticket.film_name}</b>
+                                            <br/>
+                                            Name: {ticket.user_name}
+                                            <br/>
+                                            Seat: <b>{ticket.seat_name}</b>
+                                            <br/>
+                                            Time: {ticket.start_datetime}
+                                            <br/>
+                                            Seat type: {ticket.seat_type}
+                                        </div>
                                     </div>
-                                </div>
+                                    <div className="print-no-display">----------------------------</div>
+                                </>
                             )
                         })}
+
+                        <div className="ticket-check-print--barcode">
+                            <div className="print-no-display">
+                                <Barcode value={ticketDetails[0].seat_name + ticketDetails[0].film_name}
+                                         fontSize="10px"/>
+                            </div>
+                        </div>
+                        <Button className="ticket-check--print-button noPrint" type="default"
+                                onClick={() => window.print()}>Print</Button>
                     </>
-                ) : (<div style={{fontStyle: "italic", fontSize: "14px", marginTop: "5px"}}>
+                ) : (<div className="ticket-check--message">
                     <span>
                         {messagePlace}
                     </span>
-
                 </div>)
             }
 
