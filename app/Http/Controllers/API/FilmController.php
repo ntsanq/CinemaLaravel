@@ -148,7 +148,7 @@ class FilmController
         $film = Film::findOrFail($id);
         $film->delete();
 
-        return response()->json(['message'=>'Can not delete this film'], 400);
+        return response()->json(['message'=>'success']);
     }
 
 

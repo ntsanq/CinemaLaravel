@@ -76,7 +76,10 @@ class ClerkController
 
     public function deleteForAdmin($id)
     {
+        $clerks = User::findOrFail($id);
+        $clerks->delete();
 
+        return response()->json(['message'=>'success']);
     }
 
 }

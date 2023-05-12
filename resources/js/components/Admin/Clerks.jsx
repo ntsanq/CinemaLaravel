@@ -53,7 +53,6 @@ export const ClerkCreate = () => (
             <TextInput source="password" name="password"/>
             <DateInput source="birthday" name="birthday"/>
             <TextInput source="address" name="address"/>
-
         </SimpleForm>
     </Create>
 )
