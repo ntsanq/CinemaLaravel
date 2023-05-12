@@ -22,33 +22,20 @@ class ClerkController
             ->select([
                 'users.*'
             ])
-            ->where('name', 'like', '%' . $search . '%')
+            ->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%');
+            })
             ->where(function ($query) {
-                $query->where('role', UserRole::Clerk)
-                    ->orWhere('role', UserRole::Admin);
+                $query->where('role', UserRole::Clerk);
             });
-
         $order = strtolower($order);
-        if (in_array($order, ['asc', 'desc'])) {
-            $clerks = $clerks->orderBy('users.' . $sort, $order);
-        }
 
-        $paginator = $clerks->paginate($end - $start);
-        $clerks = $paginator->toArray()['data'];
+        $clerks = $clerks->orderBy('users.' . $sort, $order)->get()->toArray();
 
-//        foreach ($clerks as &$clerk) {
-//            switch ($clerk['role']) {
-//                case UserRole::Clerk:
-//                    $clerk['role'] = UserRole::getKey(UserRole::Clerk);
-//                    break;
-//                case UserRole::Admin:
-//                    $clerk['role'] = UserRole::getKey(UserRole::Admin);
-//                    break;
-//            }
-//        }
-
-        $total = $paginator->total();
-        $data = array_values($clerks);
+        $total = count($clerks);
+        $query = collect($clerks)->skip($start)->take($end - $start);
+        $data = array_values($query->toArray());
 
         return response()->json($data)->header('X-Total-Count', $total);
     }
