@@ -10,9 +10,8 @@ class UsersTableSeeder extends Seeder
 {
     public function run()
     {
-        User::factory(100)->create();
         User::create([
-            'name' => "Thanh Sang",
+            'name' => "Lãng Tử",
             'email' => "sangss998@gmail.com",
             'gender' => 1,
             'birthday' => "2000-01-24",
@@ -49,5 +48,7 @@ class UsersTableSeeder extends Seeder
             'role' => 1,
             'remember_token' => Str::random(10),
         ]);
+
+        User::factory(20)->create();
     }
 }
