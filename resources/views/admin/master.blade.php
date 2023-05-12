@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <div id="admin_dashboard" role="{{ session()->get('role') }}"></div>
+    <div id="admin_dashboard" role="{{ session()->get('role') }}" user="{{ session()->get('admin_name') }}"></div>
     @yield('content')
 </div>
 </body>

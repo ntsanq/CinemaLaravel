@@ -29,7 +29,9 @@ class AdminController extends Controller
 
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return view('admin.login')->withErrors(['failed_auth' => 'Your email or password is not correct!'])->with($request->input());
+            return view('admin.login')
+                ->withErrors(['failed_auth' => 'Your email or password is not correct!'])
+                ->with($request->input());
         }
         if ($user->role == UserRole::Clerk) {
             session(['role' => 'clerk']);
@@ -40,6 +42,7 @@ class AdminController extends Controller
 
         $token = $user->createToken('authToken')->plainTextToken;
         session(['admin_token' => $token]);
+        session(['admin_name' => $user->name]);
 
         return redirect('/admin');
     }
@@ -47,6 +50,7 @@ class AdminController extends Controller
     public function logout()
     {
         session()->forget('admin_token');
+        session()->forget('admin_name');
 
         return redirect('admin/login');
     }

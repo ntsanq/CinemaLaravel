@@ -71,10 +71,9 @@ export const TicketList = () => {
                             return (
                                 <>
                                     <div className="ticket-check--details" key={ticket.id}>
+                                        <span className="noPrint">Name: {ticket.user_name}</span>
                                         <div>
                                             Movie: <b>{ticket.film_name}</b>
-                                            <br/>
-                                            Name: {ticket.user_name}
                                             <br/>
                                             Seat: <b>{ticket.seat_name}</b>
                                             <br/>

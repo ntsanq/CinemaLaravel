@@ -19,14 +19,16 @@ export const MyLayout = props => <Layout {...props} appBar={AdminBar}/>;
 export default function Home(props) {
     return (
         <>
-            <Admin layout={MyLayout} dataProvider={jsonServerProvider('http://localhost:8000/api/admin')}>
+            <Admin user={props.user} layout={MyLayout}
+                   dataProvider={jsonServerProvider('http://localhost:8000/api/admin')}>
                 {
-                    props.role === "admin" ? <>    <Resource options={{label: 'Films'}}
-                                                             name="films"
-                                                             list={FilmList}
-                                                             edit={FilmEdit}
-                                                             create={FilmCreate}
-                                                             icon={FilmIcon}/>
+                    props.role === "admin" ? <>
+                        <Resource options={{label: 'Films'}}
+                                  name="films"
+                                  list={FilmList}
+                                  edit={FilmEdit}
+                                  create={FilmCreate}
+                                  icon={FilmIcon}/>
 
                         <Resource options={{label: 'Film Categories'}}
                                   name="filmCategories"
@@ -75,15 +77,16 @@ export default function Home(props) {
                           icon={ScheduleIcon}/>
 
                 <Resource name="tickets"
-                          options={{label: 'Tickets'}}
+                          options={{label: 'Tickets', user: props.user}}
                           list={TicketList}
                           icon={TicketIcon}/>
-            </Admin>,
+            </Admin>
         </>
     )
 }
 
 if (document.getElementById('admin_dashboard')) {
     let role = document.getElementById('admin_dashboard').getAttribute('role');
-    createRoot(document.getElementById('admin_dashboard')).render(<Home role={role}/>);
+    let user = document.getElementById('admin_dashboard').getAttribute('user');
+    createRoot(document.getElementById('admin_dashboard')).render(<Home role={role} user={user}/>);
 }
