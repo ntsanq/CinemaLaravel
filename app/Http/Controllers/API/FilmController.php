@@ -105,6 +105,7 @@ class FilmController
         $film->description = $request->description;
         $film->language_id = $request->language_id;
         $film->production_id = $request->production_id;
+        $film->duration = $request->duration;
 
         if ($request->path) {
             $mediaLinkIns = MediaLink::findOrFail($film->media_link_id);

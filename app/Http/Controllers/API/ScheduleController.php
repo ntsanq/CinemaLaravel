@@ -108,7 +108,7 @@ class ScheduleController extends Controller
         $schedule = new Schedule();
         $schedule->film_id = $filmIns->id;
 
-        $this->roomCheck($request->room_id, $request->start, $request->room_id);
+        $this->roomCheck($request->room_id, $request->start, $request->room_id, $request->film_id);
 
         $schedule->room_id = $request->room_id;
         $schedule->start = $startTime;
@@ -127,8 +127,11 @@ class ScheduleController extends Controller
         return response()->json("Deleted");
     }
 
-    private function roomCheck($roomId, $time, $idUpdateFor): void
+    private function roomCheck($roomId, $time, $idUpdateFor, $filmId): void
     {
+        $film = Film::findOrFail($filmId);
+        $filmDuration = $film->duration;
+
         $roomSchedules = Schedule::query()
             ->join('rooms', 'rooms.id', 'schedules.room_id')
             ->select([
@@ -140,17 +143,22 @@ class ScheduleController extends Controller
             ->get()->toArray();
 
         foreach ($roomSchedules as $roomSchedule) {
-            $inputTime = Carbon::createFromFormat('Y-m-d\TH:i:s.uP', $time)->setTimezone(env('APP_TIMEZONE'));
+            $inputTime = Carbon::createFromFormat('Y-m-d\TH:i:s.uP', $time)
+                ->setTimezone(env('APP_TIMEZONE'));
             $startDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $roomSchedule['start']);
+            $soonerDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $roomSchedule['start'])
+                ->subMinutes($filmDuration);
             $endDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $roomSchedule['end']);
+            $filmDuration = 120;
 
-            if ($inputTime->between($startDateTime, $endDateTime) || $time === $startDateTime
-                || $time === $startDateTime) {
+            if ($inputTime->between($soonerDateTime, $endDateTime) || $time === $startDateTime) {
 
                 if ($roomSchedule['id'] == $idUpdateFor) {
                     continue;
                 } else {
-                    throw new \Exception('This room is not available from ' . $startDateTime->format('H:i') . ' to ' . $endDateTime->format('H:i'));
+                    throw new \Exception('There is a schedule at ' . $startDateTime->format('H:i')
+                        . ' to ' . $endDateTime->format('H:i')
+                        . '. You have to set it before ' . $filmDuration . ' minutes.');
                 }
 
             }

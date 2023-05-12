@@ -105,6 +105,7 @@ export const FilmEdit = () => (
             <TextInput label="Image" source="path" name="path" sx={{minWidth: "450px"}}/>
             <TextInput source="trailer" name="trailer" sx={{minWidth: "450px"}}/>
             <RichTextInput source="description" name="description"/>
+            <NumberInput source="duration" name="duration"/>
         </SimpleForm>
     </Edit>
 );

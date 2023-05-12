@@ -51,9 +51,12 @@ export default function BookingDetails(props) {
                         className="uk-text-left uk-margin-small booking-details--film-categories uk-margin-small-bottom">
                         <span>Genre: </span>
                         {film.categories ? film.categories.map((item, i) => {
-                            return (<span className="uk-text-left uk-text-contrast" key={i}>{item}
-                                {i !== film.rules.length - 1 && ', '}
-                            </span>)
+                            return (
+                                <span className="uk-text-left uk-text-contrast" key={i}>
+                                    {item}
+                                    {i !== film.categories.length - 1 && ', '}
+                                </span>
+                            )
                         }) : ''}
                     </div>
 
@@ -117,7 +120,8 @@ export default function BookingDetails(props) {
                     <p>Showtime: {timeState.split(' ')[0]}</p>
                     <p>Seats: {seatInfos.map(seat => <span
                         key={`${seat.id}-${seat.name}`}>{seat.name} {" "}</span>)}</p>
-                    <p>Total price: {seatInfos.reduce((total, seat) => total + seat.price, 0).toLocaleString('vi-VN')} VND</p>
+                    <p>Total
+                        price: {seatInfos.reduce((total, seat) => total + seat.price, 0).toLocaleString('vi-VN')} VND</p>
 
                     <h3 className="payment-label">Payment method</h3>
                     <div>
