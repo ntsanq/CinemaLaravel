@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {createRoot} from "react-dom/client";
-import {Admin, Resource,Layout} from "react-admin";
+import {Admin, Resource, Layout} from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 import {FilmCreate, FilmEdit, FilmIcon, FilmList} from "./Films";
 import {FilmCategoryCreate, FilmCategoryEdit, FilmCategoryIcon, FilmCategoryList} from "./FilmCategories";
@@ -12,8 +12,9 @@ import {ScheduleCreate, ScheduleEdit, ScheduleIcon, ScheduleList} from "./Schedu
 import {TicketIcon, TicketList} from "./Tickets";
 
 import AdminBar from './AdminBar';
+import {ClerkCreate, ClerkEdit, ClerkIcon, ClerkList} from "./Clerks";
 
-export const MyLayout = props => <Layout {...props} appBar={AdminBar} />;
+export const MyLayout = props => <Layout {...props} appBar={AdminBar}/>;
 
 export default function Home(props) {
     return (
@@ -67,7 +68,16 @@ export default function Home(props) {
                           create={ScheduleCreate}
                           icon={ScheduleIcon}/>
 
-                <Resource name="tickets" options={{label: 'Tickets'}} list={TicketList} icon={TicketIcon}/>
+                <Resource name="tickets"
+                          options={{label: 'Tickets'}}
+                          list={TicketList}
+                          icon={TicketIcon}/>
+
+                <Resource name="clerks"
+                          list={ClerkList}
+                          edit={ClerkEdit}
+                          create={ClerkCreate}
+                          icon={ClerkIcon}/>
             </Admin>,
         </>
     )

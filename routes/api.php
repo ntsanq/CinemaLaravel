@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\BookingController;
+use App\Http\Controllers\API\ClerkController;
 use App\Http\Controllers\API\FilmCategoryController;
 use App\Http\Controllers\API\FilmController;
 use App\Http\Controllers\API\LanguageController;
@@ -92,6 +93,14 @@ Route::prefix('/admin')->group(function () {
         Route::delete('/{id}', 'deleteForAdmin');
     });
     Route::prefix('/schedules')->controller(ScheduleController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'infoForAdmin');
+        Route::put('/{id}', 'updateForAdmin');
+        Route::post('/', 'createForAdmin');
+        Route::delete('/{id}', 'deleteForAdmin');
+    });
+
+    Route::prefix('/clerks')->controller(ClerkController::class)->group(function () {
         Route::get('/', 'index');
         Route::get('/{id}', 'infoForAdmin');
         Route::put('/{id}', 'updateForAdmin');
