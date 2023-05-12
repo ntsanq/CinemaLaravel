@@ -59,6 +59,12 @@ export default function Home(props) {
                                   edit={LanguageEdit}
                                   create={LanguageCreate}
                                   icon={LanguageIcon}/>
+
+                        <Resource name="clerks"
+                                  list={ClerkList}
+                                  edit={ClerkEdit}
+                                  create={ClerkCreate}
+                                  icon={ClerkIcon}/>
                     </> : null
                 }
 
@@ -72,12 +78,6 @@ export default function Home(props) {
                           options={{label: 'Tickets'}}
                           list={TicketList}
                           icon={TicketIcon}/>
-
-                <Resource name="clerks"
-                          list={ClerkList}
-                          edit={ClerkEdit}
-                          create={ClerkCreate}
-                          icon={ClerkIcon}/>
             </Admin>,
         </>
     )

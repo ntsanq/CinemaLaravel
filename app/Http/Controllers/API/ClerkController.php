@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ClerkController
 {
@@ -35,16 +36,16 @@ class ClerkController
         $paginator = $clerks->paginate($end - $start);
         $clerks = $paginator->toArray()['data'];
 
-        foreach ($clerks as &$clerk) {
-            switch ($clerk['role']) {
-                case UserRole::Clerk:
-                    $clerk['role'] = UserRole::getKey(UserRole::Clerk);
-                    break;
-                case UserRole::Admin:
-                    $clerk['role'] = UserRole::getKey(UserRole::Admin);
-                    break;
-            }
-        }
+//        foreach ($clerks as &$clerk) {
+//            switch ($clerk['role']) {
+//                case UserRole::Clerk:
+//                    $clerk['role'] = UserRole::getKey(UserRole::Clerk);
+//                    break;
+//                case UserRole::Admin:
+//                    $clerk['role'] = UserRole::getKey(UserRole::Admin);
+//                    break;
+//            }
+//        }
 
         $total = $paginator->total();
         $data = array_values($clerks);
@@ -55,17 +56,35 @@ class ClerkController
 
     public function infoForAdmin($id)
     {
+        $clerks = User::findOrFail($id);
 
+        return response()->json($clerks);
     }
 
     public function updateForAdmin($id, Request $request)
     {
+        $clerks = User::findOrFail($id);
+        $clerks->name = $request->name;
+        $clerks->email = $request->email;
+        $clerks->birthday = $request->birthday;
+        $clerks->address = $request->address;
+        $clerks->save();
 
+        return response()->json($clerks);
     }
 
     public function createForAdmin(Request $request)
     {
+        $clerks = new User();
+        $clerks->name = $request->name;
+        $clerks->email = $request->email;
+        $clerks->password = Hash::make($request->password);
+        $clerks->birthday = $request->birthday;
+        $clerks->address = $request->address;
+        $clerks->role = UserRole::Clerk;
+        $clerks->save();
 
+        return response()->json($clerks);
     }
 
     public function deleteForAdmin($id)
