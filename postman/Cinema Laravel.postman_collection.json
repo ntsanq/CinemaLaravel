@@ -1,0 +1,947 @@
+{
+	"info": {
+		"_postman_id": "52b267e7-527e-44e9-a4cf-b31ed26e7810",
+		"name": "Cinema Laravel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21188878"
+	},
+	"item": [
+		{
+			"name": "login",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"sang@gg.com\",\n    \"password\":\"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/auth",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Nguyen Thanh Sang\",\n    \"email\":\"sang@gg.com\",\n    \"password\":\"123123Nfq!\",\n    \"birthday\":\"2000-01-01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/register",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout (one device)",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "13|nMMIxma0Z2uXJzvzim0yZWS37Sr1Xse1R7kX6Jid",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/logout",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "log out (all devices)",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "16|YUWRlSx0hq22GFk326a2B56VBBmFHiAre9jb1t8I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{laravel}}/api/logoutAll",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"logoutAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get film by ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{laravel}}/api/films/24",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"films",
+						"24"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get users info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "25|hpKbSkfZcOIQwAz5OTFTAi82Nsb3wok5UwDIHYPY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{laravel}}/api/user",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get seats",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roomId\":3,\n    \"start\": \"00:51\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/getSeats",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"getSeats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get times",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"filmId\": \"22\",\n  \"date\": \"24-04-2023\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/getTimes",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"getTimes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "room info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{laravel}}/api/rooms/2",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"rooms",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "seat id info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{laravel}}/api/seats/414",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"seats",
+						"414"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"filmId\":16,\n    \"scheduleTime\":\"16-03-2023 17:48\",\n    \"seats\":[292, 291],\n    \"discountId\":1,\n    \"userId\":101,\n    \"payment\":\"stripe\"\n}       ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/confirmBooking",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"confirmBooking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ticket info",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sessionId\":\"cs_test_b1Ja8Bb6jX4ogGSHEghf4ocqhHyL3ZtIeuDwsHqfmV0LljYqptyXa2rybB\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/getTickets",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"getTickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getWeeklyFilm",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{laravel}}/api/getWeeklyFilm",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"getWeeklyFilm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTotalPriceBySessionId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{laravel}}/api/tickets/getTotal",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"tickets",
+						"getTotal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSeatNeighbour",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"seatId\":\"647\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/seats/getCouple",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"seats",
+						"getCouple"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN list films",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/admin/films?_end=10&_order=DESC&_sort=data.description&_start=2&film_category_id=3&film_category_id=2&production_id=2&q=sag&sangsearch=12323",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"admin",
+						"films"
+					],
+					"query": [
+						{
+							"key": "_end",
+							"value": "10"
+						},
+						{
+							"key": "_order",
+							"value": "DESC"
+						},
+						{
+							"key": "_sort",
+							"value": "data.description"
+						},
+						{
+							"key": "_start",
+							"value": "2"
+						},
+						{
+							"key": "film_category_id",
+							"value": "3"
+						},
+						{
+							"key": "film_category_id",
+							"value": "2"
+						},
+						{
+							"key": "production_id",
+							"value": "2"
+						},
+						{
+							"key": "q",
+							"value": "sag"
+						},
+						{
+							"key": "sangsearch",
+							"value": "12323"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN delete film",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/admin/films?_end=10&_order=DESC&_sort=data.description&_start=2&film_category_id=3&film_category_id=2&production_id=2&q=sag&sangsearch=12323",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"admin",
+						"films"
+					],
+					"query": [
+						{
+							"key": "_end",
+							"value": "10"
+						},
+						{
+							"key": "_order",
+							"value": "DESC"
+						},
+						{
+							"key": "_sort",
+							"value": "data.description"
+						},
+						{
+							"key": "_start",
+							"value": "2"
+						},
+						{
+							"key": "film_category_id",
+							"value": "3"
+						},
+						{
+							"key": "film_category_id",
+							"value": "2"
+						},
+						{
+							"key": "production_id",
+							"value": "2"
+						},
+						{
+							"key": "q",
+							"value": "sag"
+						},
+						{
+							"key": "sangsearch",
+							"value": "12323"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN create film",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Create Test\",\n    \"film_category_id\":[1,3],\n    \"film_rule_id\":[2],\n    \"production_id\":[2],\n    \"language_id\":[2],\n    \"path\":\"https://marketplace.canva.com/EAFH3gODxw4/1/0/1131w/canva-black-%26-white-modern-mystery-forest-movie-poster-rLty9dwhGG4.jpg\",\n    \"trailer\":\"https://www.youtube.com/watch?v=FcuVSArX-44&ab_channel=ChallengeMe-H%C3%A3yTh%C3%A1chTh%E1%BB%A9cT%C3%B4i\",\n    \"description\":\"<p>description</p>\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/admin/films",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"admin",
+						"films"
+					],
+					"query": [
+						{
+							"key": "film_category_id",
+							"value": "4",
+							"disabled": true
+						},
+						{
+							"key": "film_category_id",
+							"value": "6",
+							"disabled": true
+						},
+						{
+							"key": "production_id",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "q",
+							"value": "sag",
+							"disabled": true
+						},
+						{
+							"key": "sangsearch",
+							"value": "12323",
+							"disabled": true
+						},
+						{
+							"key": "search",
+							"value": "Smile",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN films info by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{laravel}}/api/admin/films/2",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"films",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN films UPDATE by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":17,\n    \"film_category_id\":[1,2],\n    \"media_link_id\":17,\n    \"name\":\"EVIL DEAD RISEsdfsd\",\n    \"description\":\"Veniam vel illo quia accusamus corporis. Aspernatur unde velit numquam et excepturi minima eos. Doloremque sed aut quisquam ullam consequatur. Voluptatum deleniti qui occaecati ea illo voluptatem repudiandae. Officia consequatur iusto consequuntur quas eos ratione. Facere nulla ab et aut sunt quas doloremque. Vel et magni asperiores et sapiente. Rerum temporibus non laudantium. Illo voluptatum qui quibusdam quo et ipsam eaque. Et ut voluptate fugit voluptatem ut voluptas. Est voluptatem quas consequatur sed nihil voluptatibus similique voluptatum. Et quia delectus magnam odit. Quia sequi molestias quaerat nostrum et quo aliquam asperiores. Alias saepe mollitia enim sed soluta cum. Eos quidem velit in rerum veniam. Et est ut error tempore similique et. Voluptatem iure minima aut quaerat. Accusamus accusantium deserunt officia qui eum doloribus vel. Rerum sequi molestiae eius tenetur. Deserunt hic et accusamus adipisci laudantium inventore magni.\",\n    \"language_id\":1,\n    \"film_rule_id\":[1,2],\n    \"production_id\":3,\n    \"path\":\"https://m.media-amazon.com/images/M/MV5BMmZiN2VmMjktZDE5OC00ZWRmLWFlMmEtYWViMTY4NjM3ZmNkXkEyXkFqcGdeQXVyMTI2MTc2ODM3._V1_.jpg\",\n    \"language\":\"English\",\n    \"production\":\"Ninh Kieu media\",\n    \"trailer\": \"youtu.be/hsdfishd=32142\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/admin/films/7",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"films",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN list film categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{laravel}}/api/admin/filmCategories",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"filmCategories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN list rooms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{laravel}}/api/admin/rooms",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"rooms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN list productions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{laravel}}/api/admin/productions",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"productions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN production info by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{laravel}}/api/admin/productions/1",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"productions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN list languages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{laravel}}/api/admin/languages",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"languages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN list schedules",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/admin/films?_order=ASC&_start=0&_end=5&_sort=production_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"admin",
+						"films"
+					],
+					"query": [
+						{
+							"key": "_order",
+							"value": "ASC"
+						},
+						{
+							"key": "_start",
+							"value": "0"
+						},
+						{
+							"key": "search",
+							"value": "room",
+							"disabled": true
+						},
+						{
+							"key": "_end",
+							"value": "5"
+						},
+						{
+							"key": "_sort",
+							"value": "production_id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN schedules by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{laravel}}/api/admin/schedules/2",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"schedules",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN create schedules",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"film_id\": 1,\n  \"room_id\": 1,\n  \"start\": \"2023-04-30T06:24:00.000Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/admin/schedules",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"schedules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN update schedules",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 211,\n  \"film_id\": 4,\n  \"room_id\": 1,\n  \"start\": \"2023-04-30T06:23:00.000Z\",\n  \"end\": \"2023-04-30 15:20:00\",\n  \"film_name\": \"A quiet place\",\n  \"duration\": 120\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/admin/schedules/211",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"schedules",
+						"211"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN list clerk",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{laravel}}/api/admin/clerks?_end=10&_order=DESC&_sort=role&_start=0",
+					"host": [
+						"{{laravel}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"clerks"
+					],
+					"query": [
+						{
+							"key": "_end",
+							"value": "10"
+						},
+						{
+							"key": "_order",
+							"value": "DESC"
+						},
+						{
+							"key": "_sort",
+							"value": "role"
+						},
+						{
+							"key": "_start",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VNPAY",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
